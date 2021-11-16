@@ -158,13 +158,13 @@ Introduction to Git
 ### Slides
 Introduction to LaTeX
 
-[Advanced R Markdown & LaTeX](https://jobreu.github.io/reproducible-research-gesis-2021/slides/B2_RMarkdown&LaTeX/B2_RMarkdown&LaTeX.html)  
+[Advanced R Markdown & LaTeX](https://jobreu.github.io/reproducible-research-gesis-2021/slides/B2_RMarkdown-LaTeX/B2_RMarkdown&LaTeX.html)  
 
 Jupyter Notebooks & Binder
 
 Build your own Binder
 
-[Outlook](https://jobreu.github.io/reproducible-research-gesis-2021/slides/B5_Outlook/B5_Outlook.html)
+[Recap & Outlook](https://jobreu.github.io/reproducible-research-gesis-2021/slides/B5_Outlook/B5_Outlook.html)
 
 ### Exercises
 [Advanced R Markdown & LaTeX](https://jobreu.github.io/reproducible-research-gesis-2021/exercises/B2_RMarkdown-LaTeX_exercises_question.html) 
