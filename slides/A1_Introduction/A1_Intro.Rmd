@@ -1,0 +1,263 @@
+---
+title: "Tools and Workflows for Reproducible Research in the Quantitative Social Sciences"
+subtitle: "Introduction"
+author: "Bernd Weiß<br />Johannes Breuer<br />Arnim Bleier"
+date: "2021-11-17"
+location: "GESIS, online"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: ["default", "default-fonts", "workshop.css"]
+    nature:
+      highlightStyle: "github"
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+layout: true
+
+```{r setup, include = F}
+if (!require(easypackages)) install.packages("easypackages")
+library(easypackages)
+
+packages("knitr",
+         "rmarkdown",
+         "gadenbuie/xaringanExtra",
+         "gadenbuie/tweetrmd",
+         "hadley/emo",
+         prompt = F)
+
+options(htmltools.dir.version = FALSE,
+        htmltools.preserve.raw = FALSE)
+
+opts_chunk$set(echo = FALSE,
+               fig.align = "center")
+
+xaringanExtra::use_xaringan_extra(c("tile_view", "clipboard"))
+xaringanExtra::use_extra_styles(hover_code_line = TRUE,
+                                mute_unhighlighted_code = FALSE)
+```
+
+<div class="my-footer">
+  <div style="float: left;"><span>`r gsub("<br />", ", ", gsub("<br /><br />|<a.+$", "", metadata$author))`</span></div>
+  <div style="float: right;"><span>`r metadata$location`, `r metadata$date`</span></div>
+  <div style="text-align: center;"><span>`r gsub(".+<br />", " ", metadata$subtitle)`</span></div>
+</div>
+
+---
+
+## Goals of this course
+
+After this course you should be...
+  - familiar with key concepts of reproducible research workflows
+  - able to (start) work(ing) with tools for reproducible research, such as `Git`, `LaTeX`, `R Markdown`, `Jupyter Notebooks`, and `Binder`
+  - able to publish reproducible computational analysis pipelines with `R`
+
+---
+
+## Prerequisites
+
+For this course (esp. the exercises) you should have the following things installed on your computer:
+
+- A version of [`R`](https://www.r-project.org/) that is >= 4.0.0
+  - the following `R` packages: `tidyverse`, `rmarkdown`, `tinytex`, `usethis`<sup>1</sup>
+  
+```{r install-pkg, echo=TRUE, eval=FALSE}
+# check if packages are installed and install missing ones
+packages = c("tidyverse", "rmarkdown", "tinytex", "usethis")
+
+install.packages(setdiff(packages, rownames(installed.packages())))
+```
+
+- A recent version of [*RStudio*](https://www.rstudio.com/)
+- [`Git`](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+
+In addition, you should also have/create a [*GitHub*](https://github.com/) account.
+
+.small[
+.footnote[
+[1] We will later on also use some other packages. You can install them then, but if you want to be extra-prepared (or check them out already), you can also install them now: `stargazer`, `corrr`, `equatiomatic`
+]
+]
+
+---
+
+## Disclaimer
+
+We will cover several different tools that can be used for reproducible research in the quantitative social sciences. We will only be able to cover the basics of those tools, so if you want to continue to use them and use them in more advanced ways, you will probably need to "dig deeper" eventually and consult further resources (documentation, further tutorials, blog posts, or other publications). As you probably already know, there are a lot of different tools and workflows that can be employed for increasing the reproducibility of research. We will introduce you to some of those, but there is more, and, in the end, it depends on your personal preferences and needs what tools and workflows you employ.<sup>1</sup>
+
+In this course, we will focus on reproducible research using `R`. However, there also are solutions for reproducible research with other programming languages, such as `Python` or `Julia`, as well as statistical software packages, such as *SPSS*  and *Stata*.
+
+.small[
+.footnote[
+[1] As you will see, we instructors also all have different preferences in our workflows and tool use.
+]
+]
+
+---
+
+## About us
+
+### Bernd Weiß
+
+- Head of team [GESIS Panel](https://www.gesis.org/en/gesis-panel/gesis-panel-home) and deputy head of the department [Survey Design and Methodology](https://www.gesis.org/en/institute/departments/survey-design-and-methodology) at GESIS
+
+- Obtained a doctorate (Sociology) from the University of Cologne in 2008
+
+- Research interests: methods of empirical research in the social sciences, survey methodology, family sociology and juvenile delinquency  
+
+- Approach to this workshop (and a disclaimer): Open Science and reproducible research are tools, but not part of my research agenda and I do not claim to be an expert in any of the things I will be talking about...  
+
+[bernd.weiss@gesis.org](mailto:bernd.weiss@gesis.org), [ORCID: 0000-0002-1176-8408](https://orcid.org/0000-0002-1176-8408), [@berndweiss](https://twitter.com/berndweiss), [personal website](https://berndweiss.net)
+
+---
+
+## About us
+
+### Johannes Breuer
+
+.small[
+- Senior researcher in the team *Data Augmentation* in the department *Survey Data Curation* at *GESIS*
+    - digital trace data for social science research
+    - data linking (surveys + digital trace data) 
+    
+- (Co-) Team leader of the team *Research Data & Methods* at the *Center for Advanced Internet Studies* (CAIS)
+    
+- Ph.D. in Psychology, University of Cologne  
+
+- Previously worked in several research projects investigating the use and effects of digital media (Cologne, Hohenheim, Münster, Tübingen)  
+
+- Other research interests
+    - Computational methods
+    - Data management
+    - Open science
+
+[johannes.breuer@gesis.org](mailto:johannes.breuer@gesis.org), [@MattEagle09](https://twitter.com/MattEagle09), [personal website](https://www.johannesbreuer.com/)
+
+]
+
+---
+
+## About us
+
+### Arnim Bleier 
+
+.small[
+- Senior researcher in the team *Designed Digital Data* in the department *Computational Social Science* at *GESIS*
+    - natural language processing
+    - probabilistic graphical models
+  
+    
+- Ph.D. in statistics / machine learning, Leipzig University  
+
+- Other research interests
+    - Structural equation modeling
+    - Distributed databases
+    - Right to replicate
+
+[arnim.bleier@gesis.org](mailto:arnim.bleier@gesis.org), [@arnimb](https://twitter.com/arnimb), [Google Scholar](https://scholar.google.de/citations?user=_fof5_EAAAAJ)
+
+]
+
+
+---
+
+## About you
+
+- What's your name?  
+
+- Where do you work & what is your field?  
+
+- What are your experiences with reproducible research practices (and the tools we cover in this course)?
+
+- What are your expectations for this course?
+
+---
+
+## Workshop Structure & Materials
+
+- The workshop consists of a combination of lectures and hands-on exercises
+
+- Slides and other materials are available at
+
+https://github.com/jobreu/reproducible-research-gesis-2021
+
+- The workshop repository on the [*GESIS ILIAS*](https://ilias.gesis.org) contains some literature on tools and workflows for reproducibility as well as a timetable for this workshop
+
+---
+
+## Zoom Etiquette
+
+- If possible, we invite you to turn on your camera (during the lecture and exercise parts); feel free to use a virtual background if you want to
+
+```{r tweet, echo = F}
+tweet_embed("https://twitter.com/PhdExhausted/status/1331956737683853318",
+            theme = "dark",
+            maxwidth = 400,
+            align = "center")
+```
+
+---
+
+## Zoom Etiquette
+
+- Please mute your microphones unless you are asking a question
+
+- Asking questions:
+  - If you have an immediate question, feel free to ask it via video/audio using the "raise hand" function in *Zoom* or via the text chat (private or public)
+  - If you have a question that is not urgent and might be interesting for everybody, please wait until the end of the lecture part, then use the "raise hand" function and ask your question via audio/video
+  - During the exercises you can also use "raise hand" + audio/video (if you have a question that might be interesting for others as well) or public or private text chat messages to ask questions
+
+- We will also try to provide (one-on-one) "tech support" during the exercises if that is needed (please contact us via the text chat in case you have any technical issues/questions that we can solve)
+
+---
+
+## Course schedule
+
+.center[**Wednesday, November 17th, 2021**]
+```{r schedule Wed, echo = F}
+schedule <- data.frame(
+  "When?" = c("10:00 - 10:30", "10:30 - 11:15", "11:15 - 11:30", "11:30 - 12:30", "12:30 - 13:30", "13:30 - 14:30", "14:30 - 15:30", "15:30 - 15:45", "15:45 - 17:00")
+  , "What?" = c("Introduction: What is reproducible research?", "Technical basics", "<i>Coffee break</i>", "Introduction to Git", "<i>Lunch break</i>", "Git & RStudio", "Primer/Refresher: Data wrangling with the tidyverse", "<i>Coffee break</i>", "Introduction to R Markdown")
+  , stringsAsFactors = FALSE
+  , check.names = FALSE
+)
+knitr::kable(
+  schedule
+  , format = "html"
+  , align = "cc"
+  , escape = FALSE
+)
+```
+
+---
+
+## Course schedule
+
+.center[**Thursday, November 18th, 2021**]
+```{r schedule Thur, echo = F}
+sharing_options <- data.frame(
+  "When?" = c("10:00 - 11:15", "11:15 - 11:30", "11:30 - 12:30", "12:30 - 13:30", "13:30 - 14:45", "14:45 - 15:00", "15:00 - 16:00", "16:00 - 17:00")
+  , "What?" = c("Introduction to LaTeX", "<i>Coffee break</i>", "Advanced RMarkdown & LaTeX", "<i>Lunch break</i>", "Jupyter Notebooks & Binder", "<i>Coffee break</i>", "Build your own Binder", "Outlook: Other tools & workflows")
+  , stringsAsFactors = FALSE
+  , check.names = FALSE
+)
+knitr::kable(
+  sharing_options
+  , format = "html"
+  , align = "cc"
+  , escape = FALSE
+)
+```
+
+---
+
+class: center, middle
+
+# Any questions so far?
+
+---
+
+class: center, middle
+
+# Next up: What is reproducibility and why does it matter?

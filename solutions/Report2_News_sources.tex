@@ -1,0 +1,363 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\title{The relationship between trust in institutions and use of news
+media sources in the early phase of the COVID-19 pandemic}
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\subtitle{An analysis based on the GESIS Panel Special Survey on the
+Coronavirus SARS-CoV-2 Outbreak in Germany}
+\author{R User}
+\date{2021-11-16}
+
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={The relationship between trust in institutions and use of news media sources in the early phase of the COVID-19 pandemic},
+  pdfauthor={R User},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newlength{\cslentryspacingunit} % times entry-spacing
+\setlength{\cslentryspacingunit}{\parskip}
+\newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
+ {% don't indent paragraphs
+  \setlength{\parindent}{0pt}
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1
+  \let\oldpar\par
+  \def\par{\hangindent=\cslhangindent\oldpar}
+  \fi
+  % set entry spacing
+  \setlength{\parskip}{#2\cslentryspacingunit}
+ }%
+ {}
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{#1\hfill\break}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+\usepackage{flafter}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\begin{document}
+\maketitle
+
+\hypertarget{research-question}{%
+\section{Research question}\label{research-question}}
+
+We want to investigate whether the sources of information that people
+have used for getting current information about the Corona virus are
+related to their trust in different groups and institutions.
+
+\hypertarget{methods}{%
+\section{Methods}\label{methods}}
+
+We used R version 4.1.2 (2021-11-01) (R Core Team, 2021) for all data
+wrangling and analyses.
+
+\hypertarget{sample}{%
+\subsection{Sample}\label{sample}}
+
+The data we use comes from the \emph{Public Use File (PUF) of the GESIS
+Panel Special Survey on the Coronavirus SARS-CoV-2 Outbreak in Germany}
+(GESIS Panel Team, 2020). The data set includes data for \emph{N} = 3765
+respondents, of which \emph{n} = 1832 were female and \emph{n} = 1933
+were male.
+
+\hypertarget{measures}{%
+\subsection{Measures}\label{measures}}
+
+The variables we are interested in for this analysis are the ones
+measuring trust in 1) the federal government, 2) the World Health
+Organization (WHO), and 3) scientists in dealing with the Corona virus
+as predictors, and the use of a) national public television or radio and
+b) Facebook as sources of current information about the Corona virus.
+
+The predictors assessing trust were measured on a 5-point scale ranging
+from ``1 - Do not trust at all'' to ``5 - Entirely trust,'' with the
+additional response option ``Don't know'' (those responses were excluded
+from our analyses). The two outcome variables were binary items.
+Respondents could either indicate that they used the respective source
+(in our case: national public television or radio and Facebook) for
+getting current information about the Corona virus or not. All data
+wrangling was done with the \texttt{dplyr} package (Wickham et al.,
+2021) which is part of the \texttt{tidyverse} (Wickham et al., 2019).
+
+\newpage
+
+\hypertarget{results}{%
+\section{Results}\label{results}}
+
+\hypertarget{descriptive-statistics}{%
+\subsection{Descriptive statistics}\label{descriptive-statistics}}
+
+\emph{Table 1} shows the descriptive statistics for the trust variables.
+
+\begin{table}[!htbp] \centering 
+  \caption{Descriptive statistics} 
+  \label{Descriptive statistics} 
+\begin{tabular}{@{\extracolsep{5pt}}lccccccc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+Statistic & \multicolumn{1}{c}{N} & \multicolumn{1}{c}{Mean} & \multicolumn{1}{c}{St. Dev.} & \multicolumn{1}{c}{Min} & \multicolumn{1}{c}{Pctl(25)} & \multicolumn{1}{c}{Pctl(75)} & \multicolumn{1}{c}{Max} \\ 
+\hline \\[-1.8ex] 
+Trust in federal government & 2,761 & 3.66 & 0.99 & 1.00 & 3.00 & 4.00 & 5.00 \\ 
+Trust in WHO & 2,731 & 4.03 & 0.91 & 1.00 & 4.00 & 5.00 & 5.00 \\ 
+Trust in scientists & 2,728 & 4.26 & 0.76 & 1.00 & 4.00 & 5.00 & 5.00 \\ 
+\hline \\[-1.8ex] 
+\end{tabular} 
+\end{table}
+
+\emph{Note}: The table was produced with the \texttt{stargazer} package
+(Hlavac, 2018).
+
+\hypertarget{correlations}{%
+\subsection{Correlations}\label{correlations}}
+
+\emph{Table 2} shows the correlations between the perceived personal
+risk variables. Correlations were computed using the \texttt{corr}
+package (Kuhn et al., 2020).
+
+\begin{longtable}[]{@{}llll@{}}
+\caption{Correlations between the trust variables}\tabularnewline
+\toprule
+Measure & 1 & 2 & 3 \\
+\midrule
+\endfirsthead
+\toprule
+Measure & 1 & 2 & 3 \\
+\midrule
+\endhead
+Trust in federal government & --- & --- & --- \\
+Trust in WHO & .47 & --- & --- \\
+Trust in scientists & .35 & .44 & --- \\
+\bottomrule
+\end{longtable}
+
+\newpage
+
+\hypertarget{regression-analysis}{%
+\subsection{Regression analysis}\label{regression-analysis}}
+
+We use a logistic regression model to explore how the use of 1) national
+public television and radio and 2) Facebook as sources of current
+information about the Corona virus are predicted by trust in the federal
+government, the WHO, and scientists in general.
+
+The general formula for a logistic regression model with three
+predictors is
+\(Pr(Y_i=1|X_i) = {\frac{exp(\beta_0 + \beta_1X_i + \beta_2X_2 + \beta_3X_3}{1 + exp (\beta_0 + \beta_1X_i + \beta_2X_2 + \beta_3X_3}}\)
+
+Accordingly, in our case, the formulas for the two models are:
+
+\begin{equation}
+\log\left[ \frac { P( \operatorname{info\_nat\_pub\_br} = \operatorname{1} ) }{ 1 - P( \operatorname{info\_nat\_pub\_br} = \operatorname{1} ) } \right] = \beta_{0} + \beta_{1}(\operatorname{trust\_government}) + \beta_{2}(\operatorname{trust\_who}) + \beta_{3}(\operatorname{trust\_scientists})
+\end{equation}
+
+\begin{equation}
+\log\left[ \frac { P( \operatorname{info\_fb} = \operatorname{0} ) }{ 1 - P( \operatorname{info\_fb} = \operatorname{0} ) } \right] = \beta_{0} + \beta_{1}(\operatorname{trust\_government}) + \beta_{2}(\operatorname{trust\_who}) + \beta_{3}(\operatorname{trust\_scientists})
+\end{equation}
+
+\emph{Note}: To create the formulas for our models, we used the
+\texttt{equatiomatic} package (Anderson et al., 2021).
+
+\emph{Table 3} shows the results of the two logistic regression models.
+
+\begin{table}[!htbp] \centering 
+  \caption{Results of the two logistic regression models} 
+  \label{Regression results} 
+\begin{tabular}{@{\extracolsep{5pt}}lcc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{2}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-3} 
+\\[-1.8ex] & Public broadcasting as info source & Facebook as info source \\ 
+\\[-1.8ex] & (1) & (2)\\ 
+\hline \\[-1.8ex] 
+ Trust in federal government & 0.528$^{***}$ & $-$0.193$^{***}$ \\ 
+  & (0.066) & (0.052) \\ 
+  & & \\ 
+ Trust in WHO & $-$0.014 & 0.066 \\ 
+  & (0.075) & (0.061) \\ 
+  & & \\ 
+ Trust in scientists & 0.167$^{**}$ & $-$0.133$^{**}$ \\ 
+  & (0.080) & (0.065) \\ 
+  & & \\ 
+ Constant & $-$0.224 & $-$0.467$^{*}$ \\ 
+  & (0.325) & (0.269) \\ 
+  & & \\ 
+\hline \\[-1.8ex] 
+Observations & 3,027 & 3,027 \\ 
+Log Likelihood & $-$927.508 & $-$1,459.690 \\ 
+Akaike Inf. Crit. & 1,863.016 & 2,927.379 \\ 
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note:}  & \multicolumn{2}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\end{tabular} 
+\end{table}
+
+\emph{Note}: The table was produced with the \texttt{stargazer} package
+(Hlavac, 2018).
+
+\hypertarget{discussion}{%
+\section{Discussion}\label{discussion}}
+
+Trust in the federal government and trust in scientists emerged as
+significant positive predictors of using national public broadcasting as
+a source of current information about the Corona virus, meaning that
+people who show higher trust in these institutions are more likely to
+use this source of information. Contrarily, these two trust measures
+negatively predicted the use of Facebook as a source of information,
+meaning that individuals with lower levels of trust in the federal
+government and scientists are more likely to use Facebook as an
+information source. These results show that trust in institutions and
+information behavior are related.
+
+\hypertarget{references}{%
+\section{References}\label{references}}
+
+\hypertarget{refs}{}
+\begin{CSLReferences}{1}{0}
+\leavevmode\vadjust pre{\hypertarget{ref-R-equatiomatic}{}}%
+Anderson, D., Heiss, A., \& Sumners, J. (2021). \emph{Equatiomatic:
+Transform models into LaTeX equations}.
+\url{https://CRAN.R-project.org/package=equatiomatic}
+
+\leavevmode\vadjust pre{\hypertarget{ref-GESISPanelTeam2020}{}}%
+GESIS Panel Team. (2020). \emph{{GESIS Panel Special Survey on the
+Coronavirus SARS-CoV-2 Outbreak in GermanyGESIS Panel Special Survey on
+the Coronavirus SARS-CoV-2 Outbreak in Germany}}. {GESIS Data Archive}.
+\url{https://doi.org/10.4232/1.13520}
+
+\leavevmode\vadjust pre{\hypertarget{ref-R-stargazer}{}}%
+Hlavac, M. (2018). \emph{Stargazer: Well-formatted regression and
+summary statistics tables}.
+\url{https://CRAN.R-project.org/package=stargazer}
+
+\leavevmode\vadjust pre{\hypertarget{ref-R-corrr}{}}%
+Kuhn, M., Jackson, S., \& Cimentada, J. (2020). \emph{Corrr:
+Correlations in r}. \url{https://CRAN.R-project.org/package=corrr}
+
+\leavevmode\vadjust pre{\hypertarget{ref-R}{}}%
+R Core Team. (2021). \emph{R: A language and environment for statistical
+computing}. R Foundation for Statistical Computing.
+\url{https://www.R-project.org/}
+
+\leavevmode\vadjust pre{\hypertarget{ref-tidyverse2019}{}}%
+Wickham, H., Averick, M., Bryan, J., Chang, W., McGowan, L. D.,
+François, R., Grolemund, G., Hayes, A., Henry, L., Hester, J., Kuhn, M.,
+Pedersen, T. L., Miller, E., Bache, S. M., Müller, K., Ooms, J.,
+Robinson, D., Seidel, D. P., Spinu, V., \ldots{} Yutani, H. (2019).
+Welcome to the {tidyverse}. \emph{Journal of Open Source Software},
+\emph{4}(43), 1686. \url{https://doi.org/10.21105/joss.01686}
+
+\leavevmode\vadjust pre{\hypertarget{ref-R-dplyr}{}}%
+Wickham, H., François, R., Henry, L., \& Müller, K. (2021). \emph{Dplyr:
+A grammar of data manipulation}.
+\url{https://CRAN.R-project.org/package=dplyr}
+
+\end{CSLReferences}
+
+\hypertarget{reproducibility-information}{%
+\section{Reproducibility
+information}\label{reproducibility-information}}
+
+\begin{itemize}\raggedright
+  \item R version 4.1.2 (2021-11-01), \verb|x86_64-w64-mingw32|
+  \item Running under: \verb|Windows 10 x64 (build 18362)|
+  \item Matrix products: default
+  \item Base packages: base, datasets, graphics, grDevices, methods,
+    stats, utils
+  \item Other packages: corrr~0.4.3, dplyr~1.0.6, equatiomatic~0.3.0,
+    forcats~0.5.1, ggplot2~3.3.3, purrr~0.3.4, readr~1.4.0,
+    stargazer~5.2.2, stringr~1.4.0, tibble~3.1.2, tidyr~1.1.3,
+    tidyverse~1.3.1
+  \item Loaded via a namespace (and not attached): assertthat~0.2.1,
+    backports~1.2.1, broom~0.7.6, cellranger~1.1.0, cli~2.5.0,
+    colorspace~2.0-1, compiler~4.1.2, crayon~1.4.1, DBI~1.1.1,
+    dbplyr~2.1.1, digest~0.6.27, ellipsis~0.3.2, evaluate~0.14,
+    fansi~0.4.2, fastmap~1.1.0, fs~1.5.0, generics~0.1.0, glue~1.4.2,
+    grid~4.1.2, gtable~0.3.0, haven~2.4.3, highr~0.9, hms~1.1.0,
+    htmltools~0.5.1.1, httpuv~1.6.1, httr~1.4.2, jsonlite~1.7.2,
+    knitr~1.33, later~1.2.0, lifecycle~1.0.0, lubridate~1.7.10,
+    magrittr~2.0.1, mime~0.10, modelr~0.1.8, munsell~0.5.0,
+    pillar~1.6.1, pkgconfig~2.0.3, promises~1.2.0.1, R6~2.5.0,
+    Rcpp~1.0.6, readxl~1.3.1, reprex~2.0.0, rlang~0.4.11,
+    rmarkdown~2.11, rstudioapi~0.13, rvest~1.0.0, scales~1.1.1,
+    shiny~1.6.0, stringi~1.6.2, tidyselect~1.1.1, tools~4.1.2,
+    utf8~1.2.1, vctrs~0.3.8, withr~2.4.2, xfun~0.23, xml2~1.3.2,
+    xtable~1.8-4, yaml~2.2.1
+\end{itemize}
+
+\end{document}

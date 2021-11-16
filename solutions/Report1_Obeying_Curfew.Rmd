@@ -1,0 +1,115 @@
+---
+title: "Factors predicting compliance with curfew measures during early phases of the COVID-19 pandemic"
+subtitle: "An analysis based on the GESIS Panel Special Survey on the Coronavirus SARS-CoV-2 Outbreak in Germany"
+author: "R User"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+    number_sections: true
+    toc_float: true
+    code_folding: hide
+    code_download: true
+    theme: flatly
+    highlight: tango
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      message = FALSE)
+```
+
+```{r pkgs-script}
+source("data_wrangling_gpc.R")
+
+library(corrr)
+library(stargazer)
+```
+
+# Research question
+
+Our research question was whether perceptions of the likelihood of becoming infected with and spreading the Corona virus predict whether people would be willing to comply with a curfew as a measure for containing the spread of the Corona virus.
+
+
+# Methods
+
+## Sample
+
+The data we use comes from the [Public Use File (PUF) of the GESIS Panel Special Survey on the Coronavirus SARS-CoV-2 Outbreak in Germany](https://www.gesis.org/gesis-panel/coronavirus-outbreak/public-use-file-puf). The data set includes data for *N* = `r nrow(corona_survey)` respondents, of which *n* = `r corona_survey %>% filter(sex == 2) %>% nrow()` were female and *n* = `r corona_survey %>% filter(sex == 1) %>% nrow()` were male. As people working in critical professions (e.g., medical staff, police force, etc.) were treated differently in Germany (as well as most other countries) when it came to curfews, we excluded them from our analysis, leaving us with a sample of *N* = `r nrow(corona_survey_noncrit)` respondents, of which *n* = `r corona_survey_noncrit %>% filter(sex == 2) %>% nrow()` were female and *n* = `r corona_survey_noncrit %>% filter(sex == 1) %>% nrow()` were male.
+
+## Measures
+
+Our predictors are measures of the perceived likelihood of becoming infected with and spreading the virus. These were measured on a 7-point scale ranging from "1 - not at all likely" to "7 - absolutely likely", with the additional response option "This has already happened" (those cases were excluded from our analyses). Our outcome variable is the question whether people would be willing to comply with a curfew as a measure for containing the spread of the Corona virus. After excluding people working in critical professions, this was an item with the binary response options "Yes" and "No".
+
+# Results
+
+## Descriptive statistics
+
+*Table 1* shows the descriptive statistics for the perceived personal risk variables.
+
+```{r desctable, results='asis'}
+corona_survey_noncrit %>% 
+  select(starts_with("risk")) %>% 
+  rename(`Own infection` = risk_self,
+         `Infection in close surroundings` = risk_surroundings,
+         `Infecting others` = risk_infect_others) %>% 
+  as.data.frame() %>% 
+  stargazer(type = "html",
+            digits = 2,
+            title="Table 1. Descriptive statistics")
+```
+
+
+## Correlations
+
+*Table 2* shows the correlations between the perceived personal risk variables.
+
+```{r correlations}
+corona_survey_noncrit %>% 
+  select(starts_with("risk")) %>% 
+  rename(`Own infection` = risk_self,
+         `Infection in close surroundings` = risk_surroundings,
+         `Infecting others` = risk_infect_others) %>% 
+  correlate() %>% 
+  shave() %>% 
+  fashion(na_print = "—") %>% 
+  knitr::kable(
+    caption = "Table 2. Perceived personal likelihoods of infection with & transmission of the Corona virus",
+    col.names = c("Measure", "1", "2", "3")
+  )
+```
+
+## Regression analysis
+
+We use a logistic regression model to explore how the willingness to obey a possible curfew is predicted by he perceived risk of becoming infected with and spreading the Corona virus.
+
+```{r regression}
+model <- glm(obey_curfew ~ risk_self + risk_surroundings + risk_infect_others, 
+             family = binomial(link = "logit"),
+             data = corona_survey_noncrit)
+
+```
+
+*Table 3* shows the results of our logistic regression model.
+
+```{r reg-results, results='asis'}
+stargazer(model,
+          type = "html",
+          dep.var.labels=c("Willingness to comply with curfew"),
+          covariate.labels=c("Risk of own infection",
+                             "Risk of infection in close surroundings",
+                             "Risk of infecting others"),
+          title="Table 3. Results of the logistic regression model")
+```
+
+# Discussion
+
+In our analysis, only the perceived risk of becoming infected with the Corona virus oneself emerged as a significant predictor of the willingness to obey a possible curfew. 
+
+# Reproducibility information
+
+```{r session-info}
+sessionInfo() %>% 
+  print(locale = FALSE)
+```

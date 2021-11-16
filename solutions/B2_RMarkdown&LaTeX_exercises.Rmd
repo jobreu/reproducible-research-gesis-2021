@@ -1,0 +1,247 @@
+---
+#title: 'Exercises Advanced R Markdown & LaTeX - Solutions'
+title: 'Exercises Advanced R Markdown & LaTeX' 
+author: 'Bernd Weiß, Johannes Breuer, Arnim Bleier'
+date: 'Tools and Workflows for Reproducible Research in the Quantitative Social Sciences, November 17-18, 2021'
+output:
+  #unilur::tutorial_html_solution: default
+  unilur::tutorial_html: default
+---
+
+```{r knitr_init, echo=FALSE, cache=FALSE, include=FALSE}
+# custom boxes
+knitr::opts_template$set(clues = list(box.title = "Clues",
+                                      box.body = list(fill = "#fff9dc", colour = "black"),
+                                      box.header = list(fill = "#ffec8b", colour = "black"),
+                                      box.icon = "fa-search",
+                                      box.collapse = TRUE))
+
+```
+
+```{r klippy, echo=FALSE, include=TRUE}
+klippy::klippy()
+```
+
+In the exercise on `R Markdown` basics yesterday, you already gained some experience in working with `.Rmd` files and producing `HTML` output. This time, we will build on what you have already done and what we covered in the lecture on *Advanced R Markdown & LaTeX* and generate a PDF report. As many of the tasks in this set of exercises repeat what we did yesterday, we will not provide lengthy explanations (or extended cues) for those parts. Instead, we will focus on the topics/aspects that are new and/or specific to producing PDF output and working with `LaTeX` in `R Markdown`. If you need a reminder on some of the basics and examples we have covered before, you can go back to the lecture slides and the previous exercises as well as the solutions for those.
+
+For this exercise and the report we want to produce here, we will look at relationship between trust in institutions and use of news media sources in the early phase of the COVID-19 pandemic using the synthetic data based on the *GESIS Panel Special Survey on the Coronavirus SARS-CoV-2 Outbreak in Germany*. Similar to the previous `R Markdown` exercise, feel free to change anything you like in the report (formatting, variables, analyses, etc.).
+
+As for the previous `R Markdown` exercise, you can find an example solution in the `solutions` folder within the workshop materials: The source file `Report2_News_sources.Rmd` and the output file `Report2_News_sources.pdf`. Also as in the previous `R Markdown` exercise, the `R` code in the solutions for this exercise should be put into code chunks (with appropriate labels and options) in the `.Rmd` document.
+
+In addition to the packages we used in/for the previous `R Markdown` report (`tidyverse`, `knitr`, `corrr` and `stargazer`) we will use one additional package: [`equatiomatic`](https://datalorax.github.io/equatiomatic/), Make sure to install it, if you have not already done so.
+
+```{block, box.title = "1", box.body = list(fill = "white"), box.icon = "fa-star"}
+Create a new `R Markdown` file in the `src` folder in your project directory. This time, the output type should be PDF. As before, specify a meaningful title and a subtitle, add an author name, and a date in the `YAML` header.
+```
+
+```{block, box.title = "2", box.body = list(fill = "white"), box.icon = "fa-star"}
+For this document, we want to make sure that tables and figures and tables are not displayed before the relevant text. By default, [figure and table environments in `LaTeX` are floats](https://en.wikibooks.org/wiki/LaTeX/Floats,_Figures_and_Captions). To force forward floating, we can use the `flafter` `LaTeX` package. We can specify that in the `YAML` header.
+
+In addition, we also want to keep the `.tex` output file.
+```
+
+```{block, opts.label = "clues"}
+You can specify extra (package) dependencies as an additional option within the `pdf_document` output type specification in the `YAML` header. There, you can also specify another option to keep the `.tex` file.
+```
+
+```{r yaml-dep, solution = TRUE, eval=FALSE}
+---
+title: "The relationship between trust in institutions and use of news media sources in the early phase of the COVID-19 pandemic"
+subtitle: "An analysis based on the GESIS Panel Special Survey on the Coronavirus SARS-CoV-2 Outbreak in Germany"
+author: "R User"
+date: "`r Sys.Date()`"
+output:
+  pdf_document:
+    extra_dependencies: ["flafter"]
+    keep_tex: true
+---
+```
+
+```{block, box.title = "3", box.body = list(fill = "white"), box.icon = "fa-star"}
+For our PDF report, we also want to properly cite the *GESIS Panel Special Survey on the Coronavirus SARS-CoV-2 Outbreak in Germany* data set as well as `R` and the packages we use as it is important to cite data and free and open-source software (FOSS). In the `solutions` folder in the workshop materials, you can find two `.bib` files containing `BibTeX` references for the data set and R (`refs.bib`) and the packages used in the `R Markdown` file. Copy the files to the `src` folder in your project directory and add them as bibliographies to the `YAML` header.
+```
+
+```{block, opts.label = "clues"}
+The `YAML` key you need here is simply `bibliography`. If you want to, you can also create the `.bib` files yourself or edit them (which is, e.g., possible with a simple text editor, such as [notepad++](https://notepad-plus-plus.org/downloads/) for *Windows*).
+```
+
+```{r yaml-bib, solution = TRUE, eval=FALSE}
+---
+title: "The relationship between trust in institutions and use of news media sources in the early phase of the COVID-19 pandemic"
+subtitle: "An analysis based on the GESIS Panel Special Survey on the Coronavirus SARS-CoV-2 Outbreak in Germany"
+author: "R User"
+date: "`r Sys.Date()`"
+output:
+  pdf_document:
+    extra_dependencies: ["flafter"]
+bibliography: [packages.bib, refs.bib]
+---
+```
+
+```{block, box.title = "Optional", box.body = list(fill = "white"), box.icon = "fa-star"}
+If you want to, you can also specify a citation style of your choosing. In our solution, we use APA (7th).
+```
+
+```{block, opts.label = "clues"}
+You can specify a citation style via the `csl` key in the `YAML` header. You can find an extensive list of `.csl` files in the [CSL repository on *GitHub*](https://github.com/citation-style-language/styles). Note that you do not necessarily need to have a local copy of the `.csl` file. You can also provide a URL for a `.csl` file hosted online as the value for the `csl` key in the `YAML` header of your `.Rmd` file. 
+```
+
+```{r yaml-csl, solution = TRUE, eval=FALSE}
+---
+title: "The relationship between trust in institutions and use of news media sources in the early phase of the COVID-19 pandemic"
+subtitle: "An analysis based on the GESIS Panel Special Survey on the Coronavirus SARS-CoV-2 Outbreak in Germany"
+author: "R User"
+date: "`r Sys.Date()`"
+output:
+  pdf_document:
+    extra_dependencies: ["flafter"]
+bibliography: [packages.bib, refs.bib]
+csl: https://raw.githubusercontent.com/citation-style-language/styles/master/apa.csl
+---
+```
+
+```{block, box.title = "4", box.body = list(fill = "white"), box.icon = "fa-star"}
+The structure of the document should be the same as for the `HTML` report we generated before. You should also use the same options in the setup chunk and load the required packages (including the additional `equatiomatic` package) and run (or source) the wrangling code at the beginning of the `.Rmd` document.
+
+The content of this report should be similar to the previous one, except that we now use different variables and the whole data set. The predictor variables we want to use in this report are some of the variables that measure trust in specific groups and institutions, namely `trust_government`, `trust_who` and `trust_scientists`. This time, we have two target/outcome variables: `info_nat_pub_br` and `info_fb`.
+
+We also want to do two other extra things in this report: 1) add page breaks between the *Methods* and *Results* section and the correlation and regression results, 2) cite the version of `R` you use at the beginning of the *Methods* section, the data set in the *Sample* (sub)section, and the `R` packages you use whenever you first use them.
+```
+
+```{block, opts.label = "clues"}
+There is a command in `R` for printing your `R` version as a string.
+```
+
+```{block, solution = TRUE}
+The syntax for in-text citations (in parentheses) is `[@citekey]` and you can find the correct citation keys in the `.bib` files. By default, the references will be automatically inserted at the end of the document.
+
+The command for printing your `R` version as a string is `R.version.string` and the `LaTeX` command for inserting a page break is `\newpage`.
+```
+
+```{block, box.title = "5", box.body = list(fill = "white"), box.icon = "fa-star"}
+In the results section, you should first present the descriptive/summary statistics for the trust variables.
+```
+
+```{block, opts.label = "clues"}
+As in the previous report, you can use the `stargazer` package for this. Make sure to specify the correct `type` of output (and don't forget to set the chunk option to `results = 'asis'`). In order to avoid warning messages due to missing (or multiply-used labels), you should specify a `label` in the `stargazer` function. Also, unlike for the `HTML` output, you do not need to add *Table 1* etc. to the captions. The numbering and labeling of tables is done automatically by `Pandoc` in the case of `LaTeX`/PDF documents.
+```
+
+```{r desctable, solution = TRUE, eval=FALSE}
+corona_survey_noncrit %>% 
+  select(starts_with("trust")) %>% 
+  rename(`Trust in federal government` = trust_government,
+         `Trust in WHO` = trust_who,
+         `Trust in scientists` = trust_scientists) %>% 
+  as.data.frame() %>% 
+  stargazer(type = "latex",
+            label = "Descriptive statistics",
+            digits = 2,
+            title="Descriptive statistics",
+            header = FALSE)
+```
+
+```{block, box.title = "6", box.body = list(fill = "white"), box.icon = "fa-star"}
+Next, calculate the correlations between the predictor variables and present them in a table using the `corr` library and `knitr::kable()`.
+```
+
+```{block, opts.label = "clues"}
+This time you only need to change the selection (and optionally also the naming) of the variables to be used in the code you used in the previous report.
+```
+
+```{r corrtable, solution = TRUE, eval=FALSE}
+corona_survey %>% 
+  select(starts_with("trust")) %>% 
+  rename(`Trust in federal government` = trust_government,
+         `Trust in WHO` = trust_who,
+         `Trust in scientists` = trust_scientists) %>% 
+  correlate() %>% 
+  shave() %>% 
+  fashion(na_print = "—") %>% 
+  knitr::kable(
+    caption = "Correlations between the trust variables",
+    col.names = c("Measure", "1", "2", "3")
+  )
+```
+
+```{block, box.title = "7", box.body = list(fill = "white"), box.icon = "fa-star"}
+For this report, we want to compute and present two logistic regression models (with the same predictors but different outcome variables). You can name them `model_pubbr` and `model_fb` after their outcome variables.
+```
+
+```{r reg-models, solution = TRUE, eval=FALSE}
+model_pubbr <- glm(info_nat_pub_br ~ trust_government + trust_who + trust_scientists,
+                   family = binomial(link = "logit"),
+                   data = corona_survey)
+
+model_fb <- glm(info_fb ~ trust_government + trust_who + trust_scientists,
+                family = binomial(link = "logit"),
+                data = corona_survey)
+```
+
+```{block, box.title = "8", box.body = list(fill = "white"), box.icon = "fa-star"}
+Before you present the regression results, in this report we also want to provide the formulas for the logistic regression models: Once in general form for a logistic regression model with three predictors, and then specifically for the two models we compute (with the correct variable names). For the former, we can use `LaTeX` code (in the text) and for the latter, we can use the [`equatiomatic` package](https://datalorax.github.io/equatiomatic/) (within a code chunk).
+```
+
+```{block, opts.label = "clues"}
+You can find template `LaTeX` code for the formula for a logistic regression model with 5 predictors [here](https://www.latex4technics.com/?note=LGA8NS). You can display this formula in [inline math mode](https://de.overleaf.com/learn/latex/Mathematical_expressions).
+
+The main function of the `equatiomatic` package is `extract_eq()` into which you can feed (or pipe) a model object. If you want to make the output a bit more similar to the general `LaTeX` formula, you can specify the `intercept` argument of this function accordingly.
+```
+
+```{r formulas, solution = TRUE, eval=FALSE}
+$Pr(Y_i=1|X_i) = {\frac{exp(\beta_0 + \beta_1X_i + \beta_2X_2 + \beta_3X_3}{1 + exp (\beta_0 + \beta_1X_i + \beta_2X_2 + \beta_3X_3}}$
+
+library(equatiomatic)
+
+extract_eq(model_pubbr,
+           intercept = "beta")
+
+extract_eq(model_fb,
+           intercept = "beta")
+```
+
+```{block, box.title = "9", box.body = list(fill = "white"), box.icon = "fa-star"}
+As for the previous `R Markdown` report, also write some short prose for the *Discussion* section and include the reproducibility information about the `R` version, packages, and OS you used.
+```
+
+```{block, opts.label = "clues"}
+For nicer printing of the session information, you can convert it to `LaTeX` with the the aptly named function `toLatex()`
+```
+
+```{r session-info, solution = TRUE, eval=FALSE}
+sessionInfo() %>% 
+  toLatex(locale = FALSE)
+```
+
+```{block, box.title = "Bonus 1", box.body = list(fill = "white"), box.icon = "fa-star"}
+See if you can move the *References* section before the *Reproducibility information*.
+```
+
+```{block, opts.label = "clues"}
+There are two options for this: A [`Pandoc` solution](https://pandoc.org/MANUAL.html#placement-of-the-bibliography) and a [`R Markdown` solution](https://bookdown.org/yihui/rmarkdown-cookbook/bibliography.html#include-appendix-after-bibliography).
+```
+
+```{block, solution = TRUE}
+Option 1 (Pandoc)
+
+`# References
+::: {#refs}
+:::`
+
+Option 2 (R Markdown)
+
+`<div id="refs"></div>`
+```
+
+```{block, box.title = "Bonus 2", box.body = list(fill = "white"), box.icon = "fa-star"}
+Try to automatically create the `packages.bib` file for the packages you use in this `R Markdown` report.
+```
+
+```{block, opts.label = "clues"}
+The `write_bib()` function from `knitr` allows you to create `.bib` files in `R`. You can get information about the loaded packages with the `.packages()` function. Note that the 7 first packages in that list are packages included in `base R` that you do not need to cite separately if you properly cite `R` itself.
+```
+
+```{r pkg-bib, solution = TRUE, eval=FALSE}
+(.packages()) %>% head(., -7) %>% knitr::write_bib("packages.bib")
+```
+
+Finally, as before, knit the document and store the resulting PDF document in the `output` folder. Then add, commit, and push the files/changes.

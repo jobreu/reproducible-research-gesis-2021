@@ -1,0 +1,263 @@
+---
+title: 'Exercises Intro to R Markdown - Solutions'
+#title: 'Exercises Intro to R Markdown' 
+author: 'Bernd Weiß, Johannes Breuer, Arnim Bleier'
+date: 'Tools and Workflows for Reproducible Research in the Quantitative Social Sciences, November 17-18, 2021'
+output:
+  unilur::tutorial_html_solution: default
+  #unilur::tutorial_html: default
+---
+
+```{r knitr_init, echo=FALSE, cache=FALSE, include=FALSE}
+# custom boxes
+knitr::opts_template$set(clues = list(box.title = "Clues",
+                                      box.body = list(fill = "#fff9dc", colour = "black"),
+                                      box.header = list(fill = "#ffec8b", colour = "black"),
+                                      box.icon = "fa-search",
+                                      box.collapse = TRUE))
+
+```
+
+```{r klippy, echo=FALSE, include=TRUE}
+klippy::klippy()
+```
+
+Your task in this exercise is to create an `R Markdown` document that reports an analysis based on the (synthetic) data from the *GESIS Panel Special Survey on the Coronavirus SARS-CoV-2 Outbreak in Germany*. The output should be an `HTML` document. For the `R Markdown` output (and potentially also other types of output you may produce), we suggest that you create a separate folder in your project directory named `output`.
+
+In the `R Markdown` documents we will create in this session and the one on *Advanced R Markdown & LaTeX*, we will use a few packages in addition to the `tidyverse`. For creating `R Markdown` documents, you need the `rmarkdown` package. You can check whether you have a certain package installed via the *Packages* tab in the *RStudio* GUI. Alternatively, you can also run the following command (in the `R` console): `"rmarkdown" %in% rownames(installed.packages())`. We will also need the following packages: `knitr`(should have been installed with *RStudio*), `corrr` for computing correlations, and `stargazer` for creating tables.
+As a reminder, you can install multiple packages via the command `install.packages(c("corrr", "stargazer"))`.
+
+Please note that the analyses we propose here are only toy examples. If you are or feel familiar enough with `R` and `R Markdown` and are interested in exploring other questions with the data, feel free to do something else in the `R Markdown` documents (e.g., use other variables and/or analysis methods). Also feel free to adjust/change anything else in the solution code (e.g., the document title, formatting, structure/headings, etc.).
+
+We have created a sample solution for the `R Markdown` report that you should create in this exercise. You can find the `.Rmd` file as well as the `HTML` output in the `solutions` folder within the workshop materials: `Report1_Obeying_Curfew.Rmd` and `Report1_Obeying_Curfew.html`.
+
+As a general note: The code shown in the *solution* fields for this set of exercises needs to be included in code chunks in the `R Markdown` document for which you may also need (or want) to specify (extra) chunk options.
+
+That being said, let's get started with creating the reproducible `R Markdown` report. In this report we want to look at factors predicting willingness to comply with curfew measures during early phases of the COVID-19 pandemic in Germany.
+
+```{block, box.title = "1", box.body = list(fill = "white"), box.icon = "fa-star"}
+Create a new `R Markdown` file in the `src` folder in your project directory. The output type should be `HTML`. Also specify a meaningful title and a subtitle, add an author name, and a date in the `YAML` header.
+```
+
+```{block, opts.label = "clues"}
+You can create a new `R Markdown` document via the `File` tab in the *RStudio* menu: *File* -> *New File* -> *R Markdown*. Make sure to select `HTML` as the output format. You can also specify a title and add your name into the *Author* field in the GUI menu. You can manually specify a date in the `YAML` header or insert (inline) `R` code for automatically pasting the current date.
+```
+
+```{r yaml-basic, solution = TRUE, eval=FALSE}
+---
+title: "Factors predicting compliance with curfew measures during early phases of the COVID-19 pandemic"
+subtitle: "An analysis based on the GESIS Panel Special Survey on the Coronavirus SARS-CoV-2 Outbreak in Germany"
+author: "R user"
+date: "`r Sys.Date()`"
+output: 
+  html_document
+---
+```
+
+```{block, box.title = "Optional", box.body = list(fill = "white"), box.icon = "fa-star"}
+If you want to, you can also make your `HTML` output easier to use and also prettier by specifying some additional options in the `YAML` header. To increase the usability of the resulting `HTML` document, you can add a table of contents (TOC) with 2 levels, make the TOC float (i.e., move when you scroll through the document), number the sections (as specified by the headers), hide the code by default, and include a button for downloading the underlying `.Rmd` document.
+
+For styling the document, our suggestion is to use the *Flatly* [Bootswatch theme](https://bootswatch.com/) and the *Tango* [Pandoc syntax highlighting style](https://www.garrickadenbuie.com/blog/pandoc-syntax-highlighting-examples/) (but feel free to use a different theme and/or code highlighting style).
+```
+
+```{block, opts.label = "clues"}
+You need to specify the additional options for document functions, structure, and styling as suboptions under the `html_document` specification. Have a look at the lecture slides for an example of how to do this.
+```
+
+```{r yaml-extended, solution = TRUE, eval=FALSE}
+---
+title: "Factors predicting compliance with curfew measures during early phases of the COVID-19 pandemic"
+subtitle: "An analysis based on the GESIS Panel Special Survey on the Coronavirus SARS-CoV-2 Outbreak in Germany"
+author: "R user"
+date: "`r Sys.Date()`"
+output: 
+  html_document:
+    toc: true
+    toc_depth: 2
+    number_sections: true
+    toc_float: true
+    code_folding: hide
+    code_download: true
+    theme: flatly
+    highlight: tango
+---
+```
+
+```{block, box.title = "2", box.body = list(fill = "white"), box.icon = "fa-star"}
+The next setup step is setting some `knitr` code chunk options. Make sure that the code is displayed in the output document, but that messages are suppressed.
+```
+
+```{block, opts.label = "clues"}
+You probably do not want to include the chunk options as code output in the resulting `HTML` document. You can achieve this by setting the chunk option `include` to `FALSE` for the setup chunk.
+```
+
+```{block, solution = TRUE}
+{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      message = FALSE)
+
+*NB*: In your `R Markdown` document, this code block needs to start and end with three backticks. Remember that in *RStudio* you can use the keyboard shortcut <kbd>Ctrl + Alt + I</kbd> (*Windows* & *Linux*)/<kbd>Cmd + Option + I</kbd> (*Mac*) for inserting code chunks.
+```
+
+```{block, box.title = "3", box.body = list(fill = "white"), box.icon = "fa-star"}
+As a final setup step for the document and the results to be reported therein, you should load the required packages and go through the data wrangling steps included in the `R` script we have created in the previous session.
+```
+
+```{block, opts.label = "clues"}
+You can either copy the code from the wrangling script we have created before (which should be called `data_wrangling_gpc.R` and stored in the `src` folder within your project repository) or you can call the script from within the `R Markdown` document. The command for executing an `R` script from another `R` script or an `R Markdown` document is `source()` which takes as its first argument a string containing the path to the file.
+```
+
+```{r pkg-wrangle, solution = TRUE, eval=FALSE}
+source("data_wrangling_gpc.R")
+
+library(corrr)
+library(stargazer)
+```
+
+```{block, box.title = "4", box.body = list(fill = "white"), box.icon = "fa-star"}
+Now that we have set up the document, let's start generating some content for it. We propose the following structure (but, again, feel free to change/adapt this): *Research question*, *Methods* with the two subsections *Sample* and *Measure*, *Results* with the three subsections *Descriptive statistics*, *Correlations*, and *Regression* analysis, and a final *Discussion* section.
+
+You can already add some text to the *Research question* section.
+```
+
+```{block, opts.label = "clues"}
+You can use the `Markdown` conventions for specifying different header levels using the # symbol. 
+```
+
+```{block, solution = TRUE}
+The number of # symbols is equivalent to the header level.
+```
+
+```{block, box.title = "5", box.body = list(fill = "white"), box.icon = "fa-star"}
+In the *Sample* (sub)section, indicate how many respondents the data set includes and how many of them are male and female. For our report, we will only use the responses from people who have not indicated that they work in critical professions. You should have created this filtered data set as part of the data wrangling script. Also report in this section that we will use this reduced data set as well as how many respondents it includes and how many of those are male and female.
+```
+
+```{block, opts.label = "clues"}
+You can use inline code for dynamically producing the required numbers within the text. Remember that inline code needs to be enclosed in single backticks and start with the letter r before the actual code (to indicate that this is `R` code). 
+```
+
+```{block, solution = TRUE}
+The inline code you can use for this is the following (remember to add the letter r between the opening backtick and the command in your document):
+`nrow(corona_survey)`
+`corona_survey %>% filter(sex == 2) %>% nrow()`
+`corona_survey %>% filter(sex == 1) %>% nrow()`
+Repeat this for the reduced data set (which should be called `corona_survey_noncrit`).
+```
+
+```{block, box.title = "6", box.body = list(fill = "white"), box.icon = "fa-star"}
+In the *Measures* (sub)section you can describe which variables we will use for our analysis and how they were measured. The predictor variables are `risk_self`, `risk_surroundings`, and `risk_infect_others`, and the outcome/target variable is `obey_curfew`.
+```
+
+```{block, opts.label = "clues"}
+For describing the measures, you can consult the [codebook](https://dbk.gesis.org/dbksearch/download.asp?id=67378) for the original data set. The original variable names are: `hzcy001a`, `hzcy002a`, `hzcy005a` (predictors) and `hzcy026a` (outcome).
+```
+
+```{block, box.title = "7", box.body = list(fill = "white"), box.icon = "fa-star"}
+For the part on *Descriptive statistics* in the *Results* section, generate a summary table for the `risk_` variables using the `stargazer` package. For all analyses, we want to use the data from the reduced/filtered data set (which should be called `corona_survey_noncrit`).
+```
+
+```{block, opts.label = "clues"}
+For the selection of variables you can use one of the [helper functions for `dplyr::select()`](https://tidyselect.r-lib.org/reference/select_helpers.html). Remember that the `stargazer()` function does not work with `tibbles` and expects a dataframe. Since we want to create `HTML` output, you should specify "html" as the `type` for the `stargazer` table. For prettier results, you may also want to give the table a `title`, specify that you want two decimal places, and also change the variable names (not in the data set but in the pipe for generating the table). To have the table properly displayed in the output document, you need to set the chunk option `results = 'asis'`.
+```
+
+```{r desctable, solution = TRUE, eval=FALSE}
+corona_survey_noncrit %>% 
+  select(starts_with("risk")) %>% 
+  rename(`Own infection` = risk_self, # normally spaces in variable names are bad practice, but here it is only for the tabular output
+         `Infection in close surroundings` = risk_surroundings,
+         `Infecting others` = risk_infect_others) %>% 
+  as.data.frame() %>% 
+  stargazer(type = "html",
+            digits = 2,
+            title="Table 1. Descriptive statistics")
+```
+
+```{block, box.title = "8", box.body = list(fill = "white"), box.icon = "fa-star"}
+As the next analysis step, we want to compute the correlations between the risk variables and produce a table displaying them. For that, you can use the [`corrr` package](https://corrr.tidymodels.org/) (for computing the correlations) and combine it with a function from the `knitr` package for creating the table.
+```
+
+```{block, opts.label = "clues"}
+We can use the same pipe steps as before for selecting the variables and optionally renaming them. The main workhorse of the `corrr` package is its `correlate()` function. The `knitr` function for creating tabular output is `kable()`. To make the output nicer to read, we can use two additional functions from the `corr` package for removing double entries (i.e., the upper triangle) from the correlation matrix and cleanly formatting it. You can consult [`corr` package documentation](https://corrr.tidymodels.org/articles/using-corrr.html) to find out how to do this. In addition, you might want to add a caption and change the columns names via two arguments in the `knitr::kable()` function.
+```
+
+```{r corrtable, solution = TRUE, eval=FALSE}
+corona_survey_noncrit %>% 
+  select(starts_with("risk")) %>% 
+  rename(`Own infection` = risk_self,
+         `Infection in close surroundings` = risk_surroundings,
+         `Infecting others` = risk_infect_others) %>% 
+  correlate() %>% 
+  shave() %>% 
+  fashion(na_print = "—") %>% 
+  knitr::kable( # pkg_name::function is a way of using functions from a package without loading it
+    caption = "Table 2. Perceived personal likelihoods of infection with & transmission of the Corona virus",
+    col.names = c("Measure", "1", "2", "3")
+  )
+```
+
+```{block, box.title = "9", box.body = list(fill = "white"), box.icon = "fa-star"}
+Our main analysis for this report is a logistic regression model with the risk variables as predictors and the `obey_curfew` variable as the outcome. Let's first compute this simple model before we produce a table to present its results.
+```
+
+```{block, opts.label = "clues"}
+If you have not done a logistic regression in `R` yet, a simple web search should quickly turn up many useful results that can show you how do to this. As a hint or reminder, you need the `glm()` function which expects the first argument (i.e., the regression formula) in the same format as the `lm()` function. However, in addition to that, you need to specify that you want to use a logit link (via the `family` argument).
+```
+
+```{r log-reg, solution = TRUE, eval=FALSE}
+model <- glm(obey_curfew ~ risk_self + risk_surroundings + risk_infect_others, 
+             family = binomial(link = "logit"),
+             data = corona_survey_noncrit)
+```
+
+```{block, box.title = "10", box.body = list(fill = "white"), box.icon = "fa-star"}
+Now that we have computed the logistic regression model, let's create a table to display its results. You can use the `stargazer` package for this in a similar way as for the summary stats table.
+```
+
+```{block, opts.label = "clues"}
+As its first argument, for regression tables, the `stargazer()` function expects one or more model objects. For a prettier table, you can also specify labels for the dependent variables and the predictors. Have a look at the help file for the `stargazer()` function via `?stargazer()` to see how to do this. Also here, for correct printing in the output document you need to set the chunk option `results = 'asis'`.
+```
+
+```{r regtable, solution = TRUE, eval=FALSE}
+stargazer(model,
+          type = "html",
+          dep.var.labels=c("Willingness to comply with curfew"),
+          covariate.labels=c("Risk of own infection",
+                             "Risk of infection in close surroundings",
+                             "Risk of infecting others"),
+          title="Table 3. Results of the logistic regression model")
+```
+
+```{block, box.title = "11", box.body = list(fill = "white"), box.icon = "fa-star"}
+Write one or two sentences describing the key results of the logistic regression model in the *Discussion* section.
+```
+
+```{block, opts.label = "clues"}
+You can run the code for the logistic regression model (without assigning the result to an object) in your console to check out its results. Of course, before doing that, you also need to run the wrangling code.
+```
+
+```{block, box.title = "12", box.body = list(fill = "white"), box.icon = "fa-star"}
+To further increase reproducibility, let's add some information about your `R` session (OS, `R` version, loaded packages) to the document. Add another section at the end of the document of the document called *Reproducibility information* and display this information there.
+```
+
+```{block, opts.label = "clues"}
+You can use a `base R` function to access info about your session (function name hint 1) and another one for printing it (function name hint 2). You can exclude information about your `locale` settings there.
+```
+
+```{r session-info, solution = TRUE, eval=FALSE}
+sessionInfo() %>% 
+  print(locale = FALSE)
+```
+
+```{block, box.title = "13", box.body = list(fill = "white"), box.icon = "fa-star"}
+After having created the `R Markdown` document, let's knit the `HTML` output. You should save the resulting `.html` file in the `output` folder within your project repository.
+```
+
+```{block, opts.label = "clues"}
+You can either simply use the *Knit* button in the *RStudio* GUI and then (manually) copy the resulting file into the `output` folder (by default, output documents are stored in the same location as the source file). Alternatively, you can use the `render()` command from the `rmarkdown` package and provide it with the name/location of the file you want to knit and a path for the output file. For the second option, make sure that your working directory is set appropriately (or adjust the file paths in the solution accordingly).
+```
+
+```{r render, solution = TRUE, eval=FALSE}
+rmarkdown::render('Report1_Obeying_Curfew.Rmd', output_file = '../output/Report1_Obeying_Curfew.html')
+```
+
+Finally, as before, after you have created and saved the `.Rmd` document and the `HTML` output, in `Git`, add the files, commit them (with a meaningful commit message), and push the changes to your *GitHub*  repository.

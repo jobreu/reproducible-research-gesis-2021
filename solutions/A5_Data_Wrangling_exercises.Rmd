@@ -1,0 +1,124 @@
+---
+title: 'Exercises Data Wrangling - Solutions'
+#title: 'Exercises Data Wrangling' 
+author: 'Bernd Weiß, Johannes Breuer, Arnim Bleier'
+date: 'Tools and Workflows for Reproducible Research in the Quantitative Social Sciences, November 17-18, 2021'
+output:
+  unilur::tutorial_html_solution: default
+  #unilur::tutorial_html: default
+---
+
+```{r knitr_init, echo=FALSE, cache=FALSE, include=FALSE}
+# custom boxes
+knitr::opts_template$set(clues = list(box.title = "Clues",
+                                      box.body = list(fill = "#fff9dc", colour = "black"),
+                                      box.header = list(fill = "#ffec8b", colour = "black"),
+                                      box.icon = "fa-search",
+                                      box.collapse = TRUE))
+
+```
+
+```{r klippy, echo=FALSE, include=TRUE}
+klippy::klippy()
+```
+
+The aim of the following exercises is to create an `R` script that takes care of wrangling the data for the analyses we want to perform in the upcoming sessions on `R Markdown`. Hence, your solutions for the tasks in this exercise should be written into an `R` script. This script should be named `data_wrangling_gpc.R` and stored in a folder called `src` (for source) in your project directory. As always, it is helpful to comment your code.
+
+*Note 1*: The idea for this set of exercises is to use the `tidyverse` functions we have covered in the lecture part. Hence, the solutions will be `tidyverse` code. However, if you prefer `base R`, feel free to use that instead. Also, if the wrangling operations in this exercise are too basic for you, feel free to do or add some more advanced stuff. Be aware, however, that it will be easier to continue to work on the `R Markdown` exercises later on if you follow what we propose to do in the current exercise.
+
+We will be working with the synthetic data set based on the data from the [*GESIS Panel Special Survey on the Coronavirus SARS-CoV-2 Outbreak in Germany*](https://search.gesis.org/research_data/ZA5667). If you have not already done so, please copy the the file `ZA5667_v1-0-0_CSV_synthetic-data.csv` from the workshop materials to a folder called `data` in your project folder.
+
+*Note 2*: When you execute code from the solutions (esp. the bit for loading the data), you should make sure that your working directory is the one that contains the `R` script you working on (should be the `src` folder)
+
+```{block, box.title = "1", box.body = list(fill = "white"), box.icon = "fa-star"}
+The first step in your script should be to load the packages you need for wrangling the data.
+```
+
+```{block, opts.label = "clues"}
+We want to use the `tidyverse` packages for this.
+```
+
+```{r library, solution = TRUE}
+library(tidyverse)
+```
+
+```{block, box.title = "2", box.body = list(fill = "white"), box.icon = "fa-star"}
+Next, let's load the data. Name the data object `gp_covid`.
+```
+
+```{block, opts.label = "clues"}
+The data set is in a `CSV` file. You can use a function from the `readr` package for importing it.
+```
+
+```{r create-pat, solution = TRUE}
+gp_covid <- read_csv("../data/ZA5667_v1-0-0_CSV_synthetic-data.csv")
+```
+
+```{block, box.title = "3", box.body = list(fill = "white"), box.icon = "fa-star"}
+Now we want to create a new dataframe/tibble named `corona_survey` that contains the wrangled data. For this, we want to create a subset that only includes the following variables: `sex`, `hzcy001a`, `hzcy002a`, `hzcy05a`, `hzcy048a`, `hzcy051a`, `hzcy052a`, `hzcy026a`, `hzcy084a`, `hzcy090a`. We also want to rename all of these variables except for sex to (same order as before): `risk_self`, `risk_surroundings`, `risk_infect_others`, `trust_government`, `trust_who`, `trust_scientists`, `obey_curfew`, `info_nat_pub_br`, `info_fb`.
+```
+
+```{block, opts.label = "clues"}
+You could use the `dplyr` functions `select()` and `rename()` for this. Remember that there is also a way of selecting and renaming variables in one step. If you want to know what those variables are, you can consult the [codebook](https://dbk.gesis.org/dbksearch/download.asp?id=67378) for the original data set.
+```
+
+```{r select-rename, solution = TRUE}
+corona_survey <- gp_covid %>% 
+  select(sex,
+         risk_self =  hzcy001a,
+         risk_surroundings = hzcy002a,
+         risk_infect_others = hzcy005a,
+         trust_government = hzcy048a,
+         trust_who = hzcy051a,
+         trust_scientists = hzcy052a,
+         obey_curfew = hzcy026a,
+         info_nat_pub_br = hzcy084a,
+         info_fb = hzcy090a)
+```
+
+```{block, box.title = "4", box.body = list(fill = "white"), box.icon = "fa-star"}
+In the next wrangling step, we want to recode the value 2 in the variable `obey_curfew` to 0.
+```
+
+```{block, opts.label = "clues"}
+You can use `mutate()` in combination with `recode()` here.
+```
+
+```{r recode, solution = TRUE}
+corona_survey <- corona_survey %>% 
+  mutate(obey_curfew = recode(obey_curfew,
+                              `2` = 0))
+```
+
+```{block, box.title = "5", box.body = list(fill = "white"), box.icon = "fa-star"}
+Next up, we want to recode 97 and 98 as `NA` for the entire data set.
+```
+
+```{block, opts.label = "clues"}
+The `na_if()` function can be used here.
+```
+
+```{r na, solution = TRUE}
+corona_survey <- corona_survey %>% 
+  na_if(97) %>% 
+  na_if(98)
+```
+
+You can, of course, also combine all of the previous wrangling steps into one pipe (i.e., without the need of creating any intermediate objects).
+
+```{block, box.title = "6", box.body = list(fill = "white"), box.icon = "fa-star"}
+For one of the `R Markdown` reports we are going to create in the following sessions, we also want to have a data set that only includes respondents who do not work in critical professions, such as the medical sector, the police force, etc. We can identify those respondents as they should have provided the answer with the code/value 4 to the `obey_curfew` item. The resulting new data object should be called `corona_survey_noncrit`.
+```
+
+```{block, opts.label = "clues"}
+For selecting a subset of cases, we can use `filter()` from the `dplyr` package.
+```
+
+```{r filter, solution = TRUE}
+corona_survey_noncrit <- corona_survey %>% 
+  filter(obey_curfew != 4)
+```
+
+After you have successfully created the data wrangling script that contains all of the steps listed above, make sure to save it (as `data_wrangling_gpc.R`) in the `src` folder of your project directory, then stage it, commit, and push the changes to *GitHub* (don't forget to write a meaningful commit message, such as "Create data wrangling script").
+
+*Note*: You can find the full `data_wrangling_gpc.R` script that you are supposed to create here in the `solutions` folder of the workshop materials.

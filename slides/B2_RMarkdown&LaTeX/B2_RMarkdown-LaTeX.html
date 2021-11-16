@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Tools and Workflows for Reproducible Research in the Quantitative Social Sciences</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Bernd Weiß Johannes Breuer Arnim Bleier" />
+    <meta name="date" content="2021-11-18" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/remark-css/default-fonts.css" rel="stylesheet" />
+    <link href="libs/tile-view/tile-view.css" rel="stylesheet" />
+    <script src="libs/tile-view/tile-view.js"></script>
+    <script src="libs/clipboard/clipboard.min.js"></script>
+    <link href="libs/xaringanExtra-clipboard/xaringanExtra-clipboard.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-clipboard/xaringanExtra-clipboard.js"></script>
+    <script>window.xaringanExtraClipboard(null, {"button":"Copy Code","success":"Copied!","error":"Press Ctrl+C to Copy"})</script>
+    <link href="libs/xaringanExtra-extra-styles/xaringanExtra-extra-styles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="workshop.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Tools and Workflows for Reproducible Research in the Quantitative Social Sciences
+## Advanced R Markdown &amp; LaTeX
+### Bernd Weiß<br /><b><i>Johannes Breuer</b></i><br />Arnim Bleier
+### 2021-11-18
+
+---
+
+
+layout: true
+
+
+
+&lt;div class="my-footer"&gt;
+  &lt;div style="float: left;"&gt;&lt;span&gt;Bernd Weiß, &lt;b&gt;&lt;i&gt;Johannes Breuer&lt;/b&gt;&lt;/i&gt;, Arnim Bleier&lt;/span&gt;&lt;/div&gt;
+  &lt;div style="float: right;"&gt;&lt;span&gt;GESIS, online, 2021-11-18&lt;/span&gt;&lt;/div&gt;
+  &lt;div style="text-align: center;"&gt;&lt;span&gt;Advanced R Markdown &amp; LaTeX&lt;/span&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+---
+
+# Content of this session
+
+In the previous session on `R Markdown`, we covered some of its basics and focused on `HTML` output. In this session, we will cover some more advanced topics and focus on generating PDF output using `\(\LaTeX\)`. In addition to combining some of the things we have discussed on the previous session on `\(\LaTeX\)` with `R Markdown`, we will mainly deal with two topics:
+
+- More on the creation and customization of tables in `R Markdown`
+
+- Bibliographies and citations
+
+---
+
+## PDF output with `R Markdown`
+
+If you want to generate PDF output with `R Markdown`, you need `\(\LaTeX\)`. If you have a `\(\LaTeX\)` distribution like [`MiKTeX`](https://miktex.org/) or [`TeX Live`](https://www.tug.org/texlive/) on your system, you should be all set.
+
+If you do not have `\(\LaTeX\)` installed, the easiest option - especially if you do not want to use plain `\(\LaTeX\)` - is installing [`TinyTeX`](https://yihui.org/tinytex/), which is "a lightweight, cross-platform, portable, and easy-to-maintain LaTeX distribution based on TeX Live". You can do that using the [`tinytex` package](https://cran.r-project.org/web/packages/tinytex/index.html). It also takes care of installing missing `\(\LaTeX\)` packages on the fly when knitting documents.
+
+
+```r
+install.packages('tinytex')
+
+tinytex::install_tinytex()
+```
+
+*Note*: You can also install `\(\LaTeX\)` packages manually using the `tlmgr_install()` function from the `tinytex` package.
+
+---
+
+## `YAML` options for PDF documents with `R Markdown`
+
+As we have seen in the previous `R Markdown` session, there are quite a few things that you can specify in the `YAML` header to customize your output file. While most of the basic options are the same for `HTML` and PDF output (such as `title`, `author`, `toc`, or `highlight`), there also are [specific options for PDF documents](https://bookdown.org/yihui/rmarkdown/pdf-document.html). We will go through some of those in the following.
+
+---
+
+## Using (additional) `\(\LaTeX\)` packages
+
+You can also [make use of additional `\(\LaTeX\)` packages in your `R Markdown` documents that generate PDF output](https://bookdown.org/yihui/rmarkdown-cookbook/latex-extra.html). There are different ways of including them.
+
+As of `R Markdown` version 1.4 you can use the `extra_dependencies` option within the `output: pdf_document` setting in the `YAML` header.
+
+
+```r
+---
+title: "It depends"
+subtitle: "Contemplations on the favorite answer of scientists"
+author: "The Dependables"
+date: "`r Sys.Date()`"
+output:
+  pdf_document:
+    extra_dependencies: ["threeparttable", "csquotes"]
+---
+```
+
+*Note*: If you use `tinytex`, it will automatically install missing `\(\LaTeX\)` packages on the fly when knitting documents.
+
+---
+
+## Using (additional) `\(\LaTeX\)` packages
+
+An alternative for including additional `\(\LaTeX\)` packages (that also works with older versions of `R Markdown`) is the `header-includes` setting that takes `\(\LaTeX\)` code (e.g., for loading packages) as a value.
+
+
+```r
+---
+title: "It's all in your header"
+subtitle: "What to include?"
+author: "Hunter Header"
+date: "`r Sys.Date()`"
+header-includes:
+  - \usepackage{csquotes}
+output: pdf_document
+---
+```
+
+*Note*: With both ways of loading additional `\(\LaTeX\)` packages it is also possible to [specify options for loading the packages](https://bookdown.org/yihui/rmarkdown-cookbook/latex-extra.html#loading-latex-packages).
+
+---
+
+## Includes
+
+To further customize and style the output, you can also include `.tex`, [`.sty` or `.cls` files](https://tug.org/pracjourn/2005-3/asknelly/nelly-sty-&amp;-cls.pdf)&lt;sup&gt;1&lt;/sup&gt; in different places in your document.
+
+
+```r
+---
+title: "Freestyler"
+subtitle: "Straight from the top of my dome"
+author: "M.C. Bomfunk"
+date: "`r Sys.Date()`"
+output:
+  pdf_document:
+    includes:
+      in_header: mystyle.sty
+      before_body: doc-prefix.tex
+      after_body: doc-suffix.tex
+---
+```
+
+*Note*: Those files should be stored in the same location as the `.Rmd` file.
+
+.small[
+.footnote[
+[1] Not to be confused with `.csl` files which we will talk about in the part on citations and bibliographies.
+]
+]
+
+---
+
+## `\(\LaTeX\)` engine
+
+As you have seen in the *Introduction to `\(\LaTeX\)`* session, there are different engines for rendering PDF documents. By default, `pdflatex` is used for rendering PDF output in `R Markdown`. You can, however, change this (to `xelatex` or `lualatex`) via the *RStudio* menu (*Tools* -&gt; *Global options* -&gt; *Sweave*) or by specifying the engine in the `YAML` header.
+
+
+```r
+---
+title: "The Chaos Engine"
+subtitle: "Sources of confusion about choosing the right LaTeX engine"
+author: "The Engineer"
+date: "`r Sys.Date()`"
+output:
+  pdf_document:
+    latex_engine: lualatex
+---
+```
+
+---
+
+## Keeping the `.tex` file
+
+When you knit an `R Markdwon` document to generate PDF output, the document is first converted to a `Tex` file (with file extension `.tex`) before it is then converted to PDF via the chosen `\(\LaTeX\)` engine. By default, the `.tex` file is automatically deleted. If you want to keep it however (e.g., for a journal submission), you can specify this in the `YAML` header. You could then, e.g., open (and further edit) the `.tex` file with a `\(\LaTeX\)` editor like *TeXworks* or *Overleaf*.
+
+
+```r
+---
+title: "Compiler's keepers"
+subtitle: "How to channel your inner TeX"
+author: "Dr. Pan"
+date: "`r Sys.Date()`"
+output:
+  pdf_document:
+    keep_tex: true
+---
+```
+
+---
+
+## Custom templates
+
+Beyond customizing the output via including `.tex` or `.sty`, you can also fully replace the default [`Pandoc` template](https://github.com/jgm/pandoc-templates/blob/master/default.latex) by specifying a different one.
+
+
+```r
+---
+title: "The Template of Doom"
+subtitle: "Adventures in formatting"
+author: "Henry Walton Jones Jr."
+date: "`r Sys.Date()`"
+output:
+  pdf_document:
+    template: my-amazing-template.tex
+---
+```
+
+*Note*: *Overleaf* offers a quite extensive (and searchable) [collection of `\(\LaTeX\)` templates](https://de.overleaf.com/latex/templates).
+
+---
+
+## Template packages
+
+There also are several `R` packages that provide different types of templates for `R Markdown`, including templates for journal articles. Two good options for that are:
+
+- [`papaja`](https://crsh.github.io/papaja_man/) for APA manuscripts
+
+- [`rticles`](https://github.com/rstudio/rticles) for `R Markdown` `\(\LaTeX\)` templates for various journals and publishers
+
+*Note*: Once you have installed packages containing `R Markdown` templates, these should also be available via the *RStudio* menu: *File* -&gt;  *New File* -&gt; *R Markdown* -&gt; *From Template*.
+
+---
+
+## `\(\LaTeX\)` code in `R Markdown` documents
+
+Of course, it is also possible to use raw `\(\LaTeX\)` outside the `header-includes` option in the `YAML` header. Just as you can use `HTML` code in `R Markdown` documents that produce `HTML` output, you can use `\(\LaTeX\)` code in the text body of documents that generate PDF output.
+
+For example, if you want to [insert a line break (or add an empty line) or a page break](https://de.overleaf.com/learn/latex/Line_breaks_and_blank_spaces), you can simply use the `\(\LaTeX\)` commands `\newline` and `\newpage`.
+
+---
+
+## Mathematical expressions
+
+As you may know (or remember from the previous session), `\(\LaTeX\)` is great for typesetting mathematical expressions. There are two modes for mathematical expressions in `\(\LaTeX\)` that you can also use in `R Markdown`: [inline and display mode](https://de.overleaf.com/learn/latex/Mathematical_expressions). Inline math expressions appear in the text, whereas expressions in display mode will be shown centered on a separate line.
+
+For example, we could report that the mean for a variable was calculated using the formula `\(\bar{x} = \frac{1}{n} \sum_{i=1}^{n}x_{i}\)` or present the formula for calculating the variance 
+`$$\sigma^{2} = \frac{\sum_{i=1}^{n}\left(x_{i} - \bar{x}\right)^{2}}{n-1}$$`
+*Note*: For generating formulas you can, e.g., use the [Online LaTeX Equation Editor](https://www.codecogs.com/latex/eqneditor.php) or the [Visual Math Editor](http://visualmatheditor.equatheque.net/VisualMathEditor.html).
+
+---
+
+## Mathematical expressions
+
+.pull-left[
+### Syntax
+
+```
+$\bar{x} = \frac{1}{n} 
+  \sum_{i=1}^{n}x_{i}$
+
+$$\sigma^{2} = \frac{\sum_{i=1}^{n} 
+  \left(x_{i} - \bar{x}\right)^{2}}
+  {n-1}$$
+
+```
+.small[
+*Note*: There are also [other ways of starting and ending display math mode](https://de.overleaf.com/learn/latex/Mathematical_expressions). As always, there are [pros and cons to using the different options](https://tex.stackexchange.com/questions/503/why-is-preferable-to).
+]
+]
+
+.pull-right[
+### Output
+
+`\(\bar{x} = \frac{1}{n} \sum_{i=1}^{n}x_{i}\)`
+
+`$$\sigma^{2} = \frac{\sum_{i=1}^{n} 
+  \left(x_{i} - \bar{x}\right)^{2}}
+  {n-1}$$`
+]
+
+---
+
+## Tables &amp; PDF output
+
+As we have discussed in the previous `R Markdown` session, there are quite a few packages for creating tables with `R`. Not all of them support PDF output (at least not out-of-the-box). The documentation website for the `gtsummary` package provides a helpful [tabular overview](https://www.danieldsjoberg.com/gtsummary/articles/rmarkdown.html) of the output options for some of the most popular packages for creating tables in `R`.
+
+Some packages, however, allow generating `.tex` files or raw `\(\LaTeX\)` output or can be converted to `\(\LaTeX\)` using functions from other packages. This is, e.g., the case for the `gtsummary` package and the `stargazer` package.
+
+---
+
+## PDF tables with `stargazer`
+
+We have previously used the `stargazer` to create tables for an `HTML` document. We can also use it to produce `\(\LaTeX\)` tables for PDF documents. We just need to set the `type` argument to `latex` (instead of `html`). As in the `HTML` case we need to set the chunk option `results='asis'`. What this does is putting the raw `\(\LaTeX\)` code into the `R Markdown` document which works fine as we have seen before with the math expressions.
+
+
+
+
+```r
+library(stargazer)
+
+gp_covid %&gt;% 
+  na_if(98) %&gt;% 
+  select(hzcy044a, hzcy045a) %&gt;% 
+  as.data.frame() %&gt;% 
+  stargazer(type = "latex",
+            header = FALSE)
+```
+
+*Note*: As before, you first need to run/source the data wrangling code before you can execute the above code example.
+
+---
+
+## PDF tables with `stargazer`
+
+.tiny[
+
+\begin{table}[!htbp] \centering 
+  \caption{} 
+  \label{} 
+\begin{tabular}{@{\extracolsep{5pt}}lccccccc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+Statistic &amp; \multicolumn{1}{c}{N} &amp; \multicolumn{1}{c}{Mean} &amp; \multicolumn{1}{c}{St. Dev.} &amp; \multicolumn{1}{c}{Min} &amp; \multicolumn{1}{c}{Pctl(25)} &amp; \multicolumn{1}{c}{Pctl(75)} &amp; \multicolumn{1}{c}{Max} \\ 
+\hline \\[-1.8ex] 
+hzcy044a &amp; 3,066 &amp; 4.159 &amp; 0.915 &amp; 1.000 &amp; 4.000 &amp; 5.000 &amp; 5.000 \\ 
+hzcy045a &amp; 2,899 &amp; 3.829 &amp; 0.871 &amp; 1.000 &amp; 3.000 &amp; 4.000 &amp; 5.000 \\ 
+\hline \\[-1.8ex] 
+\end{tabular} 
+\end{table} 
+]
+
+---
+
+## PDF tables with `knitr::kable()`
+
+Tables with the `kable()` function from the `knitr` package work just the same for PDF documents as they do for `HTML` output. As you may remember from the previous `R Markdown` session, however, the styling options for `knitr::kable()` are rather limited which is why tables produced with this function tend to look rather bland. This is where the package [`kableExtra`](https://haozhu233.github.io/kableExtra/) comes in which offers a wide range of additional formatting and styling options for tables created with `kable()`. It also offers options specifically for use with `\(\LaTeX\)` and provides [detailed documentation](https://haozhu233.github.io/kableExtra/awesome_table_in_pdf.pdf) for this.
+
+---
+
+## Tweaking and styling tables
+
+As we have seen, most packages for creating tables, such as `stargazer` offer various arguments or functions for customizing tables. There are also extension packages, such as `kableExtra` for `knitr::kable()` or `gtsummary` `gt`. If those options still do not satisfy your customization needs, you could copy and paste the `\(\LaTeX\)` code produced by `stargazer` or other packages that offer this option into your `R Markdown` document and then manually edit the code there.&lt;sup&gt;1&lt;/sup&gt; Even if you are not "fluent" in `\(\LaTeX\)`, if you look at the code, you should be able to figure out what most of its parts mean and do. Or you could have a look at many of the available tutorials on tables with `\(\LaTeX\)` (such as [the one by *Overleaf*](https://de.overleaf.com/learn/latex/Tables)).
+
+.small[
+.footnote[
+[1] Of course, you could do the same with `HTML` table code produced, e.g., by `stargazer`, if you want to produce `HTML` documents.
+]
+]
+
+---
+
+## Citations &amp; bibliographies
+
+**Disclaimer**: While we cover the subject of bibliographies and citations in this session that focuses on `R Markdown` and `\(\LaTeX\)`, you can, of course, also include those in `HTML` documents (and other types of output) produced with `R Markdown`. However, the format that is normally used for bibliographies in `R Markdown` is a `\(\LaTeX\)` format, and there are some specific (additional) options for citations and bibliographies when using `R Markdown` in combination with `\(\LaTeX\)` for PDF output.
+
+---
+
+## Citations &amp; bibliographies
+
+Through `Pandoc` it is possible to automatically generate citations and bibliographies in a variety of styles. It makes use of the [`citeproc` library](https://github.com/jgm/citeproc) for this purpose which "generates citations and bibliography formatted according to a CSL style". CSL stands for [Citation Style Language](https://citationstyles.org/) and there are many different CSL files for implementing various association, publisher, or journal citation styles. 
+
+`citeproc` can handle [different bibliography file formats](https://pandoc.org/MANUAL.html#citations), but the most widely used format that also works best with `R Markdown` is `\(BibTeX\)` (see https://en.wikipedia.org/wiki/BibTeX) which has the file extension `.bib`.
+
+---
+
+## Creating and managing `.bib` files
+
+The easiest way to create and manage `.bib` files is to use a reference management software, such as the free and open-source [*Zotero*](https://www.zotero.org/).&lt;sup&gt;1&lt;/sup&gt; 
+
+If you do not want to use a reference manager, you could also use [*zoterobib*](https://zbib.org/) which is a free web service for creating bibliographies "on the fly" which can also be exported as a `.bib` file. Besides that, many journal website (and some personal website) as well as *Google Scholar* offer functions for downloading citations in `\(BibTeX\)` format.
+
+If you have not worked with `.bib` files before and want to see what the bibliographic entries in those look like, you can have a look at the two `.bib` files contained in the `solutions` folder in the workshop materials. You can open (and edit) those files with any text editor (such as [notepad++](https://notepad-plus-plus.org/downloads/) on *Windows*) and also directly in *RStudio*.
+
+.small[
+.footnote[
+[1] You can also create and edit `.bib` files with other reference managers, such as [*Citavi*](https://www.citavi.com/en), [*Paperpile*](https://paperpile.com/?welcome), or [*Mendeley*](https://www.mendeley.com/).
+]
+]
+
+---
+
+### `\(BibTeX\)` entries
+
+`\(BibTeX\)` entries can have many different fields and not all of them have to be specified. Below is an example of an entry. The first value that comes after the `{` is the citation key (in this case `GESISPanelTeam2020`) which you need for citing in in `R Markdown documents` (more on this in a bit).&lt;sup&gt;1&lt;/sup&gt;
+
+
+```r
+@misc{GESISPanelTeam2020,
+  title = {{GESIS Panel Special Survey on the Coronavirus SARS-CoV-2 Outbreak in GermanyGESIS Panel Special Survey on the Coronavirus SARS-CoV-2 Outbreak in Germany}},
+  author = {{GESIS Panel Team}},
+  year = {2020},
+  publisher = {{GESIS Data Archive}},
+  doi = {10.4232/1.13520}
+  
+}
+```
+
+.small[
+.footnote[
+[1] There are different conventions for citation keys and most reference management tools offer options for formatting them in a unified way.
+]
+]
+
+---
+
+## Using `.bib` files in `R Markdown`
+
+You can use `.bib` files in `R Markdown` documents by listing them as values for the `bibliography` option in the `YAML` header. You can list one `.bib` file...
+
+
+```r
+---
+title: "Cite it right"
+subtitle: "Making reference management great again"
+author: "Sir Cite-a-Lot"
+date: "`r Sys.Date()`"
+output:
+  pdf_document
+bibliography: references.bib
+---
+```
+
+---
+
+## Using `.bib` files in `R Markdown`
+
+... or multiple ones.
+
+
+```r
+---
+title: "What a Cite!"
+subtitle: "What you cite is what you get"
+author: "Bob Lee Ography"
+date: "`r Sys.Date()`"
+output:
+  pdf_document
+bibliography: [references1.bib, references2.bib]
+---
+```
+
+*Note*: Again, the `.bib` file(s) should be stored in the same place as the `.Rmd` file.
+
+---
+
+## Citation styles
+
+When writing a paper (or some other publication), we typically want (or rather have) to adhere to specific citation styles. These can also be employed in `R Markdown` via `Pandoc` (or rather `citeproc`) by using a Citation Style Language `.csl` file and specifying it in the `YAML` header.
+
+
+```r
+---
+title: "Citing in style"
+subtitle: "A guide to making journal editors happy"
+author: "Reviewer 2"
+date: "`r Sys.Date()`"
+output:
+  pdf_document
+bibliography: references.bib
+csl: apa.csl
+---
+```
+
+---
+
+## Citation styles
+
+The free and open-source reference management tool [*Zotero*](https://www.zotero.org/) offers a [searchable collection of citation styles](https://www.zotero.org/styles/) from which the associated `.csl` files can also be downloaded. Another comprehesive source is the [`citation-style-language/styles` *GitHub* repository](https://github.com/citation-style-language/styles).
+
+---
+
+## Citations &amp; bibliographies with `\(\LaTeX\)` packages
+
+Instead of using the functionalities of `citeproc` (in combination with `.csl` files), for PDF output it is also possible to use the `\(\LaTeX\)` packages [`natbib`](https://ctan.org/pkg/natbib) or [`biblatex`](https://ctan.org/pkg/biblatex) for including and formatting citations and bibliographies. These support different bibliography styles. You can specify both the `\(\LaTeX\)` citation package and one of the styles it supports in the `YAML` header.
+
+
+```r
+---
+title: "Citing in style"
+subtitle: "A guide to making journal editors happy"
+author: "Reviewer 2"
+date: "`r Sys.Date()`"
+output:
+  pdf_document:
+  citation_package: biblatex
+bibliography: references.bib
+blibio-style: apa
+---
+```
+
+---
+
+## Citing references
+
+Once you have created and specified a `.bib` file containing references, you can cite them in your `R Markdown` document using their citation keys (which are the first fields/values in the `\(BibTeX\)` entries). 
+There are different commands for different types of citations:
+
+- `@citekey`: citation without parentheses
+- `[@citekey]`: citation in parentheses
+- `[@citekey1; @citekey2]`: multiple citations in parentheses
+- `[-@key]`: citation in parentheses without author names (i.e., just the year)
+
+As soon as you cite at least one reference that way in your `R Markdown` document, a bibliography will be automatically inserted at the end of your document.&lt;sup&gt;1&lt;/sup&gt;
+
+.small[
+.footnote[
+[1] It is, however also possible to [include items in the bibliography without citing them in the text](https://bookdown.org/yihui/rmarkdown-cookbook/bibliography.html#add-an-item-to-a-bibliography-without-using-it).
+]
+]
+
+---
+
+## Citing data &amp; FOSS
+
+One point we would like to mention here is that, in addition to citing (relevant) literature, it is important to properly cite any data as well as free and open-source (FOSS) software you use, such as `R` and its packages. Citations for data sets are usually provided by (curated) archives. For finding out how to cite `R` and its packages you can use the `citation()` function.
+
+.smaller[
+
+```r
+citation()
+```
+
+```
+## 
+## To cite R in publications use:
+## 
+##   R Core Team (2021). R: A language and environment for statistical
+##   computing. R Foundation for Statistical Computing, Vienna, Austria.
+##   URL https://www.R-project.org/.
+## 
+## Ein BibTeX-Eintrag für LaTeX-Benutzer ist
+## 
+##   @Manual{,
+##     title = {R: A Language and Environment for Statistical Computing},
+##     author = {{R Core Team}},
+##     organization = {R Foundation for Statistical Computing},
+##     address = {Vienna, Austria},
+##     year = {2021},
+##     url = {https://www.R-project.org/},
+##   }
+## 
+## We have invested a lot of time and effort in creating R, please cite it
+## when using it for data analysis. See also 'citation("pkgname")' for
+## citing R packages.
+```
+]
+
+---
+
+## Citing `R` packages
+
+
+```r
+citation("stargazer")
+```
+
+```
+## 
+## Please cite stargazer in publications as:
+## 
+##   Hlavac, Marek (2018). stargazer: Well-Formatted Regression and
+##   Summary Statistics Tables. R package version 5.2.1.
+##   https://CRAN.R-project.org/package=stargazer
+## 
+## Ein BibTeX-Eintrag für LaTeX-Benutzer ist
+## 
+##   @Manual{,
+##     title = {stargazer: Well-Formatted Regression and Summary Statistics Tables},
+##     author = {Marek Hlavac},
+##     year = {2018},
+##     note = {R package version 5.2.2},
+##     organization = {Central European Labour Studies Institute (CELSI)},
+##     address = {Bratislava, Slovakia},
+##     url = {https://CRAN.R-project.org/package=stargazer},
+##   }
+```
+
+---
+
+## `R` packages for citations &amp; bibliographies
+
+As you might have guessed, there also are `R` packages that can facilitate working with citations and bibliographies in `R Markdown`.
+
+A really easy-to-use option is the [`citr` package](https://github.com/crsh/citr) which provides a handy *RStudio* addin for automatically inserting citations and bibliographies in `R Markdown` documents and also allows direct connection to existing *Zotero* libraries.
+
+The [`bbt` package](https://github.com/paleolimbot/rbbt) also provides an *RStudio* addin and *Zotero* integration, including support for [*Better BibTeX* *Zotero* extension](https://retorque.re/zotero-better-bibtex/).
+
+Another package that can facilitate handling bibliographies in `R Markdown` is [`RefManageR`](https://github.com/ropensci/RefManageR/). 
+
+The [`knitcitations`](https://github.com/cboettig/knitcitations) package can be used to directly cite by DOI or URL (instead of by citation key) in a `R Markdown` document.
+
+---
+
+## Outlook: Even more advanced use of `R Markdown`
+
+An even more advanced use of `R Markdown` is the production of parameterized reports. This can, e.g., be used to produce similar reports for different data sets or different groups within a data set. Explaining this would be well beyond the scope of this workshop, but there are some good tutorials on this available online (e.g., in the [*RStudio* documentation](https://docs.rstudio.com/connect/1.7.4/user/param-rmarkdown.html) and in chapters in the books [*R Markdon: The Definitive Guide*](https://bookdown.org/yihui/rmarkdown/parameterized-reports.html) and the [*R Markdown Cookbook*](https://bookdown.org/yihui/rmarkdown-cookbook/parameterized-reports.html)).
+
+A good example of what can be done with parameterized reports in `R Markdown` are the [wave reports of the *GESIS Panel*](https://www.gesis.org/en/gesis-panel/documentation).
+
+---
+
+class: center, middle
+
+# [Exercise](https://jobreu.github.io/reproducible-research-gesis-2021/exercises/B2_RMarkdown-LaTeX_exercises_question.html) time 🏋️‍♀️💪🏃🚴
+
+## [Solutions](https://jobreu.github.io/reproducible-research-gesis-2021/solutions/B2_RMarkdown-LaTeX_exercises_solution.html)
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

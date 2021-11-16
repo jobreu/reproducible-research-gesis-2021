@@ -1,0 +1,155 @@
+---
+title: "Tools and Workflows for Reproducible Research in the Quantitative Social Sciences"
+subtitle: "Recap & Outlook"
+author: "Bernd Weiß<br />Johannes Breuer<br />Arnim Bleier"
+date: "2021-11-18"
+location: "GESIS, online"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: ["default", "default-fonts", "workshop.css"]
+    nature:
+      highlightStyle: "github"
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+layout: true
+
+```{r setup, include = F}
+if (!require(easypackages)) install.packages("easypackages")
+library(easypackages)
+
+packages("knitr",
+         "rmarkdown",
+         "gadenbuie/xaringanExtra",
+         "gadenbuie/tweetrmd",
+         "hadley/emo",
+         "sctyner/memer",
+         prompt = F)
+
+options(htmltools.dir.version = FALSE,
+        htmltools.preserve.raw = FALSE)
+
+opts_chunk$set(echo = FALSE,
+               fig.align = "center")
+
+xaringanExtra::use_xaringan_extra(c("tile_view", "clipboard"))
+xaringanExtra::use_extra_styles(hover_code_line = TRUE,
+                                mute_unhighlighted_code = FALSE)
+```
+
+<div class="my-footer">
+  <div style="float: left;"><span>`r gsub("<br />", ", ", gsub("<br /><br />|<a.+$", "", metadata$author))`</span></div>
+  <div style="float: right;"><span>`r metadata$location`, `r metadata$date`</span></div>
+  <div style="text-align: center;"><span>`r gsub(".+<br />", " ", metadata$subtitle)`</span></div>
+</div>
+
+---
+
+## Course recap
+
+Day 1
+
+- Computer literacy
+
+- Introduction to `Git`
+
+- `Git` & *RStudio*
+
+- Data wrangling with the `tidyverse`
+
+- Introduction to `R Markdown`
+
+---
+
+## Course recap
+
+Day 2
+
+- Introduction to $\LaTeX$
+
+- Advanced `R Markdown` & $\LaTeX$
+
+- `Jupyter Notebooks` & `Binder`
+
+---
+
+## Improving reproducibility
+
+```{r brain-meme, eval=FALSE, echo=TRUE}
+library(memer)
+
+meme_get("ExpandingBrain") %>% 
+  meme_text_brain("Writing R scripts", 
+                  "Writing R Markdown documents",
+                  "Writing version-controlled R Markdown documents",
+                  "Binderizing your GitHub repository to run RStudio in the cloud with all your materials", 
+                  size = 16)
+
+```
+
+---
+
+## Improving reproducibility
+
+```{r ref.label = "brain-meme", out.width="50%"}
+```
+
+---
+
+## What you did
+
+You created a *GitHub* repository containing materials for a fully reproducible research pipeline! `r ji("popper")`
+
+To recap your heroic journey into the universe of reproducible research, head over to http://starlogs.net/ and paste the URL of the repository you have created in this workshop.
+
+---
+
+## Collaboration `r ji("raised_hands")`
+
+In this workshop you have only collaborated with yourself. However, working with `Git` and other tools for reproducible research becomes much more exciting and relevant<sup>1</sup> when you collaborate with others. There are, again, many options (and tools) for doing this.
+
+On *GitHub* you can easily [add collaborators to a repository](https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-github-user-account/managing-access-to-your-personal-repositories/inviting-collaborators-to-a-personal-repository). If you want to allow contributions from others (who are not part of your team or direct collaborators) or want to contribute to somebody else's *GitHub*  project yourself, you can work with [pull requests](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests)<sup>2</sup> or create (or address) [issues](https://docs.github.com/en/issues/tracking-your-work-with-issues/about-issues).
+
+There also are `R` packages that you can use for collaborating on `R Markdown` documents with people who do not (want to) use `R Markdown` (and `Git`):
+
+- [`trackdown`](https://ekothe.github.io/trackdown/) uses *Google Drive* for this
+
+- [`redoc`](https://github.com/noamross/redoc) "is a package to enable a two-way R Markdown-Microsoft Word workflow"
+
+.small[
+.footnote[
+[1] And yes, sometimes also more challenging.
+
+[2] You can also use the [`usethis` package for managing pull requests](https://www.garrickadenbuie.com/blog/pull-request-flow-usethis/?interactive=1&steps=).
+]
+]
+
+---
+
+## Other tools and workflows
+
+As we have said at the beginning of the course, there are many other tools and workflows for reproducible research with `R`.
+
+For example, there are the `R` packages [`WORCS`](https://cjvanlissa.github.io/worcs/index.html) - which stands for *Workflow for Open Reproducible Code in Science* - and [`workflowr`](https://jdblischak.github.io/workflowr/index.html) which can be used to facilitate establishing reproducible research workflows with `R`.
+
+There also are other [`R` Project Templates](https://github.com/startyourlab/r-project-template).
+
+And there are packages for creating reproducible `R` environments (mostly by controlling package versions), such as [`renv`](https://rstudio.github.io/renv/index.html) and [`groundhog`](https://groundhogr.com/).
+
+Finally, while we have briefly mentioned `Docker`, there are also many online resources that cover it in more depth and with a focus on `R` (e.g., [*Docker for the R User*](https://github.com/noamross/nyhackr-docker-talk) by Noam Ross, or [*An Introduction to Docker for R Users*](https://colinfay.me/docker-r-reproducibility/) by Colin Fay).
+
+---
+
+## Keep calm and stay reproducible!
+
+We hope that we could get you started (or provide you with some boost) with making your research (more) reproducible. Of course, as always, there is much more to explore and learn. The only way to really get familiar with the tools and workflows is if you use them for your own research. Not all tools always play together nicely and some are likely to work better for you than others. However, we encourage you to work towards establishing the use of some of the tools and practices we have discussed in this workshop in your research and maybe also try to convince some of your collaborators to adopt them as well.
+
+---
+
+class: center, middle
+
+# Thank you very much for participating in this workshop! `r ji("bowing_man")`
+
+We hope that you learned something and also had some fun (at least a little bit...)
