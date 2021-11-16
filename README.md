@@ -5,7 +5,7 @@ Materials for the 2021 [*GESIS*](https://www.gesis.org/en/home/) workshop ["Tool
 by [Bernd Weiß](https://berndweiss.net/), [Johannes Breuer](https://www.johannesbreuer.com/), and [Arnim Bleier](https://www.gesis.org/en/institute/staff/person/arnim.bleier)
 
 [![](https://licensebuttons.net/l/by/3.0/80x15.png)](https://creativecommons.org/licenses/by/4.0/) 
-Please link to the [workshop GitHub repository](https://github.com/berndweiss/tools-and-workflows-for-reproducible-research)
+Please link to the [workshop GitHub repository](https://github.com/jobreu/reproducible-research-gesis-2021)
 
 ---
 
