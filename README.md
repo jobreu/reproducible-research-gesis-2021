@@ -128,11 +128,11 @@ Participants should have some basic knowledge of `R`. While this is not required
 ### Slides
 [Introduction - Organizational](https://jobreu.github.io/reproducible-research-gesis-2021/slides/A1_Introduction/A1_Intro.html)     
 
-Introduction - Substantive
+[Introduction - Substantive](https://berndweiss.net/tmp/a1_introduction-to-reproducible-research.html) (link will work only temporary)
 
-Technical basics
+[Technical basics](https://berndweiss.net/tmp/a2_computer-literacy.html) (link will work only temporary)
 
-[Introduction to Git](https://jobreu.github.io/reproducible-research-gesis-2021/slides/a1-intro_a2-comp-lit_a3-git/a3_introduction-to-git.html)
+[Introduction to Git](https://berndweiss.net/tmp/a3_introduction-to-git.html) (link will work only temporary)
 
 [Git & RStudio](https://jobreu.github.io/reproducible-research-gesis-2021/slides/A4_Git&RStudio/A4_Git-RStudio.html) 
 

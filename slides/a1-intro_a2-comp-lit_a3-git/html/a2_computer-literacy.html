@@ -1,0 +1,1315 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>A2: Computer literacy for reproducible research &#8212; Tools and Workflows for Reproducible Research in the Quantitative Social Sciences</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet" />
+  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="A3: An introduction to Git" href="a3_introduction-to-git.html" />
+    <link rel="prev" title="A1: A brief introduction to reproducible research (in the social sciences)" href="a1_introduction-to-reproducible-research.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/GESIS_Logo_kompakt_en.jpg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Tools and Workflows for Reproducible Research in the Quantitative Social Sciences</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
+   Some introductory words
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="a1_introduction-to-reproducible-research.html">
+   A1: A brief introduction to reproducible research (in the social sciences)
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   A2: Computer literacy for reproducible research
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="a3_introduction-to-git.html">
+   A3: An introduction to Git
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="appendix.html">
+   Appendix
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/a2_computer-literacy.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/executablebooks/jupyter-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fa2_computer-literacy.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/a2_computer-literacy.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#computer-literacy-live-demo">
+   Computer literacy live demo
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#overview">
+   Overview
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#computer-literacy-as-a-barrier-to-reproducibility">
+     Computer literacy as a barrier to reproducibility
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#overall-objective">
+     Overall objective
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#disclaimer">
+     Disclaimer
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#two-guiding-principles-of-reproducibility">
+     Two guiding principles of reproducibility
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#be-lazy">
+     Be lazy!
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#some-derived-principles-of-being-a-trustworthy-researcher">
+     Some derived principles of being a trustworthy researcher
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#some-derived-principles-of-being-lazy">
+     Some derived principles of being lazy
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#organization-of-a-research-project">
+   Organization of a research project
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#research-projects-on-your-computer">
+     Research projects on your computer
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#a-project-s-folder-structure">
+     A project’s folder structure
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#folder-structure-of-a-paper-not-perfect">
+     Folder structure of a paper (not perfect)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#folder-structure-of-a-conference-presentation-not-perfect">
+     Folder structure of a conference presentation (not perfect)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#data-carpentry-suggests-the-following-project-layout">
+     Data Carpentry suggests the following project layout
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#more-suggestions-to-structure-a-data-analysis-project">
+     More suggestions to structure a data analysis project
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#existing-naming-conventions-for-files-folders-variable-names-etc">
+     Existing naming conventions (for files/folders, variable names etc.)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#where-to-store-your-data">
+     Where to store your data?
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#backup-your-data">
+     Backup your data
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#working-with-files-and-folders">
+   Working with files and folders
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#why-bother">
+     Why bother?
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#examples-of-a-folder-file-path">
+     Examples of a folder/file path
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#what-is-a-path">
+     What is a path?
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#delimiting-characters">
+     Delimiting characters
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#delimiting-characters-in-r-latex-python-under-ms-windows">
+     Delimiting characters in R,
+     <span class="math notranslate nohighlight">
+      \(\LaTeX\)
+     </span>
+     , Python, … under MS Windows
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#absolute-and-relative-paths">
+     Absolute and relative paths
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#absolute-paths-or-full-path">
+     Absolute paths (or full path)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#working-directory-and-relative-paths">
+     Working directory and relative paths
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#using-a-comand-line-interface-cli">
+   Using a comand-line interface (CLI)
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#ms-window-s-default-comand-line-interpreter-cmd-exe">
+     MS Window’s default comand-line interpreter (
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       cmd.exe
+      </span>
+     </code>
+     )
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#windows-powershell">
+     Windows PowerShell
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-bash-shell-linux-macos-ms-windows">
+     The Bash shell (Linux, macOS, MS Windows, …)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#don-t-always-use-a-sledgehammer-for-the-job">
+     Don’t always use a sledgehammer for the job
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#what-is-a-command-line-interface-cli">
+     What is a command-line interface (CLI)?
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#and-what-is-a-shell">
+     And what is a shell?
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#okay-but-why">
+     Okay, but why?!
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-git-bash">
+     The Git Bash
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#important-commands">
+     Important commands
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#a-small-script-to-create-a-project-folder">
+     A small script to create a project folder
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise">
+     Exercise
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-power-of-plain-text">
+   The power of plain text
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#again-it-is-2021-why-would-i-write-in-plain-text">
+     Again, it is 2021, why would I write in plain text?
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#encoding">
+     Encoding
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-power-of-regular-expressions">
+     The power of regular expressions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#automation-and-productivity">
+   Automation and productivity
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   References
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="a2-computer-literacy-for-reproducible-research">
+<span id="section-computer-literacy"></span><h1>A2: Computer literacy for reproducible research<a class="headerlink" href="#a2-computer-literacy-for-reproducible-research" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="computer-literacy-live-demo">
+<h2>Computer literacy live demo<a class="headerlink" href="#computer-literacy-live-demo" title="Permalink to this headline">¶</a></h2>
+<p><img alt="" src="_images/live-streaming.png" /></p>
+<div>(Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>)</div></div>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="computer-literacy-as-a-barrier-to-reproducibility">
+<h3>Computer literacy as a barrier to reproducibility<a class="headerlink" href="#computer-literacy-as-a-barrier-to-reproducibility" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>There exists multiple barriers to reproducibility</p></li>
+<li><p>In “The Turing Way”, some of these <a class="reference external" href="https://the-turing-way.netlify.app/reproducible-research/overview/overview-barriers.html#barriers-to-reproducibility">Barriers to reproducibility</a> are introduced</p></li>
+<li><p>Among them:</p>
+<ul>
+<li><p>Big data and complex computational infrastructure</p></li>
+<li><p>Takes time</p></li>
+<li><p>Requires additional skills</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="overall-objective">
+<h3>Overall objective<a class="headerlink" href="#overall-objective" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Introduce concepts and software tools</p></li>
+<li><p>Provide necessary skills for subsequent modules</p></li>
+<li><p>Topics that will be covered:</p>
+<ul>
+<li><p>Be lazy, but trustworthy!</p></li>
+<li><p>Organization of a research project on a computer (file/folder structure, naming conventions, etc.)</p></li>
+<li><p>Working with files and folders (file system, absolute and relative paths, working directory)</p></li>
+<li><p>Using a command-line interface (CLI)</p></li>
+<li><p>The beauty of plain text</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="disclaimer">
+<h3>Disclaimer<a class="headerlink" href="#disclaimer" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Targets MS Windows user</p></li>
+<li><p>Your mileage may vary…</p></li>
+</ul>
+</div>
+<div class="section" id="two-guiding-principles-of-reproducibility">
+<h3>Two guiding principles of reproducibility<a class="headerlink" href="#two-guiding-principles-of-reproducibility" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>Be trustworthy!</p>
+</div></blockquote>
+<blockquote>
+<div><p>By lazy!</p>
+</div></blockquote>
+</div>
+<div class="section" id="be-lazy">
+<h3>Be lazy!<a class="headerlink" href="#be-lazy" title="Permalink to this headline">¶</a></h3>
+<p><img alt="" src="_images/f_twitter-wickham-be-lazy2.png" /></p>
+<p>(Source: <a class="reference external" href="https://twitter.com/hadleywickham/status/598532170160873472">https://twitter.com/hadleywickham/status/598532170160873472</a>)</p>
+</div>
+<div class="section" id="some-derived-principles-of-being-a-trustworthy-researcher">
+<h3>Some derived principles of being a trustworthy researcher<a class="headerlink" href="#some-derived-principles-of-being-a-trustworthy-researcher" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>Be trustworthy!</p>
+</div></blockquote>
+<ol class="simple">
+<li><p>Document everything and be transparent in your research!</p></li>
+<li><p>Share all materials (if possible)!</p></li>
+<li><p>Ideally, also document and share workflows (→ automation)</p></li>
+<li><p>….</p></li>
+</ol>
+</div>
+<div class="section" id="some-derived-principles-of-being-lazy">
+<h3>Some derived principles of being lazy<a class="headerlink" href="#some-derived-principles-of-being-lazy" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>“Be lazy!”</p>
+</div></blockquote>
+<ol class="simple">
+<li><p>Be consistent!</p>
+<ol class="simple">
+<li><p>Create your own guidelines</p></li>
+<li><p>Reduce cognitive burden</p></li>
+<li><p>Reduce decision fatigue</p></li>
+<li><p>…</p></li>
+</ol>
+</li>
+<li><p>Automate as much as possible!</p></li>
+<li><p>…</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="organization-of-a-research-project">
+<h2>Organization of a research project<a class="headerlink" href="#organization-of-a-research-project" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="research-projects-on-your-computer">
+<h3>Research projects on your computer<a class="headerlink" href="#research-projects-on-your-computer" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>What is a “project”?</p></li>
+</ul>
+<blockquote>
+<div><p>“A series of tasks linked to a goal, with a deadline” <span id="id1">[<a class="reference internal" href="a3_introduction-to-git.html#id15">Forte, 2017</a>]</span></p>
+</div></blockquote>
+<ul class="simple">
+<li><p>A research project can be writing a paper, giving a conference presentation or a lecture, …</p></li>
+<li><p>Ideally, all information, materials, data, …, should be located in a distinct project folder</p></li>
+<li><p>That is, on your computer, everything you need to complete the project should be stored inside <em>one</em> folder (which, of course, can/should have multiple subfolders) – “a project should be self-sufficient”</p></li>
+</ul>
+</div>
+<div class="section" id="a-project-s-folder-structure">
+<h3>A project’s folder structure<a class="headerlink" href="#a-project-s-folder-structure" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Be consistent!</p></li>
+<li><p>A uniform folder structure helps to find items in older projects</p></li>
+<li><p>Choose a structure and naming convention that fit your working style</p></li>
+<li><p>Generally, folder and file names should consist of the letters <strong>a-z</strong>, the number <strong>0-9</strong>, underscores, <strong>and should never include a blank space</strong></p></li>
+<li><p>I also use hyphens “<code class="docutils literal notranslate"><span class="pre">-</span></code>” sometimes, e.g., <code class="docutils literal notranslate"><span class="pre">mail_weiss-bernd.pdf</span></code>, then, the underscore is used to separate semantically different parts (e.g., <code class="docutils literal notranslate"><span class="pre">ps2021-03_gesis-panel-meet-the-expert</span></code>, <code class="docutils literal notranslate"><span class="pre">ps2020-11_utrecht_bigsurv20</span></code>)</p></li>
+<li><p>Furthermore, it is advisable to never use capital letters, as this will increase the likelihood of being inconsistent</p></li>
+<li><p>Folder and file names should be as short as possible, but as long as necessary to bring across the gist of its function/content</p></li>
+</ul>
+</div>
+<div class="section" id="folder-structure-of-a-paper-not-perfect">
+<h3>Folder structure of a paper (not perfect)<a class="headerlink" href="#folder-structure-of-a-paper-not-perfect" title="Permalink to this headline">¶</a></h3>
+<p><img alt="" src="_images/f_folder-structure-paper.png" /></p>
+<p>This is related to <span id="id2">[<a class="reference internal" href="a3_introduction-to-git.html#id14">Schaurer and Weiß, 2020</a>]</span></p>
+</div>
+<div class="section" id="folder-structure-of-a-conference-presentation-not-perfect">
+<h3>Folder structure of a conference presentation (not perfect)<a class="headerlink" href="#folder-structure-of-a-conference-presentation-not-perfect" title="Permalink to this headline">¶</a></h3>
+<p><img alt="" src="_images/f_folder-structure-talk.png" /></p>
+<p>This is related to a GOR presentation on “Investigating self-selection bias of online surveys on COVID-19 pandemic-related outcomes and health characteristics”</p>
+</div>
+<div class="section" id="data-carpentry-suggests-the-following-project-layout">
+<h3>Data Carpentry suggests the following project layout<a class="headerlink" href="#data-carpentry-suggests-the-following-project-layout" title="Permalink to this headline">¶</a></h3>
+<p>The following guidelines are copyed from the Data Carpentry website on “Introduction to automation” and aim at specific workflow utilizing R, Rmarkdown, and knitr:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">data</span></code>: the original raw data, you shouldn’t edit or otherwise alter any of the files in this folder. DATA ARE READ ONLY. If they are encoded in a supported file format, they’ll automatically be loaded when you call load.project().</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cache</span></code>: Here is where you will store any data sets that (a) are generated during a preprocessing step and (b) don’t need to be regenerated every single time you analyze your data. You can use the cache() function to store data to this directory automatically. Any data set found in both the cache and data directories will be drawn from cache instead of data based on ProjectTemplate’s priority rules. We write them to .csv files (comma eperated values) so they are machine readable and can be easily shared.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">graphs</span></code>: the folder where we can store the figures used in the project In our example, the figures are generated directly during the rendering of the RMardown file for the manuscript, but having the figures as standalone files may facilitate getting feedback from your collaborators, or save time if you just work on tweaking its appearance without having to recompile the full manuscript.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">src</span></code>: our R code (the functions that will generate the intermediate datasets, the analyses, and the figures), it’s often easier to keep the prose separated from the code. If you have a lot of code (and/or if the manuscript is long), it’s easier to navigate.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tests</span></code>: the code to test that our functions are behaving properly and that all our data is included in the analysis.
+There are other directories that you may not need as a newcomer, but these will come on handy as you increase your knowledge and prowess with R.</p></li>
+</ul>
+<p>(Source: <a class="reference external" href="https://datacarpentry.org/rr-automation/01-automation/index.html">https://datacarpentry.org/rr-automation/01-automation/index.html</a>)</p>
+</div>
+<div class="section" id="more-suggestions-to-structure-a-data-analysis-project">
+<h3>More suggestions to structure a data analysis project<a class="headerlink" href="#more-suggestions-to-structure-a-data-analysis-project" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://towardsdatascience.com/structure-your-data-science-projects-6c6c8653c16a">Structure Your Data Science Projects</a></p></li>
+<li><p><a class="reference external" href="https://www.r-statistics.com/2010/09/managing-a-statistical-analysis-project-guidelines-and-best-practices/">Managing a statistical analysis project – guidelines and best practices</a></p></li>
+<li><p><a class="reference external" href="https://annakrystalli.me/rrresearch/10_compendium.html">Creating a research compendium w/ rrtools</a></p></li>
+<li><p><a class="reference external" href="https://r-cubed.rostools.org/r-project-management.html">Management of R project</a></p></li>
+<li><p><a class="reference external" href="http://www.practicereproducibleresearch.org/core-chapters/3-basic.html">The Basic Reproducible Workflow Template</a></p></li>
+<li><p>…</p></li>
+</ul>
+</div>
+<div class="section" id="existing-naming-conventions-for-files-folders-variable-names-etc">
+<h3>Existing naming conventions (for files/folders, variable names etc.)<a class="headerlink" href="#existing-naming-conventions-for-files-folders-variable-names-etc" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Avoide any whitespace characters</p></li>
+<li><p>Some of the following examples are syntactically invalid in some programming languages, e.g., “kebab-case” does not work in R</p></li>
+<li><p>Some of the most popular ways to combine words into a single string <span id="id3">[<a class="reference internal" href="a3_introduction-to-git.html#id13">Divine, 2018</a>]</span>:</p>
+<ul>
+<li><p>CamelCase</p></li>
+<li><p>camelCase</p></li>
+<li><p><strong>pothole_case/snake_case</strong></p></li>
+<li><p>kebab-case</p></li>
+<li><p>this.case</p></li>
+<li><p>likethis</p></li>
+<li><p>…</p></li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<div><p>Choose one naming convention and stick with it!</p>
+</div></blockquote>
+<p><img alt="" src="_images/coding_cases.png" /></p>
+<p>(Source: <a class="reference external" href="https://github.com/allisonhorst/stats-illustrations/blob/master/other-stats-artwork/coding_cases.png">Artwork by &#64;allison_horst</a>)</p>
+</div>
+<div class="section" id="where-to-store-your-data">
+<h3>Where to store your data?<a class="headerlink" href="#where-to-store-your-data" title="Permalink to this headline">¶</a></h3>
+<p>(the following applys to MS Windows only)</p>
+<ul class="simple">
+<li><p>Quite often, only the <code class="docutils literal notranslate"><span class="pre">C:</span></code> drive is initialized</p></li>
+<li><p>Most Windows software suggests to save your files in your “home directory”, e.g. <code class="docutils literal notranslate"><span class="pre">C:\Users\Weiss</span></code></p></li>
+<li><p>If, for some reasons, you cannot start your computer and need to reinstall everything, all your data is gone!</p></li>
+<li><p>My suggestion: setup at least a second drive (<code class="docutils literal notranslate"><span class="pre">D:</span></code>), which is for your data only.</p></li>
+<li><p>Below is my setup, which I have been applying for the last 20 years (the Google Drive is new, though):</p></li>
+</ul>
+<p><img alt="" src="_images/f_windows-drives.png" /></p>
+</div>
+<div class="section" id="backup-your-data">
+<h3>Backup your data<a class="headerlink" href="#backup-your-data" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>Just do it!</p>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="working-with-files-and-folders">
+<h2>Working with files and folders<a class="headerlink" href="#working-with-files-and-folders" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="why-bother">
+<h3>Why bother?<a class="headerlink" href="#why-bother" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>When you write code, you often need to read or save data</p></li>
+<li><p>For your RMarkdown document, you will store data, figures, tables etc. in different folders, and you need to access this information/material</p></li>
+<li><p>So, you need to tell the software where your data can be found</p></li>
+<li><p>How do you ensure that your code or your RMarkdown document can be processed on your colleague’s computer, your next computer,  a remote server?</p></li>
+</ul>
+</div>
+<div class="section" id="examples-of-a-folder-file-path">
+<h3>Examples of a folder/file path<a class="headerlink" href="#examples-of-a-folder-file-path" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>MS Windows: Folder path to my workshop materials <code class="docutils literal notranslate"><span class="pre">E:\syncwork\projects\confer\ps2021-10-ws-repro-research</span></code></p></li>
+<li><p>Linux (MSYS2): Folder path to my workshop materials <code class="docutils literal notranslate"><span class="pre">/E/syncwork/projects/confer/ps2021-10-ws-repro-research</span></code></p></li>
+<li><p>Full file path specified in Stata to load a dataset (MS Windows): <code class="docutils literal notranslate"><span class="pre">use</span> <span class="pre">&quot;J:\Work\PARI\PARI-F\data\pari-f_data_v0-1.dta&quot;</span></code></p></li>
+<li><p>Full file path specified in R to load a dataset (MS Windows): <code class="docutils literal notranslate"><span class="pre">read.dta(&quot;J:/Work/PARI/PARI-F/data/pari-f_data_v0-1.dta&quot;)</span></code> (confusing? see below…)</p></li>
+</ul>
+<p>(Note, these are all examples of <em>absolute path</em> specifications)</p>
+</div>
+<div class="section" id="what-is-a-path">
+<h3>What is a path?<a class="headerlink" href="#what-is-a-path" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>“A path to an entity (in this case, a file, folder, or web page) describes the entity’s unique location within a hierarchical directory or website structure” (<a class="reference external" href="https://www.educative.io/edpresso/absolute-vs-relative-path">https://www.educative.io/edpresso/absolute-vs-relative-path</a>).</p>
+</div></blockquote>
+<blockquote>
+<div><p>“A path is a string of characters used to uniquely identify a location in a directory structure. It is composed by following the directory tree hierarchy in which components, separated by a delimiting character, represent each directory. The <strong>delimiting character</strong> is most commonly the <strong>slash (“/”)</strong>, the <strong>backslash character (“&quot;)</strong>, or colon (“:”), though some operating systems may use a different delimiter. Paths are used extensively in computer science to represent the directory/file relationships common in modern operating systems, […]. Resources can be represented by either <strong>absolute or relative paths</strong>” (emphasis mine; <a class="reference external" href="https://en.wikipedia.org/wiki/Path_(computing)">https://en.wikipedia.org/wiki/Path_(computing)</a>)</p>
+</div></blockquote>
+</div>
+<div class="section" id="delimiting-characters">
+<h3>Delimiting characters<a class="headerlink" href="#delimiting-characters" title="Permalink to this headline">¶</a></h3>
+<p><font style="color:red"> THIS IS IMPORTANT !!$!!!”§!111111</font></p>
+<ul class="simple">
+<li><p>Delimiting characters <code class="docutils literal notranslate"><span class="pre">/</span></code> or <code class="docutils literal notranslate"><span class="pre">\</span></code> vary by operating system</p></li>
+<li><p>MS Windows:</p>
+<ul>
+<li><p>Use a colon <code class="docutils literal notranslate"><span class="pre">:</span></code> to specify the drive name (e.g., <code class="docutils literal notranslate"><span class="pre">c:</span></code>, <code class="docutils literal notranslate"><span class="pre">d:</span></code>, <code class="docutils literal notranslate"><span class="pre">e:</span></code>)</p></li>
+<li><p>Folders and files are seperated by a backslash character (<code class="docutils literal notranslate"><span class="pre">\</span></code>)</p></li>
+<li><p>Example: <code class="docutils literal notranslate"><span class="pre">J:\Work\PARI\PARI-F\data\pari-f_data_v0-1.dta</span></code></p></li>
+</ul>
+</li>
+<li><p>Linux/macOS:</p>
+<ul>
+<li><p>No colon (<code class="docutils literal notranslate"><span class="pre">:</span></code>)</p></li>
+<li><p>Use only the slash (<code class="docutils literal notranslate"><span class="pre">/</span></code>) character</p></li>
+<li><p>Example: <code class="docutils literal notranslate"><span class="pre">/E/syncwork/projects/confer/ps2021-10-ws-repro-research</span></code></p></li>
+<li><p>Another (dynamically created) example showing the (full) path to my Git slides (using the command <code class="docutils literal notranslate"><span class="pre">readlink</span></code>):</p></li>
+</ul>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>readlink -f a3_introduction-to-git.ipynb
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/e/syncwork/projects/confer/ps2021-10-ws-repro-research/src/bw/a3_introduction-to-git.ipynb
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="delimiting-characters-in-r-latex-python-under-ms-windows">
+<h3>Delimiting characters in R, <span class="math notranslate nohighlight">\(\LaTeX\)</span>, Python, … under MS Windows<a class="headerlink" href="#delimiting-characters-in-r-latex-python-under-ms-windows" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>Software, such as R, <span class="math notranslate nohighlight">\(\LaTeX\)</span>, Python, with a Linux/UNIX background but can be used in MS Windows as well but behave differently when it comes to specifying file/folder paths</p></li>
+<li><p>That is, when specifiying a path (e.g., in R or <span class="math notranslate nohighlight">\(\LaTeX\)</span>) in MS Windows, these programs do not like the backslash character (<code class="docutils literal notranslate"><span class="pre">\</span></code>) (the backslash is used for “escaping” other characters)</p></li>
+<li><p>Two solutions:</p>
+<ul class="simple">
+<li><p>Use the slash character <code class="docutils literal notranslate"><span class="pre">/</span></code>, e.g.:</p></li>
+</ul>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">haven</span><span class="p">)</span>
+<span class="nf">read.dta</span><span class="p">(</span><span class="s">&quot;J:/Work/PARI/PARI-F/data/pari-f_data_v0-1.dta&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Escape the backslash character via <code class="docutils literal notranslate"><span class="pre">\\</span></code>, e.g.:</p></li>
+</ul>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">haven</span><span class="p">)</span>
+<span class="nf">read.dta</span><span class="p">(</span><span class="s">&quot;J:\\Work\\PARI\\PARI-F\\data\\pari-f_data_v0-1.dta&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>For more information see, e.g., <a class="reference external" href="https://www.dummies.com/programming/r/how-to-work-with-files-and-folders-in-r/">https://www.dummies.com/programming/r/how-to-work-with-files-and-folders-in-r/</a></p></li>
+<li><p>Note: Many programming languages/statistical packages (R, Python, …) can dynamically create a full path that follows the rules of the respective operating system:</p>
+<ul class="simple">
+<li><p>R:</p></li>
+</ul>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="nf">file.path</span><span class="p">(</span><span class="s">&quot;J:&quot;</span><span class="p">,</span> <span class="s">&quot;Work&quot;</span><span class="p">,</span> <span class="s">&quot;PARI&quot;</span><span class="p">,</span> <span class="s">&quot;PARI-F&quot;</span><span class="p">,</span> <span class="s">&quot;data&quot;</span><span class="p">,</span> <span class="s">&quot;pari-f_data_v0-1.dta&quot;</span><span class="p">)</span>
+<span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="s">&quot;J:/Work/PARI/PARI-F/data/pari-f_data_v0-1.dta&quot;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Python:</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;e:&quot;</span><span class="p">,</span> <span class="s2">&quot;folder1&quot;</span><span class="p">,</span> <span class="s2">&quot;folder2&quot;</span><span class="p">,</span> <span class="s2">&quot;file&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>returns: <code class="docutils literal notranslate"><span class="pre">'e:folder1\\folder2\\file'</span></code> (in Windows)</p>
+<ul class="simple">
+<li><p>Stata, actually, does not care…</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">use</span> <span class="pre">&quot;J:\Work\PARI\PARI-F\data\pari-f_data_v0-1.dta&quot;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">use</span> <span class="pre">&quot;J:/Work/PARI/PARI-F/data/pari-f_data_v0-1.dta&quot;</span></code></p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Johannes suggests a handy tool when working on both operating system: <a class="reference external" href="https://pathcopycopy.github.io/">Path Copy Copy – Copy file paths from Windows explorer’s contextual menu</a></p></li>
+</ul>
+</div>
+<div class="section" id="absolute-and-relative-paths">
+<h3>Absolute and relative paths<a class="headerlink" href="#absolute-and-relative-paths" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>There exists two types of paths: absolute or relative paths</p></li>
+<li><p>Example of an absolute path (in MS Windows): <code class="docutils literal notranslate"><span class="pre">J:\Work\PARI\PARI-F\data\pari-f_data_v0-1.dta</span></code></p></li>
+<li><p>Example of a relative path (in MS Windows): <code class="docutils literal notranslate"><span class="pre">..\data\pari-f_data_v0-1.dta</span></code></p></li>
+</ul>
+<p>(Source: <a class="reference external" href="https://www.earthdatascience.org/courses/intro-to-earth-data-science/python-code-fundamentals/work-with-files-directories-paths-in-python/">https://www.earthdatascience.org/courses/intro-to-earth-data-science/python-code-fundamentals/work-with-files-directories-paths-in-python/</a>)</p>
+</div>
+<div class="section" id="absolute-paths-or-full-path">
+<h3>Absolute paths (or full path)<a class="headerlink" href="#absolute-paths-or-full-path" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Contains the entire path to the file or directory that you need to access</p></li>
+<li><p>It will begin at you computer’s root directory (or respective Window’s drive) and will end with the file or directory that you wish to access</p></li>
+<li><p>E.g., in MS Windows: <code class="docutils literal notranslate"><span class="pre">J:\Work\PARI\PARI-F\data\pari-f_data_v0-1.dta</span></code> or <code class="docutils literal notranslate"><span class="pre">D:\tmp\yipiyy.txt</span></code>
+<img alt="" src="_images/f_explorer-full-path.png" /></p></li>
+<li><p>In Linux or macOS: <code class="docutils literal notranslate"><span class="pre">/home/weiss/important/yipiyy.txt</span></code></p></li>
+<li><p><strong>Avoid using absolute paths as much as possible since it reduces the portability of your project (your colleague’s computer, someone who wants to reproduce your analyses)</strong></p></li>
+</ul>
+</div>
+<div class="section" id="working-directory-and-relative-paths">
+<span id="cli-wd-relative-path"></span><h3>Working directory and relative paths<a class="headerlink" href="#working-directory-and-relative-paths" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>A relative path is relative to a “fixed location” on your computer</p></li>
+<li><p>Often, this “fixed location” is the so-called “working directory”</p></li>
+<li><p>So, when starting your data analysis, you first define your “working directory” as absolute path – <strong>this is done just once!</strong></p></li>
+<li><p>All other file- or folder-related operations are defined relative to this working directory</p></li>
+<li><p><strong>The huge benefit: when you share your project with a colleague or move it to a new computer, you only have to define the working directory once, everything else should work flawelessly</strong></p></li>
+<li><p>How to define a working directory?</p>
+<ul class="simple">
+<li><p>R: <code class="docutils literal notranslate"><span class="pre">setwd(&quot;full-path-to-working-directory&quot;)</span></code> -</p></li>
+<li><p>Stata: <code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">&quot;full-path-to-working-directory&quot;</span></code> (<code class="docutils literal notranslate"><span class="pre">cd</span></code> = change directory)</p></li>
+<li><p>Python: <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">os;</span> <span class="pre">os.chdir(&quot;full-path-to-working-directory&quot;)</span></code></p></li>
+</ul>
+</li>
+<li><p>How to get information about the current working directory?</p>
+<ul class="simple">
+<li><p>R: <code class="docutils literal notranslate"><span class="pre">getwd()</span></code></p></li>
+</ul>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="nf">getwd</span><span class="p">()</span>
+<span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="s">&quot;D:/Eigene Dateien/Dokumente&quot;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Stata: <code class="docutils literal notranslate"><span class="pre">cd</span></code></p></li>
+</ul>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>.cd
+C:\Program Files\Stata15
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Python: <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">os;</span> <span class="pre">os.getcwd()</span></code> (cwd = current working directory); see below for an example</p></li>
+</ul>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span> 
+<span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;E:\\syncwork\\projects\\confer\\ps2021-10-ws-repro-research\\src\\bw&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>So, let’s assume the project “PARI-F” is located on drive <code class="docutils literal notranslate"><span class="pre">J:</span></code>, the full absolute path is <code class="docutils literal notranslate"><span class="pre">J:\Work\PARI\PARI-F</span></code></p></li>
+<li><p>The content of the project’s folder <code class="docutils literal notranslate"><span class="pre">PARI-F</span></code> is:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>.
+|-- analysis
+|-- data
+|-- doc
+|-- pari-f.stpr
+`-- report
+</pre></div>
+</div>
+<ul>
+<li><p>Loading a dataset located in folder <code class="docutils literal notranslate"><span class="pre">data</span></code>, can be accomplished as follows:</p>
+<ul class="simple">
+<li><p>In R:</p></li>
+</ul>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">haven</span><span class="p">);</span> <span class="nf">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span>
+<span class="nf">setwd</span><span class="p">(</span><span class="s">&quot;J:/Work/PARI/PARI-F&quot;</span><span class="p">)</span>          <span class="c1"># Define working directory just once.</span>
+<span class="nf">read.dta</span><span class="p">(</span><span class="s">&quot;data/pari-f_data_v0-5.dta&quot;</span><span class="p">)</span> <span class="c1"># Absolute path: J:/Work/PARI/PARI-F/data/pari-f_data_v0-5.dta</span>
+<span class="kc">...</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="kc">...</span><span class="p">)</span>
+<span class="nf">ggsave</span><span class="p">(</span><span class="s">&quot;doc/my-fancy-plot.pdf&quot;</span><span class="p">)</span>       <span class="c1"># Will be saved in J:/Work/PARI/PARI-F/doc/my-fancy-plot.pdf</span>
+</pre></div>
+</div>
+<p>Note: In R, I would actually suggest to use the package <a class="reference external" href="https://here.r-lib.org/"><code class="docutils literal notranslate"><span class="pre">here</span></code></a> which avoids manually defining a working directory at all</p>
+<ul class="simple">
+<li><p>In Stata:</p></li>
+</ul>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">cd</span> <span class="s">&quot;J:/Work/PARI/PARI-F&quot;</span> <span class="c1">// Define working directory just once.</span>
+<span class="k">use</span> <span class="s">&quot;data/pari-f_data_v0-5.dta&quot;</span>,<span class="k"> clear</span>
+...<span class="k"></span>
+<span class="k">scatter</span> x y<span class="k"></span>
+<span class="k">graph</span> export <span class="s">&quot;doc/my-fancy-plot.pdf&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p>Shortcuts (<code class="docutils literal notranslate"><span class="pre">.</span></code> and <code class="docutils literal notranslate"><span class="pre">..</span></code>) and the parent directory:</p>
+<ul class="simple">
+<li><p>The dot <code class="docutils literal notranslate"><span class="pre">.</span></code> denotes the current working directory</p></li>
+<li><p>The dot dot <code class="docutils literal notranslate"><span class="pre">..</span></code> denotes the parent directory, i.e., it points upwards in the folder hierarchy</p></li>
+<li><p>Example in R</p></li>
+</ul>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">haven</span><span class="p">);</span> <span class="nf">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span>
+<span class="nf">setwd</span><span class="p">(</span><span class="s">&quot;J:/Work/PARI/PARI-F/data&quot;</span><span class="p">)</span>     <span class="c1"># Define working directory just once, now we are in /data.</span>
+<span class="nf">read.dta</span><span class="p">(</span><span class="s">&quot;pari-f_data_v0-5.dta&quot;</span><span class="p">)</span>      <span class="c1"># Absolute path: J:/Work/PARI/PARI-F/data/pari-f_data_v0-5.dta</span>
+<span class="kc">...</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="kc">...</span><span class="p">)</span>
+<span class="nf">ggsave</span><span class="p">(</span><span class="s">&quot;../doc/my-fancy-plot.pdf&quot;</span><span class="p">)</span>    <span class="c1"># Read: </span>
+                                     <span class="c1"># - We are in J:/Work/PARI/PARI-F/data</span>
+                                     <span class="c1"># - The plot should be saved to J:/Work/PARI/PARI-F/doc</span>
+                                     <span class="c1"># - &quot;..&quot; = go to parent folder of data, i.e., J:/Work/PARI/PARI-F</span>
+                                     <span class="c1"># - Then, go to folder /doc and store the plot in this folder </span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Finally, the tilde symbol <code class="docutils literal notranslate"><span class="pre">~</span></code> will bring you back to your home directory, e.g. <code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">~</span></code></p></li>
+<li><p>See also <a class="reference external" href="https://en.wikipedia.org/wiki/Path_(computing)">https://en.wikipedia.org/wiki/Path_(computing)</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="using-a-comand-line-interface-cli">
+<span id="label-cli"></span><h2>Using a comand-line interface (CLI)<a class="headerlink" href="#using-a-comand-line-interface-cli" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="ms-window-s-default-comand-line-interpreter-cmd-exe">
+<h3>MS Window’s default comand-line interpreter (<code class="docutils literal notranslate"><span class="pre">cmd.exe</span></code>)<a class="headerlink" href="#ms-window-s-default-comand-line-interpreter-cmd-exe" title="Permalink to this headline">¶</a></h3>
+<p><img alt="" src="_images/f_cli-cmd.png" /></p>
+</div>
+<div class="section" id="windows-powershell">
+<h3>Windows PowerShell<a class="headerlink" href="#windows-powershell" title="Permalink to this headline">¶</a></h3>
+<p><img alt="" src="_images/f_cli-powershell.png" /></p>
+</div>
+<div class="section" id="the-bash-shell-linux-macos-ms-windows">
+<h3>The Bash shell (Linux, macOS, MS Windows, …)<a class="headerlink" href="#the-bash-shell-linux-macos-ms-windows" title="Permalink to this headline">¶</a></h3>
+<p><img alt="" src="_images/f_cli-shell.png" /></p>
+</div>
+<div class="section" id="don-t-always-use-a-sledgehammer-for-the-job">
+<h3>Don’t always use a sledgehammer for the job<a class="headerlink" href="#don-t-always-use-a-sledgehammer-for-the-job" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>“When I fire up my Terminal app people that don’t know me well often look on in disgust, no doubt asking themselves what century I was born in. Surely they think, this is 2020! We have touch screens! Beautiful web apps! Amazing software with graphical interfaces! Yup. They’re fun. <strong>But, if your goal is to conduct a reproducible analysis, then you need to step away from those tools and dig into the command line.</strong> Another reaction is, don’t you know about this great R package to do that? I love R! But it’s not always the right tool for the job. Sometimes using R is like using a sledgehammer to pound in a nail or worse, sometimes it’s like using a sledgehammer to pound in a screw. I could, but why? Doing the same thing at the command line with bash commands would be so much easier.” (emphasis mine; <a class="reference external" href="https://riffomonas.org/code_club/2020-08-17-command-line-life">https://riffomonas.org/code_club/2020-08-17-command-line-life</a>)</p>
+</div></blockquote>
+</div>
+<div class="section" id="what-is-a-command-line-interface-cli">
+<h3>What is a command-line interface (CLI)?<a class="headerlink" href="#what-is-a-command-line-interface-cli" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>“A command-line interface (CLI) <strong>processes commands</strong> to a computer program in the form of <strong>lines of text</strong>. The program which handles the interface is called a command-line interpreter or command-line processor. Operating systems implement a command-line interface in a shell for interactive access to operating system functions or services. Such access was primarily provided to users by computer terminals starting in the mid-1960s, and continued to be used throughout the 1970s and 1980s on VAX/VMS, Unix systems and personal computer systems including DOS, CP/M and Apple DOS.”</p>
+</div></blockquote>
+<p>(emphasis mine; <a class="reference external" href="https://en.wikipedia.org/wiki/Command-line_interface">https://en.wikipedia.org/wiki/Command-line_interface</a>)</p>
+</div>
+<div class="section" id="and-what-is-a-shell">
+<h3>And what is a shell?<a class="headerlink" href="#and-what-is-a-shell" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>“In computing, a shell is a computer program which exposes an operating system’s services to a human user or other program. In general, operating system shells use either a command-line interface (CLI) or graphical user interface (GUI), depending on a computer’s role and particular operation. It is named a shell because it is the outermost layer around the operating system.”</p>
+</div></blockquote>
+<p>(<a class="reference external" href="https://en.wikipedia.org/wiki/Shell_(computing)">https://en.wikipedia.org/wiki/Shell_(computing)</a>)</p>
+</div>
+<div class="section" id="okay-but-why">
+<h3>Okay, but why?!<a class="headerlink" href="#okay-but-why" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Fast and effcient way to interact with your computer</p></li>
+<li><p>Important part of your automation toolbox to create a reproducible data analysis pipeline</p></li>
+<li><p>“1-Click Reproducibility” or better (but less catchy): “1-Command-on-a-CLI Reproducibility”</p></li>
+<li><p>Many functions that RStudio provides are actually based on command-line tools (Git, pandoc, <span class="math notranslate nohighlight">\(\LaTeX\)</span>, …) – it might be helpful to understand what is happening under the hood</p></li>
+<li><p>Accessing a remote server almost always requires some sort of command line skills</p></li>
+<li><p>…</p></li>
+</ul>
+<p><span id="id4">[<a class="reference internal" href="a3_introduction-to-git.html#id12">Piccolo and Frampton, 2016</a>]</span></p>
+<p>I also recommend “Top ten reasons to learn to use the command line: Expanding your reproducibility tools”, see <a class="reference external" href="https://riffomonas.org/code_club/2020-08-17-command-line-life">https://riffomonas.org/code_club/2020-08-17-command-line-life</a></p>
+</div>
+<div class="section" id="the-git-bash">
+<h3>The Git Bash<a class="headerlink" href="#the-git-bash" title="Permalink to this headline">¶</a></h3>
+<p><img alt="" src="_images/f_git-bash.png" /></p>
+</div>
+<div class="section" id="important-commands">
+<h3>Important commands<a class="headerlink" href="#important-commands" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Note, some of these commands depend on the respective operating system</p></li>
+<li><p>Almost all of these command can have several arguments, e.g., <code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">-la</span></code></p></li>
+<li><p>Linux cheatsheet: <a class="reference external" href="https://files.fosswire.com/2007/08/fwunixref.pdf">https://files.fosswire.com/2007/08/fwunixref.pdf</a></p></li>
+<li><p>MS Windows cheatsheet: <a class="reference external" href="http://www.cs.columbia.edu/~sedwards/classes/2015/1102-fall/Command%20Prompt%20Cheatsheet.pdf">http://www.cs.columbia.edu/~sedwards/classes/2015/1102-fall/Command Prompt Cheatsheet.pdf</a></p></li>
+</ul>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="text-align:left head"><p>Description</p></th>
+<th class="text-align:left head"><p>Win</p></th>
+<th class="text-align:left head"><p>Linux, macOS</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:left"><p>Copy files, folders</p></td>
+<td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">copy</span></code></p></td>
+<td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">cp</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>Move files, folders</p></td>
+<td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">move</span></code></p></td>
+<td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">mv</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p>List folder content</p></td>
+<td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">dir</span></code></p></td>
+<td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">ls</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>Create new folder</p></td>
+<td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">mkdir</span></code></p></td>
+<td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">mkdir</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p>Change current folder</p></td>
+<td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">cd</span></code></p></td>
+<td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">cd</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>Show current path</p></td>
+<td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">echo</span> <span class="pre">%cd%</span></code></p></td>
+<td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">pwd</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p><strong>Danger zone</strong> No undo!</p></td>
+<td class="text-align:left"><p></p></td>
+<td class="text-align:left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>Delete file(s)</p></td>
+<td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">del</span></code></p></td>
+<td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">rm</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p>Delete folder(s)</p></td>
+<td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">rmdir</span></code></p></td>
+<td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">rm</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="a-small-script-to-create-a-project-folder">
+<span id="cli-create-project"></span><h3>A small script to create a project folder<a class="headerlink" href="#a-small-script-to-create-a-project-folder" title="Permalink to this headline">¶</a></h3>
+<p>The following small bash/shell (on Windows: use the Git bash) script was introduced in the very beginning of this module. It initializes a new project folder. It even detects when you forget to submit a folder name for your project:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>#!/bin/sh
+
+# Yes, I had to google that... 
+# https://stackoverflow.com/questions/6482377/check-existence-of-input-argument-in-a-bash-shell-script
+if [ $# -eq 0 ]
+  then
+    echo &quot;No arguments supplied! You stupid!!!!!!&quot;
+    exit 1
+fi
+
+mkdir $1
+cd $1
+mkdir data
+mkdir src
+mkdir output
+touch .gitignore
+touch README 
+</pre></div>
+</div>
+</div>
+<div class="section" id="exercise">
+<h3>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Start the Git Bash</p></li>
+<li><p>List the content of the current folder via <code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">-la</span></code></p></li>
+<li><p>Determine where you are via <code class="docutils literal notranslate"><span class="pre">pwd</span></code></p></li>
+<li><p>Go to the parent folder via <code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">&lt;your</span> <span class="pre">input&gt;</span></code></p></li>
+<li><p>Copy the content from my small script (see above, section <a class="reference internal" href="#cli-create-project"><span class="std std-ref">A small script to create a project folder</span></a>, use the little copy-icon in the top-right corner) and past it into a text file, save the text file as <code class="docutils literal notranslate"><span class="pre">create-project.sh</span></code></p></li>
+<li><p>Execute the script <code class="docutils literal notranslate"><span class="pre">./create-project.sh</span></code> (the <code class="docutils literal notranslate"><span class="pre">./</span></code> is important, for an explanation see <a class="reference external" href="https://stackoverflow.com/questions/6331075/why-do-you-need-dot-slash-before-executable-or-script-name-to-run-it-in-bas">here</a>) without a folder name</p></li>
+<li><p>Execute the script <code class="docutils literal notranslate"><span class="pre">./create-project.sh</span> <span class="pre">&lt;your-new-project&gt;</span></code> with a folder name as argument</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="the-power-of-plain-text">
+<h2>The power of plain text<a class="headerlink" href="#the-power-of-plain-text" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="again-it-is-2021-why-would-i-write-in-plain-text">
+<h3>Again, it is 2021, why would I write in plain text?<a class="headerlink" href="#again-it-is-2021-why-would-i-write-in-plain-text" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Version control (e.g., Git) works well (efficient, differences between versions are easy to understand) with plain text documents, <code class="docutils literal notranslate"><span class="pre">.docx</span></code> et al. not so much</p></li>
+<li><p>Future proof</p></li>
+<li><p>Can easily manipulated with external tools</p></li>
+<li><p>…</p></li>
+</ul>
+<p>Canonical reference: <a class="reference external" href="https://plain-text.co/">The Plain Person’s Guide to Plain Text Social Science</a> by Kieran Healy</p>
+</div>
+<div class="section" id="encoding">
+<h3>Encoding<a class="headerlink" href="#encoding" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Puh, what is <a class="reference external" href="https://en.wikipedia.org/wiki/Character_encoding">(character) encoding</a>?</p></li>
+<li><p>See also <a class="reference external" href="https://www.w3.org/International/questions/qa-what-is-encoding.en">https://www.w3.org/International/questions/qa-what-is-encoding.en</a></p></li>
+<li><p>My only rule: Use utf-8</p></li>
+<li><p>If you run into trouble, use a search engine your trust… which will most likely lead to a Stackoverflow page</p></li>
+<li><p>Example: <a class="reference external" href="https://stackoverflow.com/questions/61490124/how-to-keep-umlaut-in-r">How to keep umlaut in R?</a></p></li>
+<li><p>Notepad++ is my my tool of choice…</p></li>
+<li><p>On the command line (Linux/Bash), you can use the command <code class="docutils literal notranslate"><span class="pre">file</span></code>, see below for the encoding of my references file:</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>file references.bib
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>references.bib: Unicode text, UTF-8 text, with very long lines (1869)
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="the-power-of-regular-expressions">
+<h3>The power of regular expressions<a class="headerlink" href="#the-power-of-regular-expressions" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>“Regular expressions are specially encoded text strings used as patterns for matching sets of strings” <span id="id5">[<a class="reference internal" href="a3_introduction-to-git.html#id6">Fitzgerald, 2012</a>]</span></p></li>
+<li><p>Regex = Regular expressions</p></li>
+<li><p>Regex can be really handy when it comes to:</p>
+<ul>
+<li><p>Searching for highly standardized strings, e.g., Emails, URLs etc.</p></li>
+<li><p>Search and replace in an automated fashion</p></li>
+<li><p>Extract text</p></li>
+<li><p>…</p></li>
+</ul>
+</li>
+<li><p>Regex are implemented in almost all programming languages, including Python, R, Stata</p></li>
+</ul>
+<p>The following example utilizes Python for a brief demonstration of Regex. It uses the following sample text:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">lalaal</span><span class="nd">@gesis</span><span class="o">.</span><span class="n">org</span> <span class="n">ysdfvysdfc</span> <span class="n">sdcfasefasdf</span> <span class="n">hhatz</span><span class="nd">@gesis</span><span class="o">.</span><span class="n">org</span><span class="p">,</span>
+<span class="n">aselkjcf</span> <span class="n">nöasjfasö</span> <span class="n">djfcapsodfak</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">gesis</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">welt</span> 
+<span class="n">acsd1132</span> <span class="mf">33.45</span> <span class="n">sklfdgssfd</span> <span class="n">ef</span> <span class="n">caois</span> <span class="mf">12.1</span> <span class="n">willlst</span><span class="nd">@gesis</span><span class="o">.</span><span class="n">org</span> 
+<span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">gesis</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">helloworld</span> 
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">re</span>
+
+<span class="n">sample</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;lalaal@gesis.org ysdfvysdfc sdcfasefasdf hhatz@gesis.org,</span>
+<span class="s2">aselkjcf nöasjfasö djfcapsodfak http://www.gesis.org/welt </span>
+<span class="s2">acsd1132 33.45 sklfdgssfd ef caois 12.1 willlst@gesis.org </span>
+<span class="s2">http://www.gesis.org/helloworld </span>
+<span class="s2">&quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>lalaal@gesis.org ysdfvysdfc sdcfasefasdf hhatz@gesis.org,
+aselkjcf nöasjfasö djfcapsodfak http://www.gesis.org/welt 
+acsd1132 33.45 sklfdgssfd ef caois 12.1 willlst@gesis.org 
+http://www.gesis.org/helloworld 
+</pre></div>
+</div>
+</div>
+</div>
+<p>Extract all emails:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">m</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;[\w.+-]+@[\w-]+\.[\w.-]+&#39;</span><span class="p">,</span> <span class="n">sample</span><span class="p">)</span>
+<span class="n">m</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;lalaal@gesis.org&#39;, &#39;hhatz@gesis.org&#39;, &#39;willlst@gesis.org&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Extract all numbers:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">m</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\d+&#39;</span><span class="p">,</span> <span class="n">sample</span><span class="p">)</span>
+<span class="n">m</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;1132&#39;, &#39;33&#39;, &#39;45&#39;, &#39;12&#39;, &#39;1&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="automation-and-productivity">
+<h2>Automation and productivity<a class="headerlink" href="#automation-and-productivity" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>There is a trade-off between automation and productivity</p></li>
+<li><p>Automation, learning the required skills, setting up your tool chain will take a lot of time – but can also safe a lot of time</p></li>
+<li><p>Find the sweet spot where you invest some time now to save – in the long run – more time and increase your productivity</p></li>
+<li><p>“Find the sweet spot” – well, easier said than done</p></li>
+</ul>
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Never spend 6 minutes doing something by hand when you can spend 6 hours failing to automate it</p>&mdash; Zhuowei Zhang (@zhuowei) <a href="https://twitter.com/zhuowei/status/1254266079532154880?ref_src=twsrc%5Etfw">April 26, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<p id="id6"><dl class="citation">
+<dt class="label" id="id9"><span class="brackets">AR21</span></dt>
+<dd><p>Jesse M. Alston and Jessica A. Rick. A Beginner's Guide to Conducting Reproducible Research. <em>The Bulletin of the Ecological Society of America</em>, April 2021. <a class="reference external" href="https://doi.org/10.1002/bes2.1801">doi:10.1002/bes2.1801</a>.</p>
+</dd>
+<dt class="label" id="id18"><span class="brackets">Bar18</span></dt>
+<dd><p>Lorena A. Barba. Terminologies for Reproducible Research. <em>arXiv:1802.03311 [cs]</em>, February 2018. <a class="reference external" href="https://arxiv.org/abs/1802.03311">arXiv:1802.03311</a>.</p>
+</dd>
+<dt class="label" id="id8"><span class="brackets">BD95</span></dt>
+<dd><p>Jonathan B. Buckheit and David L. Donoho. WaveLab and Reproducible Research. In Anestis Antoniadis, Georges Oppenheim, P. Bickel, P. Diggle, S. Fienberg, K. Krickeberg, I. Olkin, N. Wermuth, and S. Zeger, editors, <em>Wavelets and Statistics</em>, volume 103 of Lecture Notes in Statistics, pages 55–81. Springer New York, New York, NY, 1995. <a class="reference external" href="https://doi.org/10.1007/978-1-4612-2544-7">doi:10.1007/978-1-4612-2544-7</a>.</p>
+</dd>
+<dt class="label" id="id14"><span class="brackets"><a class="fn-backref" href="#id3">Div18</a></span></dt>
+<dd><p>Patrick Divine. String Case Styles: camel, Pascal, Snake, and Kebab Case. https://betterprogramming.pub/string-case-styles-camel-pascal-snake-and-kebab-case-981407998841, 2018.</p>
+</dd>
+<dt class="label" id="id7"><span class="brackets"><a class="fn-backref" href="#id5">Fit12</a></span></dt>
+<dd><p>Michael Fitzgerald. <em>Introducing Regular Expressions</em>. O'Reilly, Beijing, Köln, 1. ed edition, 2012. ISBN 978-1-4493-9268-0.</p>
+</dd>
+<dt class="label" id="id16"><span class="brackets"><a class="fn-backref" href="#id1">For17</a></span></dt>
+<dd><p>Tiago Forte. The PARA Method: a Universal System for Organizing Digital Information. https://fortelabs.co/blog/para/, February 2017.</p>
+</dd>
+<dt class="label" id="id20"><span class="brackets">FP17</span></dt>
+<dd><p>Jeremy Freese and David Peterson. Replication in Social Science. <em>Annual Review of Sociology</em>, 43(1):147–165, July 2017. <a class="reference external" href="https://doi.org/10.1146/annurev-soc-060116-053450">doi:10.1146/annurev-soc-060116-053450</a>.</p>
+</dd>
+<dt class="label" id="id22"><span class="brackets">GFI16</span></dt>
+<dd><p>Steven N. Goodman, Daniele Fanelli, and John P. A. Ioannidis. What does research reproducibility mean? <em>Science Translational Medicine</em>, 8(341):341ps12–341ps12, June 2016. <a class="reference external" href="https://doi.org/10.1126/scitranslmed.aaf5027">doi:10.1126/scitranslmed.aaf5027</a>.</p>
+</dd>
+<dt class="label" id="id11"><span class="brackets">Hea19</span></dt>
+<dd><p>Kieran Healy. The Plain Person's Guide to Plain Text Social Science. https://plain-text.co/, October 2019.</p>
+</dd>
+<dt class="label" id="id10"><span class="brackets">Lee14</span></dt>
+<dd><p>Thomas J. Leeper. Reproducible Research:what, Why, and How? 2014.</p>
+</dd>
+<dt class="label" id="id12"><span class="brackets">Narkebski16</span></dt>
+<dd><p>Jakub Narębski. <em>Mastering Git: Attain Expert-Level Proficiency with Git for Enhanced Productivity and Efficient Collaboration by Mastering Advanced Distributed Version Control Features</em>. Packt Publishing, Birmingham, 2016. ISBN 978-1-78355-375-4.</p>
+</dd>
+<dt class="label" id="id21"><span class="brackets">Pen11</span></dt>
+<dd><p>Roger D. Peng. Reproducible Research in Computational Science. <em>Science</em>, 334(6060):1226–1227, February 2011. <a class="reference external" href="https://doi.org/10.1126/science.1213847">doi:10.1126/science.1213847</a>.</p>
+</dd>
+<dt class="label" id="id13"><span class="brackets"><a class="fn-backref" href="#id4">PF16</a></span></dt>
+<dd><p>Stephen R. Piccolo and Michael B. Frampton. Tools and techniques for computational reproducibility. <em>GigaScience</em>, 5(1):30, December 2016. <a class="reference external" href="https://doi.org/10.1186/s13742-016-0135-4">doi:10.1186/s13742-016-0135-4</a>.</p>
+</dd>
+<dt class="label" id="id15"><span class="brackets"><a class="fn-backref" href="#id2">SWeiss20</a></span></dt>
+<dd><p>Ines Schaurer and Bernd Weiß. Investigating selection bias of online surveys on coronavirus-related behavioral outcomes: an example utilizing the GESIS Panel Special Survey on the Coronavirus SARS-CoV-2 Outbreak in Germany. <em>Survey Research Methods</em>, 2(14):103–108, June 2020. <a class="reference external" href="https://doi.org/10.18148/SRM/2020.V14I2.7751">doi:10.18148/SRM/2020.V14I2.7751</a>.</p>
+</dd>
+<dt class="label" id="id19"><span class="brackets">SLP14</span></dt>
+<dd><p>Victoria Stodden, Friedrich Leisch, and Roger D. Peng. <em>Implementing Reproducible Research</em>. CRC Press, Boca Raton, 2014.</p>
+</dd>
+</dl>
+</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="a1_introduction-to-reproducible-research.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">A1: A brief introduction to reproducible research (in the social sciences)</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="a3_introduction-to-git.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">A3: An introduction to Git</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By Bernd Weiß<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>
