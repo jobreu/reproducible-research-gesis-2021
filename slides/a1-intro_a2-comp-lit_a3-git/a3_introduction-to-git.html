@@ -1,0 +1,1683 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>A3: An introduction to Git &#8212; Tools and Workflows for Reproducible Research in the Quantitative Social Sciences</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet" />
+  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Appendix" href="appendix.html" />
+    <link rel="prev" title="A2: Computer literacy for reproducible research" href="a2_computer-literacy.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/GESIS_Logo_kompakt_en.jpg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Tools and Workflows for Reproducible Research in the Quantitative Social Sciences</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
+   Some introductory words
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="a1_introduction-to-reproducible-research.html">
+   A1: A brief introduction to reproducible research (in the social sciences)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="a2_computer-literacy.html">
+   A2: Computer literacy for reproducible research
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   A3: An introduction to Git
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="appendix.html">
+   Appendix
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/a3_introduction-to-git.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/executablebooks/jupyter-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fa3_introduction-to-git.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/a3_introduction-to-git.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#git-live-demo">
+   Git live demo
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#preface">
+   Preface
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#initializing-folders-and-files">
+     Initializing folders and files
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-concept-of-version-control">
+   The Concept of Version Control
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#prerequisits">
+     Prerequisits
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#why-use-a-version-control-system-vcs">
+     Why use a Version Control System (VCS)?
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#terminology-and-concepts">
+     Terminology and concepts
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#git-a-30-000-foot-view">
+     Git: A 30,000 foot view
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#how-i-use-git">
+     How I use Git
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#installing-git-and-setup">
+   Installing Git and setup
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#download-and-installation">
+     Download and installation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#prepare-to-access-remote-repositories">
+     Prepare to access remote repositories
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#well-not-so-distributed-at-all">
+     Well, not so distributed at all…
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#setting-up-ssh">
+       Setting up SSH
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#basic-workflow">
+   Basic workflow
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#setting-up-a-git-repository">
+     Setting up a Git repository
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#creating-a-local-git-repository">
+     Creating a local Git repository
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-status-of-a-repository-git-status">
+     The status of a repository (
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       git
+      </span>
+      <span class="pre">
+       status
+      </span>
+     </code>
+     )
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#adding-files-to-a-git-repository-git-add-and-git-commit">
+     Adding files to a git repository:
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       git
+      </span>
+      <span class="pre">
+       add
+      </span>
+     </code>
+     and
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       git
+      </span>
+      <span class="pre">
+       commit
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#viewing-git-s-commit-history-git-log">
+     Viewing Git’s commit history:
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       git
+      </span>
+      <span class="pre">
+       log
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise">
+     Exercise
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#undo-changes-going-back-in-git-s-history">
+     Undo changes / Going back in Git’s history
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#git-checkout">
+       git checkout
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#git-revert">
+       git revert
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#git-reset">
+       git reset
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#what-has-changed-at-the-file-level-git-show-and-git-diff">
+     What has changed at the file level?
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       git
+      </span>
+      <span class="pre">
+       show
+      </span>
+     </code>
+     and
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       git
+      </span>
+      <span class="pre">
+       diff
+      </span>
+     </code>
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#a-brief-intro-to-the-unified-diff-format">
+       A brief intro to the unified diff format
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#git-show">
+       <code class="docutils literal notranslate">
+        <span class="pre">
+         git
+        </span>
+        <span class="pre">
+         show
+        </span>
+       </code>
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#branching">
+     Branching
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#working-with-remote-repositories">
+   Working with remote repositories
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#establishing-a-connection-to-a-remote-repository">
+     Establishing a connection to a remote repository
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#cloning-a-remote-repository">
+     Cloning a remote repository
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#adding-a-remote-repository-via-git-remote-add">
+     Adding a remote repository via
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       git
+      </span>
+      <span class="pre">
+       remote
+      </span>
+      <span class="pre">
+       add
+      </span>
+      <span class="pre">
+       ...
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#delete-remote-branch">
+     Delete remote branch
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#dowloading-a-remote-branch-that-is-not-on-your-computer-yet">
+     Dowloading a remote branch that is not on your computer (yet)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id3">
+     Exercise
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#setting-up-a-git-repository-locally-and-remotly">
+   Setting up a Git repository locally and remotly
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id4">
+     Exercise
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#there-is-much-more">
+   There is much more…
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   References
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="a3-an-introduction-to-git">
+<h1>A3: An introduction to Git<a class="headerlink" href="#a3-an-introduction-to-git" title="Permalink to this headline">¶</a></h1>
+<p>Bernd Weiß</p>
+<p><img alt="" src="_images/xkcd_git.png" /></p>
+<p>(Source: xkcd, <a class="reference external" href="https://xkcd.com/1597/">https://xkcd.com/1597/</a>, accessed on 2017-12-23)</p>
+<div class="section" id="git-live-demo">
+<h2>Git live demo<a class="headerlink" href="#git-live-demo" title="Permalink to this headline">¶</a></h2>
+<p><img alt="" src="_images/live-streaming.png" /></p>
+<div>(Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>)</div></div>
+<div class="section" id="preface">
+<h2>Preface<a class="headerlink" href="#preface" title="Permalink to this headline">¶</a></h2>
+<p><strong>A few words on notation</strong></p>
+<p>All interactive Git commands in this document start with an exclamation mark like so: <code class="docutils literal notranslate"><span class="pre">!git</span> <span class="pre">add</span></code> In your terminal, though, you have to type in <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code> without exclamation mark</p>
+<div class="section" id="initializing-folders-and-files">
+<h3>Initializing folders and files<a class="headerlink" href="#initializing-folders-and-files" title="Permalink to this headline">¶</a></h3>
+<div class="cell tag_remove-input docutils container">
+</div>
+<p>Since we’d like to have a fully reproducible example, everytime this notebook is started everything is created from scratch. First, a test folder for Git is being created.</p>
+<div class="cell tag_hide-cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">shutil</span>
+<span class="kn">import</span> <span class="nn">re</span>
+
+<span class="n">test_folder</span> <span class="o">=</span> <span class="s2">&quot;git_test_folder&quot;</span>
+<span class="n">test_file_git</span> <span class="o">=</span> <span class="s2">&quot;test_file_git&quot;</span>
+
+<span class="c1">## If this is the n+1-th run, check if we are already in folder test_folder and then go back to parent folder.    </span>
+<span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+<span class="k">if</span> <span class="s2">&quot;git_test_folder&quot;</span> <span class="ow">in</span> <span class="n">path</span><span class="p">:</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s2">&quot;..&quot;</span><span class="p">)</span>
+
+<span class="c1">## Start always from scratch: if test_folder exists, remove it. </span>
+<span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">test_folder</span><span class="p">):</span>
+    <span class="o">!</span>rm -r <span class="o">{</span>test_folder<span class="o">}</span>
+    <span class="c1">## Using shutil.rmtree is unreliable...</span>
+    <span class="c1">## shutil.rmtree(test_folder)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">test_folder</span><span class="p">):</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">test_folder</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="n">test_folder</span> <span class="o">=</span> <span class="s2">&quot;git_test_folder&quot;</span>
+<span class="n">test_file_git</span> <span class="o">=</span> <span class="s2">&quot;test_file_git&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Second, change into git’s test directory and create a new file with a total of four lines of text.</p>
+<div class="cell tag_hide-cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">test_folder</span><span class="p">)</span>
+<span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;test.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span>
+<span class="n">file_content</span> <span class="o">=</span> <span class="s2">&quot;l1: Branch: master</span><span class="se">\n</span><span class="s2">&quot;</span> \
+               <span class="s2">&quot;l2: Author: BW</span><span class="se">\n</span><span class="s2">&quot;</span> \
+               <span class="s2">&quot;l3: // Always start with a dumb comment:</span><span class="se">\n</span><span class="s2">&quot;</span> \
+               <span class="s2">&quot;l4: use my_fancy_data.dta, clear</span><span class="se">\n</span><span class="s2">&quot;</span> \
+               <span class="s2">&quot;l5: gen v1 = 1</span><span class="se">\n</span><span class="s2">&quot;</span> \
+               <span class="s2">&quot;l6: gen v2 = v1 + 1</span><span class="se">\n</span><span class="s2">&quot;</span> \
+               <span class="s2">&quot;l7: mean v1&quot;</span>
+<span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">file_content</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>So, let’s print the content of the test file:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;test.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+<span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>l1: Branch: master
+l2: Author: BW
+l3: // Always start with a dumb comment:
+l4: use my_fancy_data.dta, clear
+l5: gen v1 = 1
+l6: gen v2 = v1 + 1
+l7: mean v1
+</pre></div>
+</div>
+</div>
+</div>
+<p>I also will create a couple of handy python functions that will make my life much easier:</p>
+<div class="cell tag_hide-cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">replace_text</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">old</span><span class="p">,</span> <span class="n">new</span><span class="p">):</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
+    <span class="n">flist</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="kn">import</span> <span class="nn">re</span>
+    <span class="n">rep</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">old</span><span class="p">)</span>
+    <span class="n">flist</span> <span class="o">=</span> <span class="n">rep</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">new</span><span class="p">,</span> <span class="n">flist</span><span class="p">)</span>   
+    <span class="c1">##print flist    </span>
+
+    <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">flist</span><span class="p">)</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    
+<span class="k">def</span> <span class="nf">remove_line</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">line_number</span><span class="p">):</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
+    <span class="n">flist</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span>
+    <span class="c1">## delete n-th line</span>
+    <span class="k">del</span> <span class="n">flist</span><span class="p">[</span><span class="n">line_number</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>    <span class="c1">#delete regarding element</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">flist</span><span class="p">:</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>    
+    
+    
+<span class="k">def</span> <span class="nf">print_file</span><span class="p">(</span><span class="n">file</span><span class="p">):</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="the-concept-of-version-control">
+<h2>The Concept of Version Control<a class="headerlink" href="#the-concept-of-version-control" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="prerequisits">
+<h3>Prerequisits<a class="headerlink" href="#prerequisits" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Git and other tools have been developed in the context of software development (in the Linux community, to be more precise)</p></li>
+<li><p>Even though there exits graphical user interfaces (GUIs) for working with Git, it is highly recommended that you have a basic knowledge of how to use the CLI (see section on <a class="reference internal" href="a2_computer-literacy.html#label-cli"><span class="std std-ref">Using a comand-line interface (CLI)</span></a>)</p></li>
+<li><p>Once you mastered using Git at the command line, using a GUI is a peace of cake</p></li>
+</ul>
+<p>Since most of you are working on a MS Windows PC, it is also a good idea to know the meaning of the <code class="docutils literal notranslate"><span class="pre">PATH</span></code> variable (what it is used for, how to access it and how to modify it).</p>
+</div>
+<div class="section" id="why-use-a-version-control-system-vcs">
+<h3>Why use a Version Control System (VCS)?<a class="headerlink" href="#why-use-a-version-control-system-vcs" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>For backup</p></li>
+<li><p>For collaborative work (including running into conflicting versions of a file) und syncing</p>
+<ul>
+<li><p>There is always a (the) “most recent” version of a file</p></li>
+<li><p>Given that there are conflicting versions of (text) files, Git is able to clearly identify these conflicts by displaying the differences of conflicting files (given they are in plain text)</p></li>
+</ul>
+</li>
+<li><p>Keeping track of changes (aka, time travel; all changes are tracked and it is quite easy to go back in time). So, even if you invented Skynet (popcultural reference) and mankind is about to being terminated for good, you always can go back in time</p></li>
+<li><p>And, avoiding the horror of <code class="docutils literal notranslate"><span class="pre">final_rev2_update12_after-computer-crashed.docx</span></code> (see <a class="reference external" href="http://phdcomics.com/comics.php?f=1531">http://phdcomics.com/comics.php?f=1531</a>)
+<img alt="" src="_images/f_naming-horror.jpg" /></p></li>
+<li><p>For having the possibility to test new code/functionalities in a “sandbox” (aka a new branch) (following-up my Skynet reference: create a parallel universe (the branch), do your evil thing and then go back to your reality if you don’t like it, i.e., delete the parallel universe/branch)</p></li>
+<li><p>While creating a history of changes, you are supposed to provide proper and meaningful messages that describe what has changed. If you do this thouroghly, you have a nice log file of all changes (like a lab notebook)</p></li>
+<li><p>Authorship attribution</p></li>
+<li><p>Modern web interfaces such as GitHub also allow for social interaction (strangers can send you <a class="reference external" href="https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests">pull requests</a> to improve your code/document/…)</p></li>
+</ul>
+<p>For what type of files is a VCS useful?</p>
+<ul class="simple">
+<li><p>Most useful for text files (Stata do files, SPSS syntax files, R skripts etc.). Text files can stored very efficient since only changes between version are tracked</p></li>
+<li><p>Binary files (Blob = binary large object) (images, word files, stata data files, etc.) can be stored in a VCS but less efficient than text files since every time the entire file is saved</p></li>
+</ul>
+</div>
+<div class="section" id="terminology-and-concepts">
+<h3>Terminology and concepts<a class="headerlink" href="#terminology-and-concepts" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>There is Git.</p></li>
+<li><p>And, then there are GitHub, GitLab etc., which are (web-based GUI) frontends to make working with Git easier, especially when it comes to collaborative work.</p></li>
+<li><p>GitHub and GitLab provide the opportunity to setup a remote Git repository.</p></li>
+<li><p>So, in most cases you will need a local installation of Git.</p></li>
+</ul>
+<ul class="simple">
+<li><p>In addition to being a frontend to Git, GitHub and GitLab also provide project management features and allow to create so-called issues that can be considered file-related todo items. You also can use milestone etc.</p></li>
+</ul>
+<ul class="simple">
+<li><p>One more thing, “Git” is the name of the software, and the actual command-line tool is <code class="docutils literal notranslate"><span class="pre">git</span></code> (e.g., in Windows it is <code class="docutils literal notranslate"><span class="pre">git.exe</span></code>).</p></li>
+</ul>
+</div>
+<div class="section" id="git-a-30-000-foot-view">
+<h3>Git: A 30,000 foot view<a class="headerlink" href="#git-a-30-000-foot-view" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Git is a version control system (VCS). As mentioned above, a VCS allows you to track the history and attribution of your project files over time in a repository <span id="id1">[<a class="reference internal" href="#id11">Narębski, 2016</a>]</span></p></li>
+<li><p>It is, if you will, a (very, very) powerful undo function (well, kind of…)</p></li>
+<li><p>To be more precise, Git is a distributed VCS (DCVS) and hence a tool for collaborartive work</p></li>
+<li><p>If you want to utilize Git for collaborative work, one approach of using Git in this context assumes that there exists a central and remote repository. Most fomous are GitHub, at GESIS we use GitLab</p></li>
+</ul>
+<ul class="simple">
+<li><p>Workflow in Git (given that a Git repository has already be initialized):</p></li>
+</ul>
+<ol class="simple">
+<li><p>Work locally (i.e. on your computer) on your files until a certain feature is completed (a function is completed, a paragraph written etc).</p></li>
+<li><p><em>Commit</em> your file and write a commit message, i.e. inform git that a certain file (or more) have changed and inform your future self (or someone else) about the nature of your changes (aka write a commit message). This has to be done manually.</p></li>
+<li><p>Commit early, commit often!</p></li>
+<li><p>When a remote repository exists: send (“push”) you changes to the remote repository.</p></li>
+</ol>
+<p><img alt="" src="_images/git-basic.png" /></p>
+<p>Source: <span id="id2">[<a class="reference internal" href="#id10">Healy, 2019</a>]</span>, see <a class="reference external" href="https://plain-text.co/keep-a-record.html">https://plain-text.co/keep-a-record.html</a></p>
+</div>
+<div class="section" id="how-i-use-git">
+<h3>How I use Git<a class="headerlink" href="#how-i-use-git" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Git is a very powerful tool, in my own work, I utilize a rather limited set of its capabilities</p></li>
+<li><p>This is what I mostly do with Git:</p>
+<ul>
+<li><p>Initialize a new Git repository or clone an existing respository</p></li>
+<li><p>Backup my work on a remote server</p></li>
+<li><p>Track changes</p></li>
+<li><p>Use branches to implement experimental features</p></li>
+<li><p>Search (and undo) previous changes (most of the time using the interface provided bv GitHub or GitLab)</p></li>
+</ul>
+</li>
+<li><p>“Google” (or whatever your prefered seach engine is) a lot …</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="installing-git-and-setup">
+<h2>Installing Git and setup<a class="headerlink" href="#installing-git-and-setup" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="download-and-installation">
+<h3>Download and installation<a class="headerlink" href="#download-and-installation" title="Permalink to this headline">¶</a></h3>
+<p>Git (for Windows) can be downloaded from: <a class="reference external" href="https://git-scm.com/download/win">https://git-scm.com/download/win</a>.</p>
+<p>Here are a few questions that you will be asked during the installation:</p>
+<ul class="simple">
+<li><p>Default editor (use Notepad++ if you have it on your computed, vim also works)</p></li>
+<li><p>Adjusting your PATH environment (you might want to go with the second optionn “Use Git from the Windows command Prompt”)</p></li>
+<li><p>Choosing HTTPS… (go with default: OpenSSL)</p></li>
+</ul>
+<p>In case you will be working with others, you also will need a remote repository (be able to acces a remote respository). For convenience reasons it is recommended that you also install/set up SSH (see next slides).</p>
+<p>For various reasons, I no longer use a standalone version of Git but use a version of Git that can be installed via <a class="reference external" href="https://www.msys2.org/">MSYS2</a>. “MSYS2 is a collection of tools and libraries providing you with an easy-to-use environment for building, installing and running native Windows software” (<a class="reference external" href="https://www.msys2.org/">https://www.msys2.org/</a>).</p>
+</div>
+<div class="section" id="prepare-to-access-remote-repositories">
+<h3>Prepare to access remote repositories<a class="headerlink" href="#prepare-to-access-remote-repositories" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="well-not-so-distributed-at-all">
+<h3>Well, not so distributed at all…<a class="headerlink" href="#well-not-so-distributed-at-all" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Even though Git is called “distributed”, most of the time, there is just one central server (e.,g., GitHub, GitLab, …)</p></li>
+<li><p>A Git project is stored in a repository, which can be local or remote</p></li>
+<li><p>When using Git to access a remote repository (for backup or collaborative work) on a remote server, you need to authenticate yourself to the server</p></li>
+<li><p>There are two ways of authentication: HTTPS or SSH</p></li>
+<li><p>Despite its technical details, I always choose SSH but Johannes, for instance, prefers HTTPS</p></li>
+<li><p>More information can be found on these websites:</p>
+<ul>
+<li><p><a class="reference external" href="https://docs.github.com/en/get-started/getting-started-with-git/about-remote-repositories">https://docs.github.com/en/get-started/getting-started-with-git/about-remote-repositories</a></p></li>
+<li><p><a class="reference external" href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/about-authentication-to-github#authenticating-with-the-command-line">https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/about-authentication-to-github#authenticating-with-the-command-line</a></p></li>
+</ul>
+</li>
+</ul>
+<div class="section" id="setting-up-ssh">
+<h4>Setting up SSH<a class="headerlink" href="#setting-up-ssh" title="Permalink to this headline">¶</a></h4>
+<p>To work with git on you local computer, you do not need SSH (= Secure Shell). SSH is a network protocol that comes in handy, when you work with remote repositories and when you do not want to type-in your passwort every time you pull (fetch) or push (send) from a remote repository. You still need to authenticate yourself, though.</p>
+<p>Authentication in SSH (which is also the name of the program) works by using a private and a public key (usually the public key has the file extension <code class="docutils literal notranslate"><span class="pre">.pub</span></code>, e.g. my public key is <code class="docutils literal notranslate"><span class="pre">id_rsa.pub</span></code>). When you start working with SSH for the very first time, you have to create both keys.</p>
+<p>The private key remains on your local computer and you have to make sure that it is safe – it is a simple text file and it is your password now, and everyone who has your private key can access your files. Again, everyone who has your private key has your password!</p>
+<p>This is what my <em>public key</em> looks like:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ssh-rsa
+AAAAB3NzaC1yc2EAAAABIwAAAQEAyOQ9RT6TkfgkdO2NspzdVJE5CZ03yYAhVwLGo
+CrI3E9/Ix0MAySunXExjhsQi2XkhPBjLOEahYuuLaAWHuBc7apUPRNSBy+mdUHnH3
+0BdTQijQ6vj3RL99HO4yrZnipIlkS5ufw/+hpbXXOzSOqTvyGtL9ygm3eA2HDSQtz
+2ptFq8anODJDKrgTbNLb/YZ9KDIcpdO/Sfk4LtvaGF3tIFlyE+pogNmN4eWiYg9Xv
+25BhVVxWMHadRFLeDastWO4SedriEHzQYaNgxVNTufqolJ0nbg4R//fVDxjR2SbzV
+AHLZ+eVPUx+vzcPVMP9wYPcnii9YLiSRy+hlUAOR/kXeQ== berndweiss
+</pre></div>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The <em>public key</em> (not the private key!) has to be stored at the GitHub/GitLab/… website. Now, everyone who has your public key can encrypt files (that are sent to you via the internet) but only you (or anyone else who has your private key) can decrypt the files. And, for that reasons you do not have to login everytime you push/pull files from the remote repository.</p>
+</div>
+<ul class="simple">
+<li><p>How to setup SSH on you computer is explained on this website: <a class="reference external" href="https://docs.gitlab.com/ce/ssh/README.html">https://docs.gitlab.com/ce/ssh/README.html</a> (“Generate an SSH key pair”)</p></li>
+<li><p>The most important point is that <code class="docutils literal notranslate"><span class="pre">ssh</span></code> is able to find your key pair, i.e., it needs to be located in your HOME folder</p></li>
+</ul>
+<p>If everything works well, you should receive the following friendly welcome message after typing in the command <code class="docutils literal notranslate"><span class="pre">ssh</span> <span class="pre">-T</span> <span class="pre">git&#64;git.gesis.org</span></code>:</p>
+<blockquote>
+<div><p>Welcome to GitLab, [your username]</p>
+</div></blockquote>
+</div>
+</div>
+</div>
+<div class="section" id="basic-workflow">
+<h2>Basic workflow<a class="headerlink" href="#basic-workflow" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="setting-up-a-git-repository">
+<h3>Setting up a Git repository<a class="headerlink" href="#setting-up-a-git-repository" title="Permalink to this headline">¶</a></h3>
+<p>Usually, there are two ways to set up/obtain a Git repository:</p>
+<ol class="simple">
+<li><p>You create a new Git repository, push it to GitHub/GitLab and start collaborating with your colleagues (or only yourself)</p></li>
+<li><p>You “clone” an existing repository from a remote Git server such as GitHub/GitLab (for more details see section <a class="reference internal" href="#git-remote"><span class="std std-ref">Working with remote repositories</span></a>)</p></li>
+</ol>
+</div>
+<div class="section" id="creating-a-local-git-repository">
+<h3>Creating a local Git repository<a class="headerlink" href="#creating-a-local-git-repository" title="Permalink to this headline">¶</a></h3>
+<p>The first step is to create a Git repository. After the repository has been created, we need to tell <code class="docutils literal notranslate"><span class="pre">git</span></code> which files will be subject to version control. So, the following git commands will be utilized:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">init</span></code>: Creates a new folder <code class="docutils literal notranslate"><span class="pre">.git</span></code>, which contains configuration files and the repository. As of now, <code class="docutils literal notranslate"><span class="pre">git</span></code> does not know anything about our file(s), e.g. <code class="docutils literal notranslate"><span class="pre">test.txt</span></code></p></li>
+<li><p>From now on, all examples will refer to a demo repository called <code class="docutils literal notranslate"><span class="pre">git_test_folder</span></code></p></li>
+</ul>
+<p>The content of <code class="docutils literal notranslate"><span class="pre">git_test_folder</span></code> is</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>ls -la
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>total 9
+drwxr-xr-x 1 weissbd DomÃ¤nen-Benutzer   0 Nov 17 05:21 .
+drwxr-xr-x 1 weissbd DomÃ¤nen-Benutzer   0 Nov 17 05:21 ..
+-rw-r--r-- 1 weissbd DomÃ¤nen-Benutzer 160 Nov 17 05:21 test.txt
+</pre></div>
+</div>
+</div>
+</div>
+<p>And, <code class="docutils literal notranslate"><span class="pre">test.txt</span></code> contains the following content:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>cat test.txt
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>l1: Branch: master
+l2: Author: BW
+l3: // Always start with a dumb comment:
+l4: use my_fancy_data.dta, clear
+l5: gen v1 = 1
+l6: gen v2 = v1 + 1
+l7: mean v1
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, let’s initialize the Git repository using the <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">init</span></code> command.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>git init
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Initialized empty Git repository in /e/syncwork/projects/confer/ps2021-10-ws-repro-research/src/bw/git_test_folder/.git/
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="the-status-of-a-repository-git-status">
+<h3>The status of a repository (<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code>)<a class="headerlink" href="#the-status-of-a-repository-git-status" title="Permalink to this headline">¶</a></h3>
+<p>Before we start doing anything, let’s check the status of our newly created repository using the command <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code>. It shows the status of the currect working tree, the main one is called <code class="docutils literal notranslate"><span class="pre">master</span></code>. As of now, <code class="docutils literal notranslate"><span class="pre">git</span></code> is not aware of any files yet, so it informs us about the existance of ‘Untracked files: …’.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>git status
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>On branch main
+
+No commits yet
+
+Untracked files:
+  (use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)
+	test.txt
+
+nothing added to commit but untracked files present (use &quot;git add&quot; to track)
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="adding-files-to-a-git-repository-git-add-and-git-commit">
+<h3>Adding files to a git repository: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code> and <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code><a class="headerlink" href="#adding-files-to-a-git-repository-git-add-and-git-commit" title="Permalink to this headline">¶</a></h3>
+<p>Now it is time for some file action by adding (a) file(s) to our repository.</p>
+<p>In the previous section on <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code> it was recommended that <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code> is used to add files to the git repository:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>(use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)
+</pre></div>
+</div>
+<p>That is what we are going to do now: To actually ‘save’ (check-in or track) files in the repository, a <em>two-step</em> procedure needs to be performed.</p>
+<p>The first step is to call <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code>, the second step is to commit the file(s) using <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code>. For now, it might be hard to see the benefit of this two-step procedure, see <a class="reference external" href="http://gitolite.com/uses-of-index.html">http://gitolite.com/uses-of-index.html</a> for a thorough description.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">-A</span></code> : Adds (here ´-A´ means “all files”) files to the <em>index</em> (or staging area).</p></li>
+<li><p>To add a particilar files to the index, use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">my_special_file.do</span></code>.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>git add -A
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>git status
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>On branch main
+
+No commits yet
+
+Changes to be committed:
+  (use &quot;git rm --cached &lt;file&gt;...&quot; to unstage)
+	new file:   test.txt
+</pre></div>
+</div>
+</div>
+</div>
+<p>The second step is to run the command <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span> <span class="pre">-m</span> <span class="pre">&quot;your</span> <span class="pre">text,</span> <span class="pre">verbs</span> <span class="pre">in</span> <span class="pre">imperative</span> <span class="pre">form&quot;</span></code> (see below), e.g. <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span> <span class="pre">-m</span> <span class="pre">&quot;add</span> <span class="pre">function</span> <span class="pre">to</span> <span class="pre">compute</span> <span class="pre">tau^2&quot;</span></code>. Since this is my first commit, I always apply the following commit message: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span> <span class="pre">-m</span> <span class="pre">&quot;initial</span> <span class="pre">commit</span></code>.</p>
+<p>According to <a class="reference external" href="https://git.kernel.org/pub/scm/git/git.git/tree/Documentation/SubmittingPatches?id=HEAD#n133">https://git.kernel.org/pub/scm/git/git.git/tree/Documentation/SubmittingPatches?id=HEAD#n133</a> commit messages should follow the “imperative-style”:</p>
+<blockquote>
+<div><p>“Describe your changes in imperative mood, e.g. “make xyzzy do frotz” instead of “[This patch] makes xyzzy do frotz” or “[I]
+changed xyzzy to do frotz”, as if you are giving orders to the codebase to change its behavior. Try to make sure your
+explanation can be understood without external resources. Instead of giving a URL to a mailing list archive, summarize the
+relevant points of the discussion.”</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>git commit -m <span class="s2">&quot;Initial commit&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[main (root-commit) 12b9483] Initial commit
+ 1 file changed, 7 insertions(+)
+ create mode 100644 test.txt
+</pre></div>
+</div>
+</div>
+</div>
+<p>Again, let’s see what <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code> reports:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>git status
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>On branch main
+nothing to commit, working tree clean
+</pre></div>
+</div>
+</div>
+</div>
+<p>So, there are no untracked files, that is, “nothing to commit, working directory clean”.</p>
+</div>
+<div class="section" id="viewing-git-s-commit-history-git-log">
+<h3>Viewing Git’s commit history: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code><a class="headerlink" href="#viewing-git-s-commit-history-git-log" title="Permalink to this headline">¶</a></h3>
+<p>There is another useful command <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code> that informs about <code class="docutils literal notranslate"><span class="pre">git</span></code>’s history, i.e. commited files and folders:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>git log
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>commit 12b9483953c67438aa087586c82b7ba17d02975d
+Author: Bernd Weiss &lt;spam@metaanalyse.de&gt;
+Date:   Wed Nov 17 05:21:12 2021 +0100
+
+    Initial commit
+</pre></div>
+</div>
+</div>
+</div>
+<p>Right now, the history only contains one entry. The very first line <code class="docutils literal notranslate"><span class="pre">commit</span> <span class="pre">...</span></code> shows the SHA1 hash. The ‘Secure Hash Algorithm 1’ is used to calculate this long, hexadecimal number for a file. Files with identical content are representet by an identical SHA1 hash, files with different content do not share an identical SHA1 hash. Using these SHA1 numbers, <code class="docutils literal notranslate"><span class="pre">git</span></code> can identify changes in a file.</p>
+<p>Let’s start changing the content of text.txt. For instance, remove line 3 (<code class="docutils literal notranslate"><span class="pre">//</span> <span class="pre">Always</span> <span class="pre">start</span> <span class="pre">with</span> <span class="pre">a</span> <span class="pre">dumb</span> <span class="pre">comment:</span></code>). First, let’s print the original file content again:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">print_file</span><span class="p">(</span><span class="s2">&quot;test.txt&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>l1: Branch: master
+l2: Author: BW
+l3: // Always start with a dumb comment:
+l4: use my_fancy_data.dta, clear
+l5: gen v1 = 1
+l6: gen v2 = v1 + 1
+l7: mean v1
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here is some Python code that removes the comment line.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">remove_line</span><span class="p">(</span><span class="s2">&quot;test.txt&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Print out the new code file (remember, the comment line has been removed).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;test.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+<span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>l1: Branch: master
+l2: Author: BW
+l4: use my_fancy_data.dta, clear
+l5: gen v1 = 1
+l6: gen v2 = v1 + 1
+l7: mean v1
+</pre></div>
+</div>
+</div>
+</div>
+<p>Again, let’s check <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code> to see what our repository is doing and what has changed…</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>git status
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>On branch main
+Changes not staged for commit:
+  (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)
+  (use &quot;git restore &lt;file&gt;...&quot; to discard changes in working directory)
+	modified:   test.txt
+
+no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="exercise">
+<span id="git-exercise1"></span><h3>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Open your Git Bash</p></li>
+<li><p>Go to your Home directory via <code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">~</span></code> (or, actually, go wherever you want)</p></li>
+<li><p>Create a new folder (either via <code class="docutils literal notranslate"><span class="pre">mkdir</span></code> or <code class="docutils literal notranslate"><span class="pre">create-project.sh</span></code>)</p></li>
+<li><p>Change into the newly created directory via <code class="docutils literal notranslate"><span class="pre">&lt;your</span> <span class="pre">input</span> <span class="pre">here&gt;</span></code></p></li>
+<li><p>Initialize your new Git project via <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">init</span></code></p></li>
+<li><p>Copy a few files (PDF files etc. – does not really matter, but no sensitive material!) in your new project folder</p></li>
+<li><p>What comes next? Hint: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code> and then <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span> <span class="pre">&lt;your</span> <span class="pre">input&gt;</span></code></p></li>
+<li><p>Check the status and the history of your Git repository</p></li>
+<li><p><strong>PLEASE do not delete the repository, we will need it for a later exercise!</strong></p></li>
+</ul>
+</div>
+<div class="section" id="undo-changes-going-back-in-git-s-history">
+<h3>Undo changes / Going back in Git’s history<a class="headerlink" href="#undo-changes-going-back-in-git-s-history" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Undoing changes can be done utilizing three different approaches (<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span></code>, <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">revert</span></code>, <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">reset</span></code>)</p></li>
+<li><p>Depends on the state of your working directory (clean or uncommitted changes)</p></li>
+<li><p>A pragmatic approach is to utilize the search funtionalities of a web platform such as GitHub or GitLab</p></li>
+<li><p>Here, only some basics will be introduced, further information is provided by <a class="reference external" href="https://www.atlassian.com/git/tutorials/undoing-changes">https://www.atlassian.com/git/tutorials/undoing-changes</a> or <a class="reference external" href="https://git-scm.com/book/en/v2/Git-Basics-Undoing-Things">https://git-scm.com/book/en/v2/Git-Basics-Undoing-Things</a></p></li>
+</ul>
+<div class="section" id="git-checkout">
+<h4>git checkout<a class="headerlink" href="#git-checkout" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p>In order to undo (a) uncommitted changes or (b) going back to an earlier commit, respectively, the command <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span></code> can be utilized</p></li>
+<li><p>You have multiple possibilities to undo changes. You can undo changes regarding a particular file or you can go back to an earlier commit, which may contain multiple changes (not a good practice, though)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">--</span> <span class="pre">myfile</span></code> will discard all changes with respect to <code class="docutils literal notranslate"><span class="pre">myfile</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">--</span> <span class="pre">.</span></code> (or use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">restore</span> <span class="pre">.</span></code>) will discard all changes in your working directory, which can include multiple files (remember the dot <code class="docutils literal notranslate"><span class="pre">.</span></code>, see section <a class="reference internal" href="a2_computer-literacy.html#cli-wd-relative-path"><span class="std std-ref">Working directory and relative paths</span></a>)</p></li>
+</ul>
+<ul class="simple">
+<li><p>Now, let’s discard all (uncommitted) changes that we made to file <code class="docutils literal notranslate"><span class="pre">text.txt</span></code> and recover the lost line 3:</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>git status 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>On branch main
+Changes not staged for commit:
+  (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)
+  (use &quot;git restore &lt;file&gt;...&quot; to discard changes in working directory)
+	modified:   test.txt
+
+no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check again the content of test.txt; line 3 should be missing.</span>
+<span class="o">!</span>cat test.txt
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>l1: Branch: master
+l2: Author: BW
+l4: use my_fancy_data.dta, clear
+l5: gen v1 = 1
+l6: gen v2 = v1 + 1
+l7: mean v1
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>git checkout -- test.txt
+</pre></div>
+</div>
+</div>
+</div>
+<p>Voilà, our beloved comment (line 3) has been risen from the dead…</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">print_file</span><span class="p">(</span><span class="s2">&quot;test.txt&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>l1: Branch: master
+l2: Author: BW
+l3: // Always start with a dumb comment:
+l4: use my_fancy_data.dta, clear
+l5: gen v1 = 1
+l6: gen v2 = v1 + 1
+l7: mean v1
+</pre></div>
+</div>
+</div>
+</div>
+<p>For more information see <a class="reference external" href="https://www.atlassian.com/git/tutorials/using-branches/git-checkout">https://www.atlassian.com/git/tutorials/using-branches/git-checkout</a></p>
+</div>
+<div class="section" id="git-revert">
+<h4>git revert<a class="headerlink" href="#git-revert" title="Permalink to this headline">¶</a></h4>
+<p>Put simply: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">revert</span></code> can undo a certain commit</p>
+<p>For more information see <a class="reference external" href="https://www.atlassian.com/git/tutorials/undoing-changes/git-revert">https://www.atlassian.com/git/tutorials/undoing-changes/git-revert</a></p>
+</div>
+<div class="section" id="git-reset">
+<h4>git reset<a class="headerlink" href="#git-reset" title="Permalink to this headline">¶</a></h4>
+<p>Put simply: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">reset</span></code> goes back to a certain commit and discards all later commits</p>
+<p>For more information see <a class="reference external" href="https://www.atlassian.com/git/tutorials/undoing-changes/git-reset">https://www.atlassian.com/git/tutorials/undoing-changes/git-reset</a></p>
+</div>
+</div>
+<div class="section" id="what-has-changed-at-the-file-level-git-show-and-git-diff">
+<h3>What has changed at the file level? <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">show</span></code> and <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span></code><a class="headerlink" href="#what-has-changed-at-the-file-level-git-show-and-git-diff" title="Permalink to this headline">¶</a></h3>
+<p>In this chapter we will learn about <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">show</span></code> and <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span></code>, which show differences at the file level. However, for those of you who do not feel comfortable using the command line I highly recommend meld (<a class="reference external" href="http://meldmerge.org/">http://meldmerge.org/</a>).</p>
+<p>So far, we have only a few commits. <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code> shows all commits, the SHA1 hash and the respective commit message.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>git log
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>commit 421c480c05cf1d5d233c3728f60b1672303164f1
+Author: Bernd Weiss &lt;spam@metaanalyse.de&gt;
+Date:   Wed Nov 17 05:21:14 2021 +0100
+
+    add new comment (M2)
+
+commit ea3dd7685c8f1de5cab96fddaba4e003f1db29d0
+Author: Bernd Weiss &lt;spam@metaanalyse.de&gt;
+Date:   Wed Nov 17 05:21:13 2021 +0100
+
+    add new line (M1)
+
+commit 12b9483953c67438aa087586c82b7ba17d02975d
+Author: Bernd Weiss &lt;spam@metaanalyse.de&gt;
+Date:   Wed Nov 17 05:21:12 2021 +0100
+
+    Initial commit
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="a-brief-intro-to-the-unified-diff-format">
+<h4>A brief intro to the unified diff format<a class="headerlink" href="#a-brief-intro-to-the-unified-diff-format" title="Permalink to this headline">¶</a></h4>
+<p>Using <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">show</span></code> without any additional arguments shows the differences between the last commit and HEAD. The output follows the so called “unified diff format” (UDF). A good introduction of UDF ist provided by <a class="reference external" href="https://www.gnu.org/software/diffutils/manual/html_node/Detailed-Unified.html#Detailed-Unified">https://www.gnu.org/software/diffutils/manual/html_node/Detailed-Unified.html#Detailed-Unified</a>. The following is mostly copy-and-paste from the aforementioned source. It is also imported to note that UDF utilizes so-called (c)hunks to describe changes. A hunk is a paragraph separated by an empty line.</p>
+</div>
+<div class="section" id="git-show">
+<h4><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">show</span></code><a class="headerlink" href="#git-show" title="Permalink to this headline">¶</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>git show
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>commit 421c480c05cf1d5d233c3728f60b1672303164f1
+Author: Bernd Weiss &lt;spam@metaanalyse.de&gt;
+Date:   Wed Nov 17 05:21:14 2021 +0100
+
+    add new comment (M2)
+
+diff --git a/test.txt b/test.txt
+index ed73d1e..32af706 100644
+--- a/test.txt
++++ b/test.txt
+@@ -5,4 +5,5 @@ l3: // Always start with a dumb comment:
+ l4: use my_fancy_data.dta, clear
+ l5: gen v1 = 1
+ l6: gen v2 = v1 + 1
+-l7: mean v1
+\ No newline at end of file
++l7: // M2: A new comment.
++mean v1
+\ No newline at end of file
+</pre></div>
+</div>
+</div>
+</div>
+<p>Frankly, I go to GitHub or GitLab and check the respective differences between files…</p>
+<p><img alt="" src="_images/fig_git-diff.png" /></p>
+</div>
+</div>
+<div class="section" id="branching">
+<h3>Branching<a class="headerlink" href="#branching" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>In addition to being a powerful undo function, git also allows you to “toy around” with different “versions” of your text or code</p></li>
+<li><p>Let’s assume that you wrote a first draft of a Stata program (macro). Everything works as expected. From a programming perspective, though, the program is just ugly and it is therefore quite hard to add additional functionalities.</p></li>
+<li><p>What I used to do was: save my original file as <code class="docutils literal notranslate"><span class="pre">my-great-program.do</span></code> and start working on a new version of the program using a file called <code class="docutils literal notranslate"><span class="pre">my-great-program_new.do</span></code></p></li>
+<li><p>This is not necessary with <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">branch</span></code></p></li>
+</ul>
+<p>Let’s start with a list of files that are currently in my project folder:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>ls -la
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>total 13
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>drwxr-xr-x 1 weissbd DomÃ¤nen-Benutzer   0 Nov 17 05:21 .
+drwxr-xr-x 1 weissbd DomÃ¤nen-Benutzer   0 Nov 17 05:21 ..
+drwxr-xr-x 1 weissbd DomÃ¤nen-Benutzer   0 Nov 17 05:21 .git
+-rw-r--r-- 1 weissbd DomÃ¤nen-Benutzer 203 Nov 17 05:21 test.txt
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>git status
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>On branch main
+nothing to commit, working tree clean
+</pre></div>
+</div>
+</div>
+</div>
+<p>What branches are available? Once we have more than one branch, the <code class="docutils literal notranslate"><span class="pre">*</span></code> shows which branch is active (or: in wich branch we are in)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>git branch
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>* main
+</pre></div>
+</div>
+</div>
+</div>
+<p>Create a new branch called <code class="docutils literal notranslate"><span class="pre">testing</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>git branch testing
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>git branch
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>* main
+  testing
+</pre></div>
+</div>
+</div>
+</div>
+<p>How do we get into the <code class="docutils literal notranslate"><span class="pre">testing</span></code> branch? Use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">testing</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>git checkout testing
+<span class="o">!</span>git branch
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Switched to branch &#39;testing&#39;
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  main
+* testing
+</pre></div>
+</div>
+</div>
+</div>
+<p>Create a new file <code class="docutils literal notranslate"><span class="pre">testingfile</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>touch testingfile
+<span class="o">!</span><span class="nb">echo</span> <span class="s2">&quot;in testing&quot;</span> &gt; testingfile
+<span class="o">!</span>ls -la
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>total 14
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>drwxr-xr-x 1 weissbd DomÃ¤nen-Benutzer   0 Nov 17 05:21 .
+drwxr-xr-x 1 weissbd DomÃ¤nen-Benutzer   0 Nov 17 05:21 ..
+drwxr-xr-x 1 weissbd DomÃ¤nen-Benutzer   0 Nov 17 05:21 .git
+-rw-r--r-- 1 weissbd DomÃ¤nen-Benutzer 203 Nov 17 05:21 test.txt
+-rw-r--r-- 1 weissbd DomÃ¤nen-Benutzer  15 Nov 17 05:21 testingfile
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>cat testingfile
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&quot;in testing&quot; 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>git add testingfile
+<span class="o">!</span>git commit -m <span class="s2">&quot;new branch testing&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[testing d21b859] new branch testing
+ 1 file changed, 1 insertion(+)
+ create mode 100644 testingfile
+</pre></div>
+</div>
+</div>
+</div>
+<p>Switch back to branch <code class="docutils literal notranslate"><span class="pre">main</span></code> (and <code class="docutils literal notranslate"><span class="pre">cat</span> <span class="pre">testingfile</span></code> should result in an error message, since there is no <code class="docutils literal notranslate"><span class="pre">testingfile</span></code> in branch <code class="docutils literal notranslate"><span class="pre">main</span></code>)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>git checkout main
+<span class="o">!</span>cat testingfile
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Switched to branch &#39;main&#39;
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>cat: testingfile: No such file or directory
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, we can use <code class="docutils literal notranslate"><span class="pre">merge</span></code> to combine <code class="docutils literal notranslate"><span class="pre">main</span></code> and <code class="docutils literal notranslate"><span class="pre">testing</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>git merge testing
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Updating 421c480..d21b859
+Fast-forward
+ testingfile | 1 +
+ 1 file changed, 1 insertion(+)
+ create mode 100644 testingfile
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>ls -la
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>total 14
+drwxr-xr-x 1 weissbd DomÃ¤nen-Benutzer   0 Nov 17 05:21 .
+drwxr-xr-x 1 weissbd DomÃ¤nen-Benutzer   0 Nov 17 05:21 ..
+drwxr-xr-x 1 weissbd DomÃ¤nen-Benutzer   0 Nov 17 05:21 .git
+-rw-r--r-- 1 weissbd DomÃ¤nen-Benutzer 203 Nov 17 05:21 test.txt
+-rw-r--r-- 1 weissbd DomÃ¤nen-Benutzer  15 Nov 17 05:21 testingfile
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>cat testingfile
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&quot;in testing&quot; 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="working-with-remote-repositories">
+<span id="git-remote"></span><h2>Working with remote repositories<a class="headerlink" href="#working-with-remote-repositories" title="Permalink to this headline">¶</a></h2>
+<p>As mentioned in the introduction, git is especially powerful when it comes to collaborative work. In order to work with others, you need some sort of connetion to these other person(s). The one I am discussing here is having a central repository C. Let us assume that you (x) have two other collaborators y and z. Then x (that’s you), as well as y and z need to synchronise with the same repository C. There also exists another model which is based on a decentralized approach, where you could indivdually sync with x-y, x-z, y-z etc.</p>
+<div class="section" id="establishing-a-connection-to-a-remote-repository">
+<h3>Establishing a connection to a remote repository<a class="headerlink" href="#establishing-a-connection-to-a-remote-repository" title="Permalink to this headline">¶</a></h3>
+<p>There are two ways to establish a connection to a remote repository:</p>
+<ol class="simple">
+<li><p>Clone a remote repository via <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span> <span class="pre">...</span></code>.</p></li>
+<li><p>Setting up a new remote repository via <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">remote</span> <span class="pre">add</span> <span class="pre">&lt;name&gt;</span> <span class="pre">&lt;url&gt;</span></code>.</p></li>
+</ol>
+</div>
+<div class="section" id="cloning-a-remote-repository">
+<h3>Cloning a remote repository<a class="headerlink" href="#cloning-a-remote-repository" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Cloning a remote repository via GitHub/GitLab/… is quite easy</p></li>
+<li><p>Visit the website, on GitHub look for the green “Code” button, see also screenshot below</p></li>
+<li><p>Decide wether you would like to use the HTTPS or SSH protocoll</p></li>
+<li><p>Copy the link and execute <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span></code></p></li>
+<li><p>Here is an example using my workshop on “Meta-Analysis in Social Research”, see <a class="reference external" href="https://github.com/berndweiss/dji-meta-analysis-2019">https://github.com/berndweiss/dji-meta-analysis-2019</a></p></li>
+<li><p>Open a CLI and execute <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span> <span class="pre">git&#64;github.com:berndweiss/dji-meta-analysis-2019.git</span></code></p></li>
+</ul>
+<p><img alt="" src="_images/f_github-clone.png" /></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>cd
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>E:\syncwork\projects\confer\ps2021-10-ws-repro-research\src\bw\git_test_folder
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="adding-a-remote-repository-via-git-remote-add">
+<h3>Adding a remote repository via <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">remote</span> <span class="pre">add</span> <span class="pre">...</span></code><a class="headerlink" href="#adding-a-remote-repository-via-git-remote-add" title="Permalink to this headline">¶</a></h3>
+<p>Using the git command <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">remote</span> <span class="pre">add</span> <span class="pre">&lt;name&gt;</span> <span class="pre">&lt;url&gt;</span></code>. The usual name for <code class="docutils literal notranslate"><span class="pre">&lt;name&gt;</span></code> is <code class="docutils literal notranslate"><span class="pre">origin</span></code>, however, feel free to choose another name. The <code class="docutils literal notranslate"><span class="pre">&lt;url&gt;</span></code> for this repository looks like <code class="docutils literal notranslate"><span class="pre">git&#64;git.gesis.org:weissbd/ps2017-xx-intro2git.git</span></code>; another example is this one: <code class="docutils literal notranslate"><span class="pre">git&#64;github.com:berndweiss/ps2017-11_porto-campbell-ma-workshop.git</span></code>. The url can be found in the respective github/gitlab repository.</p>
+<p>The most convenient way in working with remove respositories is using SSH. In order to utilize SSH, the remote url has to be start with <code class="docutils literal notranslate"><span class="pre">git&#64;git...</span></code>.</p>
+<p>It is also possible to use the HTTPS protocol. In these cases the urls look like so <code class="docutils literal notranslate"><span class="pre">https://example.com/path/to/repo.git</span></code>.</p>
+</div>
+<div class="section" id="delete-remote-branch">
+<h3>Delete remote branch<a class="headerlink" href="#delete-remote-branch" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span> <span class="pre">&lt;remote_name&gt;</span> <span class="pre">--delete</span> <span class="pre">&lt;branch_name&gt;</span></code>, e.g. <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span> <span class="pre">origin</span> <span class="pre">--delete</span> <span class="pre">my_branch</span></code></p>
+</div>
+<div class="section" id="dowloading-a-remote-branch-that-is-not-on-your-computer-yet">
+<h3>Dowloading a remote branch that is not on your computer (yet)<a class="headerlink" href="#dowloading-a-remote-branch-that-is-not-on-your-computer-yet" title="Permalink to this headline">¶</a></h3>
+<p>Just run a simple <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code> (see <a class="reference external" href="https://stackoverflow.com/a/2294385">https://stackoverflow.com/a/2294385</a>). Then, on your local repository checkout to that remote branch, e.g. <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkput</span> <span class="pre">indepday</span></code>:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Switched to a new branch &#39;indepday&#39;
+Branch &#39;indepday&#39; set up to track remote branch &#39;indepday&#39; from &#39;origin&#39;.
+</pre></div>
+</div>
+<p>After checkout to <code class="docutils literal notranslate"><span class="pre">indepday</span></code>, git automatically starts tracking the new branch.</p>
+</div>
+<div class="section" id="id3">
+<h3>Exercise<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Start the Git Bash</p></li>
+<li><p>Clone the respository of my workshop <a class="reference external" href="https://github.com/berndweiss/dji-meta-analysis-2019">https://github.com/berndweiss/dji-meta-analysis-2019</a></p></li>
+<li><p>Change into the newly created directory</p></li>
+<li><p>List the Git history via <code class="docutils literal notranslate"><span class="pre">&lt;your</span> <span class="pre">input</span> <span class="pre">--oneline&gt;</span></code> (the <code class="docutils literal notranslate"><span class="pre">--oneline</span></code> is very handy) and determine the first 7 SHA1 digits</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="setting-up-a-git-repository-locally-and-remotly">
+<h2>Setting up a Git repository locally and remotly<a class="headerlink" href="#setting-up-a-git-repository-locally-and-remotly" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id4">
+<h3>Exercise<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>In a previous exercise (see <a class="reference internal" href="#git-exercise1"><span class="std std-ref">Exercise</span></a>), you have created your own repository (let’s call it <code class="docutils literal notranslate"><span class="pre">your-new-repo</span></code>)</p></li>
+<li><p>Now, go to your GitHub account and create a new repository on GitHub</p>
+<ul>
+<li><p>Startpage -&gt; tab “Repositories” -&gt; green button “New”</p></li>
+<li><p>Enter a new “Repository name”</p></li>
+<li><p>Make it “Private” (unless you have something important to share)</p></li>
+<li><p>Do <strong>not</strong> check any of the “Initialize this repository with” boxes</p></li>
+<li><p>Hit the green “Create repository” button</p></li>
+<li><p>Choose SSH or HTTPS as protocol (“Quick setup — if you’ve done this kind of thing before”)</p></li>
+<li><p>Look for “…or push an existing repository from the command line”</p></li>
+<li><p>SSH:</p>
+<ul>
+<li><p>Copy the line <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">remote</span> <span class="pre">add</span> <span class="pre">origin</span> <span class="pre">git&#64;github.com:berndweiss/your-repo-name.git</span></code></p></li>
+<li><p>Execute the command <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">remote</span> <span class="pre">add</span> <span class="pre">origin</span> <span class="pre">git&#64;github.com:berndweiss/your-repo-name.git</span></code> in the Git Bash in your local repository (<code class="docutils literal notranslate"><span class="pre">your-new-repo</span></code>)</p></li>
+</ul>
+</li>
+<li><p>HTTPS:</p>
+<ul>
+<li><p>Copy the line <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">remote</span> <span class="pre">add</span> <span class="pre">origin</span> <span class="pre">https://github.com/berndweiss/your-repo-name.git</span></code></p></li>
+<li><p>Execute the command <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">remote</span> <span class="pre">add</span> <span class="pre">origin</span> <span class="pre">https://github.com/berndweiss/your-repo-name.git</span></code> in the Git Bash in your local repository (<code class="docutils literal notranslate"><span class="pre">your-new-repo</span></code>)</p></li>
+</ul>
+</li>
+<li><p>Make sure that <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code> shows a clean repository</p></li>
+<li><p>Now you can run your first <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span> <span class="pre">origin</span> <span class="pre">main</span></code></p></li>
+<li><p>Reload the GitHub page via F5; you now should see the content of your local repo <code class="docutils literal notranslate"><span class="pre">your-new-repo</span></code></p></li>
+<li><p>…</p></li>
+<li><p>You can delete a GitHub repository via the tab “Settings” -&gt; “Options”, then scroll down -&gt; “Danger Zone” -&gt; “Delete this repository”</p></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="there-is-much-more">
+<h2>There is much more…<a class="headerlink" href="#there-is-much-more" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Commit hygiene <a class="reference external" href="http://www.ericbmerritt.com/2011/09/21/commit-hygiene-and-git.html">http://www.ericbmerritt.com/2011/09/21/commit-hygiene-and-git.html</a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.gitconfig</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.gitignore</span></code></p></li>
+<li><p>…</p></li>
+<li><p>A nice tutorial in German: “git - Der einfache Einstieg, eine einfache Anleitung, um git zu lernen. Kein Schnick-Schnack ;) <a class="reference external" href="https://rogerdudler.github.io/git-guide/index.de.html">https://rogerdudler.github.io/git-guide/index.de.html</a></p></li>
+</ul>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<p id="id5"><dl class="citation">
+<dt class="label" id="id8"><span class="brackets">AR21</span></dt>
+<dd><p>Jesse M. Alston and Jessica A. Rick. A Beginner's Guide to Conducting Reproducible Research. <em>The Bulletin of the Ecological Society of America</em>, April 2021. <a class="reference external" href="https://doi.org/10.1002/bes2.1801">doi:10.1002/bes2.1801</a>.</p>
+</dd>
+<dt class="label" id="id17"><span class="brackets">Bar18</span></dt>
+<dd><p>Lorena A. Barba. Terminologies for Reproducible Research. <em>arXiv:1802.03311 [cs]</em>, February 2018. <a class="reference external" href="https://arxiv.org/abs/1802.03311">arXiv:1802.03311</a>.</p>
+</dd>
+<dt class="label" id="id7"><span class="brackets">BD95</span></dt>
+<dd><p>Jonathan B. Buckheit and David L. Donoho. WaveLab and Reproducible Research. In Anestis Antoniadis, Georges Oppenheim, P. Bickel, P. Diggle, S. Fienberg, K. Krickeberg, I. Olkin, N. Wermuth, and S. Zeger, editors, <em>Wavelets and Statistics</em>, volume 103 of Lecture Notes in Statistics, pages 55–81. Springer New York, New York, NY, 1995. <a class="reference external" href="https://doi.org/10.1007/978-1-4612-2544-7">doi:10.1007/978-1-4612-2544-7</a>.</p>
+</dd>
+<dt class="label" id="id13"><span class="brackets">Div18</span></dt>
+<dd><p>Patrick Divine. String Case Styles: camel, Pascal, Snake, and Kebab Case. https://betterprogramming.pub/string-case-styles-camel-pascal-snake-and-kebab-case-981407998841, 2018.</p>
+</dd>
+<dt class="label" id="id6"><span class="brackets">Fit12</span></dt>
+<dd><p>Michael Fitzgerald. <em>Introducing Regular Expressions</em>. O'Reilly, Beijing, Köln, 1. ed edition, 2012. ISBN 978-1-4493-9268-0.</p>
+</dd>
+<dt class="label" id="id15"><span class="brackets">For17</span></dt>
+<dd><p>Tiago Forte. The PARA Method: a Universal System for Organizing Digital Information. https://fortelabs.co/blog/para/, February 2017.</p>
+</dd>
+<dt class="label" id="id19"><span class="brackets">FP17</span></dt>
+<dd><p>Jeremy Freese and David Peterson. Replication in Social Science. <em>Annual Review of Sociology</em>, 43(1):147–165, July 2017. <a class="reference external" href="https://doi.org/10.1146/annurev-soc-060116-053450">doi:10.1146/annurev-soc-060116-053450</a>.</p>
+</dd>
+<dt class="label" id="id21"><span class="brackets">GFI16</span></dt>
+<dd><p>Steven N. Goodman, Daniele Fanelli, and John P. A. Ioannidis. What does research reproducibility mean? <em>Science Translational Medicine</em>, 8(341):341ps12–341ps12, June 2016. <a class="reference external" href="https://doi.org/10.1126/scitranslmed.aaf5027">doi:10.1126/scitranslmed.aaf5027</a>.</p>
+</dd>
+<dt class="label" id="id10"><span class="brackets"><a class="fn-backref" href="#id2">Hea19</a></span></dt>
+<dd><p>Kieran Healy. The Plain Person's Guide to Plain Text Social Science. https://plain-text.co/, October 2019.</p>
+</dd>
+<dt class="label" id="id9"><span class="brackets">Lee14</span></dt>
+<dd><p>Thomas J. Leeper. Reproducible Research:what, Why, and How? 2014.</p>
+</dd>
+<dt class="label" id="id11"><span class="brackets"><a class="fn-backref" href="#id1">Narkebski16</a></span></dt>
+<dd><p>Jakub Narębski. <em>Mastering Git: Attain Expert-Level Proficiency with Git for Enhanced Productivity and Efficient Collaboration by Mastering Advanced Distributed Version Control Features</em>. Packt Publishing, Birmingham, 2016. ISBN 978-1-78355-375-4.</p>
+</dd>
+<dt class="label" id="id20"><span class="brackets">Pen11</span></dt>
+<dd><p>Roger D. Peng. Reproducible Research in Computational Science. <em>Science</em>, 334(6060):1226–1227, February 2011. <a class="reference external" href="https://doi.org/10.1126/science.1213847">doi:10.1126/science.1213847</a>.</p>
+</dd>
+<dt class="label" id="id12"><span class="brackets">PF16</span></dt>
+<dd><p>Stephen R. Piccolo and Michael B. Frampton. Tools and techniques for computational reproducibility. <em>GigaScience</em>, 5(1):30, December 2016. <a class="reference external" href="https://doi.org/10.1186/s13742-016-0135-4">doi:10.1186/s13742-016-0135-4</a>.</p>
+</dd>
+<dt class="label" id="id14"><span class="brackets">SWeiss20</span></dt>
+<dd><p>Ines Schaurer and Bernd Weiß. Investigating selection bias of online surveys on coronavirus-related behavioral outcomes: an example utilizing the GESIS Panel Special Survey on the Coronavirus SARS-CoV-2 Outbreak in Germany. <em>Survey Research Methods</em>, 2(14):103–108, June 2020. <a class="reference external" href="https://doi.org/10.18148/SRM/2020.V14I2.7751">doi:10.18148/SRM/2020.V14I2.7751</a>.</p>
+</dd>
+<dt class="label" id="id18"><span class="brackets">SLP14</span></dt>
+<dd><p>Victoria Stodden, Friedrich Leisch, and Roger D. Peng. <em>Implementing Reproducible Research</em>. CRC Press, Boca Raton, 2014.</p>
+</dd>
+</dl>
+</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="a2_computer-literacy.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">A2: Computer literacy for reproducible research</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="appendix.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">Appendix</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By Bernd Weiß<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>
