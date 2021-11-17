@@ -132,7 +132,7 @@ Introduction - Substantive
 
 Technical basics
 
-Introduction to Git
+[Introduction to Git](https://jobreu.github.io/reproducible-research-gesis-2021/slides/a1-intro_a2-comp-lit_a3-git/a3_introduction-to-git.html)
 
 [Git & RStudio](https://jobreu.github.io/reproducible-research-gesis-2021/slides/A4_Git&RStudio/A4_Git-RStudio.html) 
 
