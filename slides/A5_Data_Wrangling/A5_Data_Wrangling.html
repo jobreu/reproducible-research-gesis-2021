@@ -684,17 +684,17 @@ gp_covid &lt;- gp_covid %&gt;%
                            `2` = 4,
                            `1` = 5))
 
-table(gp_covid$hzcy052a, gp_covid$hzcy052a, useNA = "always")
+table(gp_covid$hzcy052aR, gp_covid$hzcy052a, useNA = "always")
 ```
 
 ```
 ##       
 ##           1    2    3    4    5   98 &lt;NA&gt;
-##   1      23    0    0    0    0    0    0
-##   2       0   74    0    0    0    0    0
+##   1       0    0    0    0 1259    0    0
+##   2       0    0    0 1448    0    0    0
 ##   3       0    0  300    0    0    0    0
-##   4       0    0    0 1448    0    0    0
-##   5       0    0    0    0 1259    0    0
+##   4       0   74    0    0    0    0    0
+##   5      23    0    0    0    0    0    0
 ##   98      0    0    0    0    0   51    0
 ##   &lt;NA&gt;    0    0    0    0    0    0  610
 ```

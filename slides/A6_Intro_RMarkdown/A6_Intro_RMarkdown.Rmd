@@ -303,7 +303,7 @@ A new paragraph is started with a blank line before the text.
 
 > block quote
 
-![R Logo](./img/content/img/Rlogo.png) 
+![R Logo](./img/Rlogo.png) 
 ```
 ]
 
