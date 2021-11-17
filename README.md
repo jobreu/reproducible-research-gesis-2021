@@ -158,7 +158,7 @@ Participants should have some basic knowledge of `R`. While this is not required
 ### Slides
 Introduction to LaTeX ([PDF slides in German](https://jobreu.github.io/reproducible-research-gesis-2021/slides/b1_latex/ps2020-10_gesis_latex-intro_german.pdf), [PDF slides in English](comming soon))
 
-[Advanced R Markdown & LaTeX](https://jobreu.github.io/reproducible-research-gesis-2021/slides/B2_RMarkdown-LaTeX/B2_RMarkdown&LaTeX.html)  
+[Advanced R Markdown & LaTeX](https://jobreu.github.io/reproducible-research-gesis-2021/slides/B2_RMarkdown&LaTeX/B2_RMarkdown-LaTeX.html)  
 
 Jupyter Notebooks & Binder
 
