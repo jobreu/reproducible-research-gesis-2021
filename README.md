@@ -160,7 +160,7 @@ Introduction to LaTeX ([PDF slides in English](https://jobreu.github.io/reproduc
 
 [Advanced R Markdown & LaTeX](https://jobreu.github.io/reproducible-research-gesis-2021/slides/B2_RMarkdown&LaTeX/B2_RMarkdown-LaTeX.html)  
 
-Jupyter Notebooks & Binder
+[Jupyter Notebooks & Binder](https://docs.google.com/presentation/d/1ZUCI6rjO8vjceRZ9QMHpy-bOAENpdoFeYlgPy-R_QMo/edit?usp=sharing)
 
 Build your own Binder
 
