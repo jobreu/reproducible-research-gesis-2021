@@ -1,0 +1,59 @@
+%% -- Start preamble ---
+
+\documentclass[11pt, paper=a4, ]{scrartcl}
+
+\usepackage{fontspec}
+%%\setmainfont{TeX Gyre Heros} %% Helvetica
+%%\setmainfont{TeX Gyre Termes} %% Times New Roman
+%%\setsansfont{Arial}
+
+\usepackage[american]{babel} %%estonian
+
+\usepackage[hidelinks]{hyperref}
+
+\usepackage{graphicx}
+
+\usepackage{blindtext}
+
+\usepackage{setspace}
+\onehalfspacing 
+
+\title{twrr-demo-lualatex}
+\author{Bernd Weiss}
+\date{\today}
+
+%% -- End preamble ---
+
+
+%% -- Start main body ---
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\section{Introduction}
+
+\blindtext[5]
+
+see\ref{fig:my_label}
+
+\section{another section}
+
+\blindtext[5]
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{fem_rem_scheme-1}
+    \caption{Caption}
+    \label{fig:my_label}
+\end{figure}
+
+\appendix
+
+\section{section in appendix}
+
+\end{document}
+
+%% -- End main body ---

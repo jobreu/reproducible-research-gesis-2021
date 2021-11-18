@@ -1,0 +1,60 @@
+\documentclass[fontsize=12pt, paper=a4]{scrartcl}
+
+\usepackage{fontspec}
+\setmainfont{TeX Gyre Termes}
+%\setsansfont{Arial}
+
+\usepackage[ngerman]{babel}
+\usepackage[hidelinks]{hyperref}
+\usepackage{csquotes}
+\usepackage{listings}
+
+\usepackage[backend = biber, %
+style = apa, %
+bibencoding = utf8, %
+sorting = nyt, %
+sortlocale = auto, %
+maxcitenames = 2, %
+maxbibnames = 99, %
+language = auto, %
+dashed = false, %
+hyperref = true]{biblatex}
+
+\addbibresource{gesis_panel_bibliography.bib} %% you can add multiple 
+%%bibliographies
+
+
+\title{Das GESIS Panel -- die Bibliographie}
+\author{All die verehrten Nutzer*innen des GESIS Panels}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Die Wahrheit}
+
+Das GESIS Panel ist ganz toll \parencite{bosnjak_establishing_2017}. Das sagt 
+jede \parencite{struminskaya_respondent_2016}. Besonders hervorheben ist die 
+Arbeit von \textcite[616]{wahlig_panelmanagement:_2018}. Aber auch die Arbeiten 
+von \textcites{ackermann_stealth_2018, 
+bosnjak_establishing_2017,blom_comparison_2016,danner_development_2016} sind 
+ganz ausgezeichnet.
+
+Wiederholen wir doch noch einmal den letzten Satz, jetzt aber mit gefakten 
+Seitenzahlen: Aber auch die Arbeiten von 
+\textcites[123]{ackermann_stealth_2018}[34]{bosnjak_establishing_2017}
+{blom_comparison_2016}[vgl. besonders][897]{danner_development_2016} sind ganz 
+ausgezeichnet
+
+
+\section{Die Quelle der Wahrheit}
+
+\begin{footnotesize}
+\lstinputlisting[language={[LaTeX]TeX}]{biblatex-sample.tex}	
+\end{footnotesize}
+
+
+\printbibliography
+
+\end{document}

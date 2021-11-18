@@ -1,0 +1,36 @@
+\documentclass[openany]{scrbook}
+
+\usepackage{fontspec}
+\usepackage[ngerman]{babel}
+\usepackage{graphicx}
+
+\usepackage{blindtext}
+
+
+%% 1.5 Zielenabstand.
+\usepackage{setspace}
+\onehalfspacing
+
+
+\begin{document}
+
+\KOMAoptions{twoside = false}
+
+  \input{titelblatt.tex}
+
+\KOMAoptions{twoside}
+
+\tableofcontents
+	
+\chapter{Einleitung}
+\Blindtext	
+
+\chapter{Theorie}
+\Blindtext	
+
+\chapter{Daten und Methoden}
+\Blindtext	
+
+
+	
+\end{document}

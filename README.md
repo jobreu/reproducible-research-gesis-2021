@@ -156,7 +156,7 @@ Participants should have some basic knowledge of `R`. While this is not required
 
 ## Day 2
 ### Slides
-Introduction to LaTeX ([PDF slides in German](https://jobreu.github.io/reproducible-research-gesis-2021/slides/b1_latex/ps2020-10_gesis_latex-intro_german.pdf), [PDF slides in English](comming soon))
+Introduction to LaTeX ([PDF slides in English](https://jobreu.github.io/reproducible-research-gesis-2021/slides/b1_latex//ps2020-10_gesis_latex-intro.pdf)), [PDF slides in German](https://jobreu.github.io/reproducible-research-gesis-2021/slides/b1_latex/ps2020-10_gesis_latex-intro_german.pdf))
 
 [Advanced R Markdown & LaTeX](https://jobreu.github.io/reproducible-research-gesis-2021/slides/B2_RMarkdown&LaTeX/B2_RMarkdown-LaTeX.html)  
 
