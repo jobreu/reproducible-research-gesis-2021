@@ -138,6 +138,8 @@ There also are other [`R` Project Templates](https://github.com/startyourlab/r-p
 
 And there are packages for creating reproducible `R` environments (mostly by controlling package versions), such as [`renv`](https://rstudio.github.io/renv/index.html) and [`groundhog`](https://groundhogr.com/).
 
+The [`starter` package](https://www.danieldsjoberg.com/starter/) can be used to initialize a new `R` project based on a template using `Git` and the `renv` package.
+
 Finally, while we have briefly mentioned `Docker`, there are also many online resources that cover it in more depth and with a focus on `R` (e.g., [*Docker for the R User*](https://github.com/noamross/nyhackr-docker-talk) by Noam Ross, or [*An Introduction to Docker for R Users*](https://colinfay.me/docker-r-reproducibility/) by Colin Fay).
 
 ---

@@ -169,7 +169,7 @@ output:
 
 ## Keeping the `.tex` file
 
-When you knit an `R Markdwon` document to generate PDF output, the document is first converted to a `Tex` file (with file extension `.tex`) before it is then converted to PDF via the chosen $\LaTeX$ engine. By default, the `.tex` file is automatically deleted. If you want to keep it however (e.g., for a journal submission), you can specify this in the `YAML` header. You could then, e.g., open (and further edit) the `.tex` file with a $\LaTeX$ editor like *TeXworks* or *Overleaf*.
+When you knit an `R Markdwon` document to generate PDF output, the document is first converted to a $TeX$ file (with file extension `.tex`) before it is then converted to PDF via the chosen $\LaTeX$ engine. By default, the `.tex` file is automatically deleted. If you want to keep it however (e.g., for a journal submission), you can specify this in the `YAML` header. You could then, e.g., open (and further edit) the `.tex` file with a $\LaTeX$ editor like *TeXworks* or *Overleaf*.
 
 ```{r keep-tex, eval=FALSE}
 ---
@@ -518,7 +518,7 @@ The [`knitcitations`](https://github.com/cboettig/knitcitations) package can be 
 
 ## Outlook: Even more advanced use of `R Markdown`
 
-An even more advanced use of `R Markdown` is the production of parameterized reports. This can, e.g., be used to produce similar reports for different data sets or different groups within a data set. Explaining this would be well beyond the scope of this workshop, but there are some good tutorials on this available online (e.g., in the [*RStudio* documentation](https://docs.rstudio.com/connect/1.7.4/user/param-rmarkdown.html) and in chapters in the books [*R Markdon: The Definitive Guide*](https://bookdown.org/yihui/rmarkdown/parameterized-reports.html) and the [*R Markdown Cookbook*](https://bookdown.org/yihui/rmarkdown-cookbook/parameterized-reports.html)).
+An even more advanced use of `R Markdown` is the production of parameterized reports. This can, e.g., be used to produce similar reports for different data sets or different groups within a data set. Explaining this would be well beyond the scope of this workshop, but there are some good tutorials on this available online (e.g., in the [*RStudio* documentation](https://docs.rstudio.com/connect/1.7.4/user/param-rmarkdown.html) and in chapters in the books [*R Markdown: The Definitive Guide*](https://bookdown.org/yihui/rmarkdown/parameterized-reports.html) and the [*R Markdown Cookbook*](https://bookdown.org/yihui/rmarkdown-cookbook/parameterized-reports.html)).
 
 A good example of what can be done with parameterized reports in `R Markdown` are the [wave reports of the *GESIS Panel*](https://www.gesis.org/en/gesis-panel/documentation).
 
