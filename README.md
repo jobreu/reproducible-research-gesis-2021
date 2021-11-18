@@ -162,7 +162,7 @@ Introduction to LaTeX ([PDF slides in English](https://jobreu.github.io/reproduc
 
 [Jupyter Notebooks & Binder](https://docs.google.com/presentation/d/1ZUCI6rjO8vjceRZ9QMHpy-bOAENpdoFeYlgPy-R_QMo/edit?usp=sharing)
 
-Build your own Binder
+[Build your own Binder](https://docs.google.com/presentation/d/1SAqgPIV3nHES9qR85SacRvUe2k6OPdgiASLiHru4Tf4/edit?usp=sharing)
 
 [Recap & Outlook](https://jobreu.github.io/reproducible-research-gesis-2021/slides/B5_Outlook/B5_Outlook.html)
 
