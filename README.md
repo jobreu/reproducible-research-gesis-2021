@@ -150,7 +150,7 @@ Participants should have some basic knowledge of `R`. While this is not required
 ### Solutions
 [Git & RStudio](https://jobreu.github.io/reproducible-research-gesis-2021/solutions/A4_Git-RStudio_exercises_solution.html) 
 
-[Data Wrangling](https://jobreu.github.io/reproducible-research-gesis-2021/solutions/A5_Data_Wrangling_exercises_solution.html) 
+[Data Wrangling](https://jobreu.github.io/reproducible-research-gesis-2021/solutions/A5_Data_Wrangling_exercises_solution.html)   
 
 [Introduction to R Markdown](https://jobreu.github.io/reproducible-research-gesis-2021/solutions/A6_Intro_to_RMarkdown_exercises_solution.html) 
 
