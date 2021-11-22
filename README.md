@@ -128,11 +128,11 @@ Participants should have some basic knowledge of `R`. While this is not required
 ### Slides
 [Introduction - Organizational](https://jobreu.github.io/reproducible-research-gesis-2021/slides/A1_Introduction/A1_Intro.html)     
 
-[Introduction - Substantive](https://berndweiss.net/tmp/a1_introduction-to-reproducible-research.html) (link will work only temporary)
+[Introduction - Substantive](https://berndweiss.net/tmp/a1_introduction-to-reproducible-research.html) (link will work only temporarily)
 
-[Technical basics](https://berndweiss.net/tmp/a2_computer-literacy.html) (link will work only temporary)
+[Technical basics](https://berndweiss.net/tmp/a2_computer-literacy.html) (link will work only temporarily)
 
-[Introduction to Git](https://berndweiss.net/tmp/a3_introduction-to-git.html) (link will work only temporary)
+[Introduction to Git](https://berndweiss.net/tmp/a3_introduction-to-git.html) (link will work only temporarily)
 
 [Git & RStudio](https://jobreu.github.io/reproducible-research-gesis-2021/slides/A4_Git&RStudio/A4_Git-RStudio.html) 
 
@@ -167,7 +167,9 @@ Introduction to LaTeX ([PDF slides in English](https://jobreu.github.io/reproduc
 [Recap & Outlook](https://jobreu.github.io/reproducible-research-gesis-2021/slides/B5_Outlook/B5_Outlook.html)
 
 ### Exercises
-[Advanced R Markdown & LaTeX](https://jobreu.github.io/reproducible-research-gesis-2021/exercises/B2_RMarkdown-LaTeX_exercises_question.html) 
+[Advanced R Markdown & LaTeX](https://jobreu.github.io/reproducible-research-gesis-2021/exercises/B2_RMarkdown-LaTeX_exercises_question.html)
+
+[Jupyter Notebooks & Binder](https://docs.google.com/presentation/d/1SAqgPIV3nHES9qR85SacRvUe2k6OPdgiASLiHru4Tf4/edit#slide=id.p)
 
 ### Solutions
 [Advanced R Markdown & LaTeX](https://jobreu.github.io/reproducible-research-gesis-2021/solutions/B2_RMarkdown-LaTeX_exercises_solution.html) 
